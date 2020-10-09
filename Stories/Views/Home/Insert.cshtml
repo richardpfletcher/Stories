@@ -1,0 +1,256 @@
+﻿
+@{
+    ViewBag.Title = "Insert";
+}
+
+@{
+    ViewBag.Title = "CD";
+}
+@model Stories.Models.Story
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+<div class="page-wrapper">
+    <div class="row">
+        <div class="col-sm-4">
+
+
+
+            <div>
+
+
+
+                <table style="width: 55%">
+                    <tr>
+                        <td>
+                            @Html.Label("Title")
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>
+                            @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"])
+                        </td>
+
+                    </tr>
+                </table>
+
+                <table style="width: 55%">
+                    <tr>
+                        <td>
+                            @Html.Label("Animal Type")
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>
+
+                            @for (int i = 0; i < Model.animalCombo.items.Count; i++)
+                            {
+                        <tr>
+                            <td>
+                                @*@Html.CheckBoxFor(m => Model.animalCombo.items[i].Selected)*@
+                                @Html.CheckBoxFor(m => Model.animalCombo.items[i].Selected, new { @class = "animalCombo" })
+
+
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => Model.animalCombo.items[i].Text, new { @class = "animalCombo" })
+                                @Html.HiddenFor(m => Model.animalCombo.items[i].Value, new { @class = "animalCombo" })
+                                @Html.HiddenFor(m => Model.animalCombo.items[i].Text, new { @class = "animalCombo" })
+                            </td>
+                        </tr>
+
+
+                            }
+
+
+                        </table>
+
+                        <table style="width: 55%">
+                            <tr>
+                                <td>
+                                    @Html.Label("Moral Type")
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    @Html.DropDownList("moralType", (IEnumerable<SelectListItem>)ViewData["moralTypeData"])
+                                </td>
+
+                            </tr>
+                        </table>
+
+
+                    </div>
+
+                    <p>
+                        <input type="button" id="Update" value="Save" />
+                    </p>
+
+                </div>
+                <div class="col-sm-8">
+                    <div>
+                        Copy and Paste story below
+                        <textarea id="elmeStory" name="elmeStory" rows="30" cols="90" style="width: 100%">
+		  
+			</textarea>
+                    </div>
+                    <div>
+                        Comments
+                        <textarea id="comments" name="elmeStory" rows="30" cols="90" style="width: 100%">
+		  
+			</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            $(function () {
+
+                $("#Update").click(function () {
+
+
+
+                    var idslist = "";
+                    var counter = 0;
+                    var counter1 = 0;
+                    var animalChoosen = "";
+
+                    $("input:checkbox[class=animalCombo]").each(function () {
+
+                        if ($(this).is(":checked")) {
+                            var userid = $(this).attr("value");
+                            if (idslist != "") {
+                                idslist = idslist + ',' + userid;
+                                counter1++;
+
+
+                            }
+                            else
+                                idslist = userid;
+                            animalChoosen = $("#animalCombo_items_" + counter + "__Value").val() + ',' + animalChoosen;
+                        }
+                        counter++;
+                    });
+
+                    if (counter1 == 0)
+                    {
+                        alert('You must choose an animal type');
+                    }
+
+
+                    var jakataMaster = $("#jakataMaster").val();
+
+                   
+                    var title = $("#jakataMaster").val();
+
+                    if (title == "0") {
+                        alert('Title is required');
+                        document.getElementById('jakataMaster').focus();
+                        return;
+                    }
+
+
+                    var moralType = $("#moralType").val();
+                    if (moralType == "0") {
+                        alert('Moral Type is required');
+                        document.getElementById('moralType').focus();
+                        return;
+                    }
+
+
+
+
+                    var elmeStory = document.getElementById('elmeStory').value;
+
+                    var comments = document.getElementById('comments').value;
+
+
+
+                    if (elmeStory.length == 0) {
+                        alert('The Story field cant be empty');
+                        document.getElementById('elmeStory').focus();
+                        return;
+                    }
+
+
+
+                    //var resultJSON = {
+                    //    htmlSourceReceipe: rec, htmlSourceComments: comments, htmlSourceIngred: IngredHTML, title: title, mainIngred: mainIngred, ethnic: ethnic, cat: cat, meal: meal, seasonal: seasonal,
+                    //    cookingLevelCode: cookingLevelCode, Servings: Servings, PrepTime: PrepTime, CookTime: CookTime, youtube: youtube, pictureName: pictureName
+                    //};
+
+                    var resultJSON = {
+                        JakataID: jakataMaster, StoryCategorytName: 1, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+
+                        url: "http://localhost:5187/api/Storiesapi/insert",
+
+
+                        data: resultJSON,
+                        dataType: "json",
+
+
+                        success: function (data, status, xhr) {
+                            //alert("Success: " + xhr.status + " : " + xhr.statusText);
+                            alertify.success("Story Saved");
+                            //window.location.href = "/Home/Update?row=" + data.foo;
+                            window.location.href = "/Home/Update?row=" + data.dataField;
+
+
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(xhr.status);
+                            alert(thrownError);
+                        }
+
+
+                        //success: function (data) {
+
+                        //    alertify.success("Story Saved");
+                        //    $("#divLoading").hide();
+
+                        //    window.location.href = "/Home/Update?row=" + data.foo;
+
+                        //},
+
+
+                    });
+
+                    return;
+
+                });
+
+                //
+
+            });
+        </script>
