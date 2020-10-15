@@ -13,7 +13,7 @@ namespace Stories.Controllers
 {
 
     
-    [EnableCors(origins: "http://localhost:5187", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:27242", headers: "*", methods: "*")]
     public class StoriesapiController : ApiController
     {
 
@@ -76,24 +76,24 @@ namespace Stories.Controllers
 
 
 
-        //public string Search(Story myStoryies)
+        public string Search(Story myStoryies)
         //public HttpResponseMessage Search(Story myStoryies)
        
         //public response Search(Story myStoryies)
-            public string Search(Story myStoryies)
+            //public string Search(Story myStoryies)
         {
 
-            return "hello";
+            //return "hello";
 
-            //GetStories myStories = new GetStories();
+            GetStories myStories = new GetStories();
             //SpecificStoryList mySpecificStoryList = new SpecificStoryList();
-            //string xmlString = myStories.GetSpecificStory(myStoryies);
+            string xmlString = myStories.GetSpecificStory(myStoryies);
 
             //response myresponse = new response();
             //myresponse = myStories.GetSpecificStory(myStoryies);
 
             //return myresponse ;
-            ///return xmlString;
+            return xmlString;
             //return Request.CreateResponse<String>(HttpStatusCode.Created, xmlString);
 
             //HttpResponseMessage response = new HttpResponseMessage();

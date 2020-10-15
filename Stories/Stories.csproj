@@ -50,6 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="iTextSharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <HintPath>..\packages\iTextSharp-LGPL.4.1.6\lib\iTextSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -199,6 +202,7 @@
     <Compile Include="Controllers\JakataMasterController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MoralTypeController.cs" />
+    <Compile Include="Controllers\MyFavortiesController.cs" />
     <Compile Include="Controllers\RomanController.cs" />
     <Compile Include="Controllers\RomanToArabicController.cs" />
     <Compile Include="Controllers\SpecificStoryDropdownController.cs" />
@@ -221,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\album.jpg" />
     <Content Include="Content\alertify\alertify.bootstrap.css" />
     <Content Include="Content\alertify\alertify.core.css" />
     <Content Include="Content\alertify\alertify.default.css" />
@@ -279,10 +284,12 @@
     <Content Include="Views\Home\Update.cshtml" />
     <Content Include="Views\Home\BookGenerator.cshtml" />
     <Content Include="Views\Home\UpdateStory.cshtml" />
+    <Content Include="Views\MyFavorties\PdfResultsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="Views\NewFolder1\" />
     <Folder Include="Views\Update\" />
   </ItemGroup>
   <ItemGroup>

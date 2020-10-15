@@ -41,6 +41,18 @@ namespace Stories.Factory
         {
             var p = new DynamicParameters();
 
+            var AnimalType = myStory.AnimalType;
+
+            AnimalType = AnimalType.Trim();
+
+            if (AnimalType.EndsWith(","))
+            {
+                AnimalType = AnimalType.Remove(AnimalType.Length - 1, 1);
+                myStory.AnimalType = AnimalType;
+            }
+
+
+
             p.Add("@JakataID", myStory.JakataID);
             p.Add("@StoryCategorytName", 1);
             p.Add("@Title", myStory.Title);
@@ -118,6 +130,16 @@ namespace Stories.Factory
         public int Update(Story myStory)
         {
             var p = new DynamicParameters();
+
+            var AnimalType = myStory.AnimalType;
+
+            AnimalType = AnimalType.Trim();
+
+            if (AnimalType.EndsWith(","))
+            {
+                AnimalType = AnimalType.Remove(AnimalType.Length - 1, 1);
+                myStory.AnimalType = AnimalType;
+            }
 
             p.Add("@ID", myStory.ID);
             p.Add("@JakataID", myStory.JakataID);
@@ -631,8 +653,8 @@ namespace Stories.Factory
             return response;
         }
 
-        public response GetSpecificStory(Story myStoryies)
-             //public String GetSpecificStory(Story myStoryies)
+        //public response GetSpecificStory(Story myStoryies)
+             public String GetSpecificStory(Story myStoryies)
         {
 
             var dataTable = new DataTable();
@@ -645,6 +667,7 @@ namespace Stories.Factory
             string returnString = "";
             response response = new response();
             response.result = 0;
+            string resultstring = "";
 
             SpecificStoryList list = new SpecificStoryList();
 
@@ -701,37 +724,32 @@ namespace Stories.Factory
                     dataTable.Load(dataReader);
                     dataTable.WriteXml(writer, XmlWriteMode.WriteSchema, false);
                     returnString = writer.ToString();
+
+                    //return returnString;
                     int numberOfRecords = dataTable.Rows.Count;
                     response.result = numberOfRecords;
 
 
-
+                    
                     //SpecificStoryList list = new SpecificStoryList();
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        specificStory myprod = new specificStory();
-                        myprod.ID = row["ID"].ToString();
-                        myprod.JakataID = row["JakataID"].ToString();
-                        myprod.AnimalType = row["AnimalType"].ToString();
-                        myprod.Comments = row["Comments"].ToString();
-                        myprod.MoralType = row["MoralType"].ToString();
-                        myprod.Stories = row["Stories"].ToString();
-                        myprod.StoryCategorytName = row["StoryCategorytName"].ToString();
-                        myprod.Title = row["Title"].ToString();
+                        //specificStory myprod = new specificStory();
+                        resultstring= resultstring+ row["ID"].ToString()+"|";
+                        
 
-
-                        list.specificStory.Add(myprod);
+                        //list.specificStory.Add(myprod);
                     }
-                    response.AddSpecificStoryList(list);
+                    //response.AddSpecificStoryList(list);
 
-                    response.log.Add(numberOfRecords + " Records found");
+                    //response.log.Add(numberOfRecords + " Records found");
 
                 }
             }
 
             //return list;
-            //return returnString;
-            return response;
+            return resultstring;
+            //return response;
         }
 
         public response GetJakataMaster()

@@ -1,0 +1,451 @@
+﻿@*@model Stories.Models.Story*@
+
+@{
+
+    Stories.Models.Story myStories = new Stories.Models.Story();
+    myStories = (Stories.Models.Story)ViewData["myStory"];
+}
+
+@{
+    ViewBag.Title = "SearchResults";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+
+
+
+
+@*<script src='https://cdn.tiny.cloud/1/acug8soyldlt311fezqg7zu1dlsri2513ia49ds48rk5dqur/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+</script>
+
+
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+        toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+    });
+</script>*@
+
+
+
+
+@*@{
+    Html.RenderPartial("SearchView");
+}*@
+
+
+
+
+
+
+<div class="container">
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+        <li><a data-toggle="tab" href="#menu1">YouTube</a></li>
+
+        <li><a data-toggle="tab" href="#menu3">PDF Generator</a></li>
+        <li><a data-toggle="tab" href="#menu4">Read Chapter </a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+
+
+            <div id="exTab1" class="container">
+
+                <div class="page-wrapper">
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="1a">
+                            <div class="row">
+                                <div class="col-sm-4">
+
+
+
+                                    <div>
+
+
+
+                                        <table style="width: 55%">
+                                            <tr>
+                                                <td>
+                                                    @Html.Label("Title")
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"], new { @disabled = "" })
+                                                </td>
+
+                                            </tr>
+                                        </table>
+
+                                        <table style="width: 55%">
+                                            <tr>
+                                                <td>
+                                                    @Html.Label("Animal Type")
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+
+                                                    @for (int i = 0; i < myStories.animalCombo.items.Count; i++)
+                                                    {
+                                                <tr>
+                                                    <td>
+                                                        @Html.CheckBoxFor(m => myStories.animalCombo.items[i].Selected, new { @disabled = "" })
+                                                       
+                                                        
+
+                                                        @Html.DisplayFor(m => myStories.animalCombo.items[i].Text, new { @class = "animalCombo" })
+                                                        @Html.HiddenFor(m => myStories.animalCombo.items[i].Value, new { @class = "animalCombo" })
+
+                                                        @Html.HiddenFor(m => myStories.animalCombo.items[i].Text, new { @class = "animalCombo" })
+
+
+
+                                                    </td>
+                                                    <td>
+                                                     
+                                                    </td>
+                                                </tr>
+
+
+                                            }
+
+
+                                                </table>
+
+
+
+
+                                                <table style="width: 55%">
+                                                    <tr>
+                                                        <td>
+                                                            @Html.Label("Moral Type")
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+
+                                                        <td>
+                                                            @Html.DropDownList("moralType1", (IEnumerable<SelectListItem>)ViewData["moralTypeData"], new { @disabled = "" })
+                                                        </td>
+
+                                                    </tr>
+                                                </table>
+@*<table style="width: 55%">
+        <tr>
+            <td>
+                @Html.Label("Story Source")
+            </td>
+
+        </tr>
+        <tr>
+
+            <td>
+                @Html.DropDownList("storySource", (IEnumerable<SelectListItem>)ViewData["storySourceData"])
+            </td>
+
+        </tr>
+    </table>*@
+
+
+</div>
+
+                                 <p>
+                                     @{
+                                         int pageNum = (int)ViewData["total"];
+                                         var current = ViewData["currentPage"];
+                                         int currentPage = Convert.ToInt16(current);
+                                         var searchResults = Convert.ToString(ViewData["searchResults"]);
+
+                                         //int currentPage = (int)ViewData["currentPage"];
+
+                                         if (pageNum <= 0)
+                                         {
+                                             <input type="button"  hidden="true" id="Previous" onclick="previous()" disabled="true" value="Previous" />
+                                         }
+                                         else
+                                         {
+                                             <input type="button" id="Previous" onclick="previous()" disabled="false" value="Previous" />
+                                         }
+
+                                         if (pageNum > 1)
+                                         {
+                                             <input type="button" id="Next" onclick="next()" value="Next" />
+
+                                         }
+
+                                         //@ViewData["totalRecipesFound"]
+
+                                         <input type="hidden" id="numberOfPages" name="numberOfPages" value="@pageNum" />
+                                         <input type="hidden" id="currentPage" name="currentPage" value="@currentPage" />
+                                         <input type="hidden" id="searchResults" name="searchResults" value="@searchResults" />
+
+                                     }
+
+
+                                 </p>
+
+                             </div>
+                             <div class="col-sm-8">
+                                 <div>
+                                     Copy and Paste story below
+                                     <textarea id="elmeStory" readonly="true" name="elmeStory" rows="30" cols="90" style="width: 100%">
+
+@{
+
+    string menu = (string)ViewData["Stories"];
+
+    menu = System.Web.HttpUtility.HtmlDecode(menu);
+      @menu
+}
+
+
+ </textarea>
+
+
+                                 </div>
+
+                                 <div>
+                                     Comments
+                                     <textarea id="comments" readonly="true" name="elmeStory" rows="15" cols="90" style="width: 100%">
+
+
+                     @{
+                         string menuComments = (string)ViewData["Comments"];
+
+                         menuComments = System.Web.HttpUtility.HtmlDecode(menuComments);
+                                      @menuComments
+                         }
+
+ </textarea>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+             </div>
+
+         </div>
+
+
+
+
+     </div>
+     <div id="menu1" class="tab-pane fade">
+
+         <div>
+
+
+
+
+             <p>
+
+                 @for (int i = 0; i < myStories.youTubeCombo.items.Count; i++)
+                 {
+                     <iframe width="420" height="345"
+                             src=@myStories.youTubeCombo.items[i].Text></iframe>
+
+                 }
+
+
+
+
+
+             </p>
+         </div>
+     </div>
+     <div id="menu2" class="tab-pane fade">
+         <h3>Create Customm PDF</h3>
+
+     </div>
+     <div id="menu3" class="tab-pane fade">
+
+         <input type="button" onclick="PDF()" name="PDF" id="PDF" value="Create custom receipe book" />
+
+
+     </div>
+
+     <div id="menu4" class="tab-pane fade">
+
+         <div>
+
+             <textarea id="elmeStory" readonly="true" name="elmeStory" rows="30" cols="90" style="width: 100%">
+
+@{
+
+    string menu2 = (string)ViewData["Stories"];
+
+    menu2 = System.Web.HttpUtility.HtmlDecode(menu);
+      @menu2
+}
+
+
+ </textarea>
+
+
+         </div>
+
+     </div>
+
+
+
+
+
+<script>
+
+    function next() {
+
+        if (parseInt(document.getElementById('currentPage').value) == parseInt(document.getElementById('numberOfPages').value)) {
+
+            alertify.success("End of search");
+            $('#Previous').attr("disabled", false);
+            $('#Next').attr("disabled", true);
+            return;
+        }
+        else {
+
+            $('#Next').attr("disabled", false);
+            $('#Previous').attr("disabled", false);
+            var x = parseInt(document.getElementById('currentPage').value) + 1
+            document.getElementById('currentPage').value = x;
+            var searchResults = document.getElementById('searchResults').value;
+
+
+            var resultJSON = {
+                searchResults: searchResults, page: x,
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: "http://localhost:27242//Home/SearchResults",
+                //url: "//Home/SearchResults",
+                data: resultJSON,
+                //dataType: "json",
+                success: function (data, status, xhr) {
+
+                    alertify.success("Story next");
+                    if (data == "") {
+                        alertify.success("No records found");
+                        return;
+                    }
+                    //window.location.reload();
+                    //location.href = location.href;
+                    //window.location.href = "http://localhost:27242/Home/SearchResults?searchResults=" + data + "&page="+page;
+
+                    //$("body").html(response);
+                    console.log(data[0]);
+                    return;
+
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alertify.success("error");
+                    //alert(thrownError);
+                }
+
+            });
+
+
+            return;
+        }
+
+    }
+
+    function previous() {
+        //alert("ddd");
+        $('#Next').attr("disabled", false);
+
+        if (parseInt(document.getElementById('currentPage').value) == 0) {
+
+            alertify.success("Beginning  of search");
+            $('#Previous').attr("disabled", true);
+            return;
+        }
+        else {
+
+            $('#Previous').attr("disabled", false);
+            var x = parseInt(document.getElementById('currentPage').value) - 1
+            document.getElementById('currentPage').value = x;
+            var searchResults = document.getElementById('searchResults').value;
+            var resultJSON = {
+                searchResults: searchResults, page: x,
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: "http://localhost:27242//Home/SearchResults",
+                //url: "//Home/SearchResults",
+                data: resultJSON,
+                //dataType: "json",
+                success: function (data, status, xhr) {
+
+                    alertify.success("Story previous");
+                    if (data == "") {
+                        alertify.success("No records found");
+                        return;
+                    }
+                    //window.location.reload();
+                    //location.href = location.href;
+                    //$("body").html(response);
+
+                    console.log(data[0]);
+                    return;
+
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alertify.success("error");
+                }
+
+            });
+
+
+            return;
+        }
+
+    }
+
+    function PDF() {
+
+        alertify.success("Creating your custum PDF. This will take a few minutes");
+        var searchResults = document.getElementById('searchResults').value;
+
+        window.location.replace("/MyFavorties/PdfResultsView?all=" + searchResults);
+    }
+
+</script>
+
+
+
+
+
+
+
+
+

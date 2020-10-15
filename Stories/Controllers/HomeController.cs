@@ -62,6 +62,7 @@ namespace Stories.Controllers
         /// <returns></returns>
         public ActionResult Update(int row)
         {
+            Story myStory = new Story();
             DropdownModel model = new DropdownModel();
             GetLookups myGetLookups = new GetLookups();
             Story modelStory = new Story();
@@ -82,9 +83,10 @@ namespace Stories.Controllers
 
             ViewData["comments"] = Comments;
             ViewData["Stories"] = Stories;
+            ViewData["searchResults"] = row;
 
 
-           
+
 
 
             model = myGetLookups.GeLookupSpecificStoryDropdown();
@@ -127,7 +129,7 @@ namespace Stories.Controllers
 
             ViewData["animalTypeData"] = model.items;
 
-            Story myStory = new Story();
+            
             myStory.animalCombo = model;
 
             GetLookups myYouTubeGetLookups = new GetLookups();
@@ -141,19 +143,21 @@ namespace Stories.Controllers
             //modelAnimal = model;
             DropdownModel modelMoral = new DropdownModel();
 
-            modelMoral = myGetLookups.GeLookupMoral();
-
+           //modelMoral = myGetLookups.GeLookupMoral();
+            model = myGetLookups.GeLookupMoral();
 
             var moral = Moraltype.ToString();
 
-            foreach (SelectListItem s in modelMoral.items)
+            foreach (SelectListItem s in model.items)
             {
                 if (s.Value == moral)
                 {
                     s.Selected = true;
                 }
             }
-            ViewData["moralTypeData"] = modelMoral.items;
+
+           
+            ViewData["moralTypeData1"] = model.items;
 
 
 

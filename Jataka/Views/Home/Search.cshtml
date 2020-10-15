@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>Search</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -18,6 +18,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" /
 
    
 </head>
@@ -27,7 +38,7 @@
      
         <br>
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
+        @*<ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
             </li>
@@ -37,7 +48,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
             </li>
-        </ul>
+        </ul>*@
 
         <!-- Tab panes -->
         <div class="tab-content">
@@ -123,35 +134,10 @@
 
                                     </div>
 
-                            @*<div id="centerdivButtons" style="width: 500px;">
-
-                                @{
-                                    int pageNum = (int)ViewData["total"];
-                                    int currentPage = (int)ViewData["currentPage"];
-
-                                    if (pageNum > 0)
-                                    {
-                                        <input type="button" id="Previous" disabled="true" value="Previous" />
-                                    }
-
-                                    if (pageNum > 1)
-                                    {
-                                        <input type="button" id="Next"
-                                               value="Next" />
-                                    }
-
-                                    @ViewData["totalRecipesFound"]
-                                }
-
-                                <input type="hidden" id="numberOfPages" name="numberOfPages" value="@pageNum" />
-                                <input type="hidden" id="currentPage" name="currentPage" value="@currentPage" />
-
-                                <input type="hidden" id="queryString" name="queryString" value="" />
-                            </div>*@
-                                       
+                            
 
                                     <p>
-                                        <input type="button" id="Search" value="Save" />
+                                        <input type="button" id="Search" value="Search" />
                                     </p>
 
                                 </div>
@@ -211,9 +197,9 @@
                     }
                     else
                         idslist = userid;
-                    animalChoosen = $("#animalCombo_items_" + counter + "__Value").val() + ',' + animalChoosen;
+                    animalChoosen = $("#animalCombo_items_" + counter1 + "__Value").val() + ',' + animalChoosen;
                 }
-                counter++;
+                counter1++;
             });
 
             if (counter1 == 0) {
@@ -271,20 +257,28 @@
             };
 
             console.log(resultJSON);
-
+            
             $.ajax({
                 type: 'POST',
                 url: "http://localhost:5187/api/Storiesapi/search",
                 data: resultJSON ,
-                //dataType: "json",
-                dataType: "application/json" ,
+                dataType: "json",
+                //dataType: "application/json" ,
                
 
                 success: function (data, status, xhr) {
                     
                     alertify.success("Story Saved");
-                  
+                    if (data == "")
+                    {
+                        alertify.success("No records found");
+                        return;
+                    }
+                    
+                    window.location.href = "http://localhost:27242/Home/SearchResults?searchResults=" + data +"&page=0" ;
+                    console.log(data[0]);
 
+                  
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     alert(xhr.status);
@@ -292,49 +286,8 @@
                 }
 
             });
-
-            //$.ajax({
-            //    type: "POST",
-            //    url: "http://localhost:5187/api/Storiesapi/search" ,
-            //    dataType: "json",
-            //    data: resultJSON,
-            //    success: function (result, status, xhr) {
-            //        alertify.success("Story Saved"); 
-            //    },
-            //    error: function (xhr, status, error) {
-            //        alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
-            //    }
-            //});
-
-        //    $.ajax({
-        //        type: 'POST',
-
-        //        url: "http://localhost:5187/api/Storiesapi/search",
-        //        data: resultJSON,
-        //        //dataType: "json",
-               
-        //        dataType: 'xml',
-
-
-        //        success: function (data, status, xhr) {
-        //            //alert("Success: " + xhr.status + " : " + xhr.statusText);
-        //            alertify.success("Story Saved");
-                  
-        //            //window.location.href = "/Home/Update?row=" + data.dataField;
-
-
-        //        },
-        //        error: function (xhr, ajaxOptions, thrownError) {
-        //            alert(xhr.status);
-        //            alert(thrownError);
-        //        }
-        //    });
-
-        //    return;
-
+            
         });
-
-        //
 
     });
 </script>
