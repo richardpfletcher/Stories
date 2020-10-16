@@ -13,9 +13,8 @@
     <title>Search</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- JavaScript -->
@@ -28,9 +27,14 @@
     <!-- Semantic UI theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
     <!-- Bootstrap theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" /
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
 
-   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.redirect.js"></script>
+
+
+
+
 </head>
 
     
@@ -275,7 +279,18 @@
                         return;
                     }
                     
-                    window.location.href = "http://localhost:27242/Home/SearchResults?searchResults=" + data +"&page=0" ;
+                    //window.location.href = "http://localhost:27242/Home/SearchResults?searchResults=" + data + "&page=0";
+
+                    var url = 'http://localhost:27242/Home/SearchResults' ;
+                    var form = $('<form action="' + url + '" method="post">' +
+                        '<input type="text" name="searchResults" value="' + data + '" />' +
+                        '<input type="text" name="row" value="' + 0 + '" />' +
+                        '</form>');
+                    $('body').append(form);
+                    form.submit();
+
+                    //$.redirect('http://localhost:27242/Home/SearchResults', { 'searchResults': data, 'page': 0 });
+                   
                     console.log(data[0]);
 
                   
