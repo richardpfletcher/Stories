@@ -5,9 +5,11 @@ using System.Web.Mvc;
 using Stories.Factory;
 using Stories.Models;
 using System;
+using System.Web.Http.Cors;
 
 namespace Stories.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MyFavortiesController : Controller
     {
         // GET: MyFavorties

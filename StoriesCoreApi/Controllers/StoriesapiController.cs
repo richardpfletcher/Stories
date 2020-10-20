@@ -1,37 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using StoriesCoreApi.Models;
+using StoriesCoreApi.Factory;
 using System.Net.Http;
-using System.Web.Http;
-using Stories.Models;
-using Stories.Factory;
-using System.Web.Http.Cors;
-//using System.Web.Mvc;
+using System.Net;
+using Microsoft.AspNetCore.Cors;
 
-namespace Stories.Controllers
+namespace StoriesCoreApi.Controllers
 {
 
-    
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
-    //[EnableCors(origins: "http://localhost:27242", headers: "*", methods: "*")]
-
-    public class StoriesapiController : ApiController
+    //[EnableCors(origins: "http://localhost:44345", headers: "*", methods: "*")]
+   
+    [Route("api/[controller]")]
+    [ApiController]
+    public class StoriesapiController : ControllerBase
     {
-
+        [EnableCors("Policy1")]
         [HttpPost]
         [Route("api/Storiesapi/insert")]
 
-        public HttpResponseMessage Insert(Story myStoryies)
+        public IActionResult Insert(Story myStoryies)
         {
             GetStories myStories = new GetStories();
 
 
 
-            int lastRecord =myStories.Insert(myStoryies);
+            int lastRecord = myStories.Insert(myStoryies);
             MyOder order = new MyOder();
             order.MyData = lastRecord.ToString();
-            return Request.CreateResponse<MyOder>(HttpStatusCode.Created, order);
+
+
+            return Ok(order);
+
+            //return Request.CreateResponse<MyOder>(HttpStatusCode.Created, order);
 
 
         }
@@ -39,7 +44,7 @@ namespace Stories.Controllers
         [HttpPost]
         [Route("api/Storiesapi/inserturl")]
 
-        public HttpResponseMessage InsertURL(youTubeModel myYoutube)
+        public IActionResult InsertURL(youTubeModel myYoutube)
         {
             GetStories myStories = new GetStories();
 
@@ -48,8 +53,7 @@ namespace Stories.Controllers
             int lastRecord = myStories.InsertURL(myYoutube);
             MyOder order = new MyOder();
             order.MyData = lastRecord.ToString();
-            return Request.CreateResponse<MyOder>(HttpStatusCode.Created, order);
-
+            return Ok(order);
 
         }
 
@@ -58,7 +62,7 @@ namespace Stories.Controllers
         [HttpPost]
         [Route("api/Storiesapi/update")]
 
-        public HttpResponseMessage Update(Story myStoryies)
+        public IActionResult Update(Story myStoryies)
         {
             GetStories myStories = new GetStories();
 
@@ -68,8 +72,7 @@ namespace Stories.Controllers
             MyOder order = new MyOder();
             order.MyData = lastRecord.ToString();
             //order.MyData = "1";
-            return Request.CreateResponse<MyOder>(HttpStatusCode.Created, order);
-
+            return Ok(order);
 
         }
 
@@ -80,9 +83,9 @@ namespace Stories.Controllers
 
         public string Search(Story myStoryies)
         //public HttpResponseMessage Search(Story myStoryies)
-       
+
         //public response Search(Story myStoryies)
-            //public string Search(Story myStoryies)
+        //public string Search(Story myStoryies)
         {
 
             //return "hello";
@@ -110,3 +113,4 @@ namespace Stories.Controllers
 
     }
 }
+

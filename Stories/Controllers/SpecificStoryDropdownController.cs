@@ -6,9 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http;
 using Stories.Factory;
+using System.Web.Http.Cors;
 
 namespace Stories.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class SpecificStoryDropdownController : ApiController
     {
 

@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -202,6 +203,7 @@
     <Compile Include="Controllers\JakataMasterController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MoralTypeController.cs" />
+    <Compile Include="Controllers\MothersHelpersController.cs" />
     <Compile Include="Controllers\MyFavortiesController.cs" />
     <Compile Include="Controllers\RomanController.cs" />
     <Compile Include="Controllers\RomanToArabicController.cs" />
