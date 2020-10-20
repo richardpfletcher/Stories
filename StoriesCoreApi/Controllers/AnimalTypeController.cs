@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace StoriesCoreApi.Controllers
 {
-    
+    [EnableCors()]
     [Route("api/[controller]")]
     [ApiController]
     public class AnimalTypeController : ControllerBase

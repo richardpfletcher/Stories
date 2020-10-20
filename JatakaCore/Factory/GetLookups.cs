@@ -20,7 +20,7 @@ namespace JatakaCore.Factory
         //{
 
 
-        //    HttpClient client = new HttpClient { BaseAddress = new Uri("http://localhost:5187/") };
+        //    HttpClient client = new HttpClient { BaseAddress = new Uri("https://localhost:44302/") };
 
        
         //    try
@@ -52,7 +52,7 @@ namespace JatakaCore.Factory
             {
 
                 //.net web api
-                //var uri = new Uri("https://localhost:5187/api/AnimalType/");
+                //var uri = new Uri("https://localhost:44302/api/AnimalType/");
 
                 //.net core web api
 
@@ -62,7 +62,7 @@ namespace JatakaCore.Factory
                 
                 var response = client.GetAsync(uri).Result;
 
-                //var content = await client.GetStringAsync("http://localhost:5187/api/AnimalType");
+                //var content = await client.GetStringAsync("https://localhost:44302/api/AnimalType");
 
                 var responseContent = response.Content;
                 var responseString = responseContent.ReadAsStringAsync().Result;
@@ -110,7 +110,7 @@ namespace JatakaCore.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/MoralType/");
+                var uri = new Uri("https://localhost:44302/api/MoralType/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -161,7 +161,7 @@ namespace JatakaCore.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/StorySource/");
+                var uri = new Uri("https://localhost:44302/api/StorySource/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -213,7 +213,7 @@ namespace JatakaCore.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/JakataMaster/");
+                var uri = new Uri("https://localhost:44302/api/JakataMaster/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -264,7 +264,7 @@ namespace JatakaCore.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/SpecificStoryDropdown/");
+                var uri = new Uri("https://localhost:44302/api/SpecificStoryDropdown/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -316,9 +316,9 @@ namespace JatakaCore.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/ToDo/" + status1);
-                //var uri = new Uri("http://localhost:5187/api/Storiesapi/ToDo/"+status1);
-                //var uri = new Uri("http://localhost:5187/api/JakataMaster/");
+                var uri = new Uri("https://localhost:44302/api/ToDo/" + status1);
+                //var uri = new Uri("https://localhost:44302/api/Storiesapi/ToDo/"+status1);
+                //var uri = new Uri("https://localhost:44302/api/JakataMaster/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -369,7 +369,7 @@ namespace JatakaCore.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/Stories/" + row);
+                var uri = new Uri("https://localhost:44302/api/Stories/" + row);
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;
@@ -415,7 +415,7 @@ namespace JatakaCore.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/YouTube/" + row);
+                var uri = new Uri("https://localhost:44302/api/YouTube/" + row);
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;
