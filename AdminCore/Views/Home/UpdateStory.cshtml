@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "UpdateStory";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<h2>UpdateStory</h2>
+
+<table style="width: 55%">
+    <tr>
+        <td>
+            @Html.Label("Title")
+        </td>
+
+    </tr>
+    <tr>
+
+        <td>
+            @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"])
+        </td>
+
+       
+
+    </tr>
+</table>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#jakataMaster").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+           window.location.href = "/Home/Update?row=" + selectedValue;
+            
+
+        });
+    });
+</script>
+
+

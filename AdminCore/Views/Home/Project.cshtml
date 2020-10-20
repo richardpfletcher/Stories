@@ -1,0 +1,233 @@
+﻿
+@{
+    ViewData["Title"] = "Project";
+}
+@model AdminCore.Models.Story
+
+<h1>Project</h1>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <table style="width: 55%">
+            <tr>
+                <td>
+                    @Html.Label("Title")
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+                    @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"])
+                </td>
+
+            </tr>
+        </table>
+
+
+    </div>
+    <div class="col-md-8">
+
+        <table style="width: 55%">
+            <tr>
+                <td>
+                    @Html.Label("Illustrations")
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+
+                    @for (int i = 0; i < Model.IllustrationsCombo.items.Count; i++)
+                    {
+                <tr>
+                    <td>
+                        @*@Html.CheckBoxFor(m => Model.ReadersCombo.items[i].Selected)*@
+                        @Html.CheckBoxFor(m => Model.IllustrationsCombo.items[i].Selected, new { @class = "IllustrationsCombo" })
+
+
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => Model.IllustrationsCombo.items[i].Text, new { @class = "IllustrationsCombo" })
+                        @Html.HiddenFor(m => Model.IllustrationsCombo.items[i].Value, new { @class = "IllustrationsCombo" })
+                        @Html.HiddenFor(m => Model.IllustrationsCombo.items[i].Text, new { @class = "IllustrationsCombo" })
+                    </td>
+                </tr>
+
+
+            }
+
+
+                </table>
+
+                <table style="width: 55%">
+                    <tr>
+                        <td>
+                            @Html.Label("Readers")
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>
+
+                            @for (int i = 0; i < Model.ReadersCombo.items.Count; i++)
+                            {
+                        <tr>
+                            <td>
+                                @*@Html.CheckBoxFor(m => Model.ReadersCombo.items[i].Selected)*@
+                                @Html.CheckBoxFor(m => Model.ReadersCombo.items[i].Selected, new { @class = "ReadersCombo" })
+
+
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => Model.ReadersCombo.items[i].Text, new { @class = "ReadersCombo" })
+                                @Html.HiddenFor(m => Model.ReadersCombo.items[i].Value, new { @class = "ReadersCombo" })
+                                @Html.HiddenFor(m => Model.ReadersCombo.items[i].Text, new { @class = "ReadersCombo" })
+                            </td>
+                        </tr>
+
+
+                    }
+
+
+                        </table>
+
+                        <table style="width: 55%">
+                            <tr>
+                                <td>
+                                    @Html.Label("Music Type")
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>
+
+                                    @for (int i = 0; i < Model.MusicCombo.items.Count; i++)
+                                    {
+                                <tr>
+                                    <td>
+                                        @*@Html.CheckBoxFor(m => Model.MusicCombo.items[i].Selected)*@
+                                        @Html.CheckBoxFor(m => Model.MusicCombo.items[i].Selected, new { @class = "MusicCombo" })
+
+
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => Model.MusicCombo.items[i].Text, new { @class = "MusicCombo" })
+                                        @Html.HiddenFor(m => Model.MusicCombo.items[i].Value, new { @class = "MusicCombo" })
+                                        @Html.HiddenFor(m => Model.MusicCombo.items[i].Text, new { @class = "MusicCombo" })
+                                    </td>
+                                </tr>
+
+
+                            }
+
+
+                                </table>
+
+                                <table style="width: 55%">
+                                    <tr>
+                                        <td>
+                                            @Html.Label("Dance Type")
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+
+                                            @for (int i = 0; i < Model.DanceCombo.items.Count; i++)
+                                            {
+                                        <tr>
+                                            <td>
+                                                @*@Html.CheckBoxFor(m => Model.DanceCombo.items[i].Selected)*@
+                                                @Html.CheckBoxFor(m => Model.DanceCombo.items[i].Selected, new { @class = "DanceCombo" })
+
+
+
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => Model.DanceCombo.items[i].Text, new { @class = "DanceCombo" })
+                                                @Html.HiddenFor(m => Model.DanceCombo.items[i].Value, new { @class = "DanceCombo" })
+                                                @Html.HiddenFor(m => Model.DanceCombo.items[i].Text, new { @class = "DanceCombo" })
+                                            </td>
+                                        </tr>
+
+
+                                    }
+
+
+                                        </table>
+
+                                        <table style="width: 55%">
+                                            <tr>
+                                                <td>
+                                                    @Html.Label("Admin Type")
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+
+                                                    @for (int i = 0; i < Model.AdminCombo.items.Count; i++)
+                                                    {
+                                                <tr>
+                                                    <td>
+                                                        @*@Html.CheckBoxFor(m => Model.AdminCombo.items[i].Selected)*@
+                                                        @Html.CheckBoxFor(m => Model.AdminCombo.items[i].Selected, new { @class = "AdminCombo" })
+
+
+
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(m => Model.AdminCombo.items[i].Text, new { @class = "AdminCombo" })
+                                                        @Html.HiddenFor(m => Model.AdminCombo.items[i].Value, new { @class = "AdminCombo" })
+                                                        @Html.HiddenFor(m => Model.AdminCombo.items[i].Text, new { @class = "AdminCombo" })
+                                                    </td>
+                                                </tr>
+
+
+                                            }
+
+
+                                                </table>
+
+                                            </div>
+    @*<div class="col-md-4">
+        <h2>Project Status</h2>
+        <p>TKeep up to date on each project. </p>
+        <p><a class="btn btn-info" href="/Home/Project">Project Status</a></p>
+    </div>*@
+
+</div>
+
+
+

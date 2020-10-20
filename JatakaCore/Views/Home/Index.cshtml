@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@*<img src="/content/album.jpg" />*@
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Getting started</h2>
+        <p>
+            Here you can search for a particuliar story.
+            <a class="btn btn-info" href="/Home/Search">Search for a story</a>
+            <input type="button" id="Next" onclick="next()" value="Next" />
+        </p>
+
+    </div>
+    @*<div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>*@
+    @*<div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>*@
+</div>
+
+
+@*<iframe width="420" height="345"
+            src='https://www.youtube.com/embed?v=GL0PjOR3gKo&list=PL9qsexN4A8jytRinRRkCGFAQOCSF2KUQb&index=3&t=0s&fbclid=IwAR38-wF4PbQcy5ziIekSGDuMHcbmDdo2qrCslL7Zq9-Y6K1mP301e0bjQUo'
+    </iframe>
+
+    <iframe width="420" height="345"
+            src='https://www.youtube.com/embed?v=-Xa8kM4pnKM&feature=share&fbclid=IwAR2G3n1O4OtaKPuKXBCj66wAswotkQutDwA4oHCs99FrBJODSHG_bagrnIs'
+    </iframe>*@
+
+<script>
+
+    function next() {
+
+       
+
+            $.ajax({
+                type: 'GET',
+                url: "https://localhost:44302/api/AnimalType",
+                //url: "//Home/SearchResults",
+                //data: resultJSON,
+                //dataType: "json",
+                success: function (data, status, xhr) {
+
+                    alert("got data");
+                    //window.location.reload();
+                    //location.href = location.href;
+                    //window.location.href = "http://localhost:44345/Home/SearchResults?searchResults=" + data + "&page="+page;
+
+                    //$("body").html(response);
+                    console.log(data[0]);
+                    return;
+
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alertify.success("error");
+                    //alert(thrownError);
+                }
+
+            });
+
+
+            return;
+        }
+
+    //}
+
+    </script>
