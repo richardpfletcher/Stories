@@ -32,7 +32,7 @@ namespace Stories.Controllers
             DropdownModel model = new DropdownModel();
             DropdownModel modelAnimal = new DropdownModel();
             GetLookups myGetLookups = new GetLookups();
-            model=myGetLookups.GeLookupAnimal();
+            model = myGetLookups.GeLookupAnimal();
             ViewData["animalTypeData"] = model.items;
 
             Story myStory = new Story();
@@ -52,7 +52,7 @@ namespace Stories.Controllers
 
 
             return View(myStory);
-            
+
         }
 
         /// <summary>
@@ -75,11 +75,11 @@ namespace Stories.Controllers
             var JakataIDString = modelStory.JakataID.ToString();
             ViewData["JakataID"] = JakataIDString;
 
-            var Comments =modelStory.Comments;
-            var Moraltype =modelStory.MoralType  ;
-            var Stories =modelStory.Stories  ;
-            var StoryCategorytName=modelStory.StoryCategorytName ;
-            var Title =modelStory.Title ;
+            var Comments = modelStory.Comments;
+            var Moraltype = modelStory.MoralType;
+            var Stories = modelStory.Stories;
+            var StoryCategorytName = modelStory.StoryCategorytName;
+            var Title = modelStory.Title;
 
             ViewData["comments"] = Comments;
             ViewData["Stories"] = Stories;
@@ -95,7 +95,7 @@ namespace Stories.Controllers
 
 
             var AnimalType = modelStory.AnimalType;
-            
+
             AnimalType = AnimalType.Trim();
 
             if (AnimalType.EndsWith(","))
@@ -129,7 +129,7 @@ namespace Stories.Controllers
 
             ViewData["animalTypeData"] = model.items;
 
-            
+
             myStory.animalCombo = model;
 
             GetLookups myYouTubeGetLookups = new GetLookups();
@@ -143,7 +143,7 @@ namespace Stories.Controllers
             //modelAnimal = model;
             DropdownModel modelMoral = new DropdownModel();
 
-           //modelMoral = myGetLookups.GeLookupMoral();
+            //modelMoral = myGetLookups.GeLookupMoral();
             model = myGetLookups.GeLookupMoral();
 
             var moral = Moraltype.ToString();
@@ -156,7 +156,7 @@ namespace Stories.Controllers
                 }
             }
 
-           
+
             ViewData["moralTypeData1"] = model.items;
 
 
@@ -175,7 +175,7 @@ namespace Stories.Controllers
                     s.Selected = true;
                 }
             }
-                       
+
 
             ViewData["jakataMasterData"] = model.items;
 
@@ -186,7 +186,7 @@ namespace Stories.Controllers
             myStory.done = model;
 
             model = myGetLookups.GetStatus(0);
-            myStory.toDo= model;
+            myStory.toDo = model;
             ViewData["ToDo"] = model.items;
 
             return View(myStory);
@@ -197,7 +197,7 @@ namespace Stories.Controllers
             ViewBag.Message = "Your app description page.";
             DropdownModel model = new DropdownModel();
             GetLookups myGetLookups = new GetLookups();
-            
+
             model = myGetLookups.GeLookupSpecificStoryDropdown();
             ViewData["jakataMasterData"] = model.items;
 
@@ -205,6 +205,40 @@ namespace Stories.Controllers
 
             return View();
         }
+
+        public ActionResult Project()
+        {
+            ViewBag.Title = "Project";
+            Story myStory = new Story();
+            DropdownModel model = new DropdownModel();
+            DropdownModel modelAnimal = new DropdownModel();
+            GetLookups myGetLookups = new GetLookups();
+            model = myGetLookups.GeLookupCatUsers(1);
+            myStory.IllustrationsCombo = model;
+            //ViewData["IllustrationsData"] = model.items;
+            model = myGetLookups.GeLookupCatUsers(2);
+            myStory.ReadersCombo = model;
+            //ViewData["ReadersData"] = model.items;
+            model = myGetLookups.GeLookupCatUsers(3);
+            myStory.MusicCombo = model;
+            //ViewData["MusicData"] = model.items;
+            model = myGetLookups.GeLookupCatUsers(4);
+            myStory.DanceCombo = model;
+            //ViewData["DanceData"] = model.items;
+            model = myGetLookups.GeLookupCatUsers(5);
+            myStory.AdminCombo = model;
+            //ViewData["AdminData"] = model.items;
+
+            model = myGetLookups.GeLookupJakataMaster();
+            ViewData["jakataMasterData"] = model.items;
+
+
+
+
+
+            return View(myStory);
+        }
+
 
         public ActionResult BookGenerator()
         {

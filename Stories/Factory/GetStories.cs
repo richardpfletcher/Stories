@@ -78,7 +78,7 @@ namespace Stories.Factory
                 }
             }
 
-             return total;
+            return total;
 
         }
 
@@ -95,7 +95,7 @@ namespace Stories.Factory
 
             p.Add("@JakataID", myStory.JakataID);
             p.Add("@URL", myStory.URL);
-          
+
             var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
             string strConnString = conString.ConnectionString;
 
@@ -167,7 +167,7 @@ namespace Stories.Factory
                 //}
             }
 
-            
+
 
             return total;
 
@@ -178,7 +178,7 @@ namespace Stories.Factory
 
 
 
-            public response GetAnimal()
+        public response GetAnimal()
         {
 
             var dataTable = new DataTable();
@@ -371,12 +371,281 @@ namespace Stories.Factory
             return response;
         }
 
+        public response GetPosted()
+        {
+
+            var dataTable = new DataTable();
+            dataTable = new DataTable { TableName = "Posted" };
+            //var conString1 = ConfigurationManager.ConnectionStrings["LocalEvolution"];
+            //string connString = conString1.ConnectionString;
+            string connString = URLInfo.GetDataBaseConnectionString();
+
+
+            System.IO.StringWriter writer = new System.IO.StringWriter();
+            string returnString = "";
+            response response = new response();
+            response.result = 0;
+            using (System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(connString))
+            {
+                using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("GetPosted", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    var dataReader = cmd.ExecuteReader();
+                    dataTable.Load(dataReader);
+                    dataTable.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+                    returnString = writer.ToString();
+                    int numberOfRecords = dataTable.Rows.Count;
+                    response.result = numberOfRecords;
+
+
+
+                    PostedList list = new PostedList();
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        posted myprod = new posted();
+                        myprod.ID = row["ID"].ToString();
+                        myprod.Posted = row["Posted"].ToString();
+
+
+                        list.postedLists.Add(myprod);
+                    }
+                    response.AddPostedList(list);
+
+                    response.log.Add(numberOfRecords + " Records found");
+
+                }
+            }
+            return response;
+        }
+
+        public response GetReadersSpecificStory(int ID)
+        {
+
+            var dataTable = new DataTable();
+            dataTable = new DataTable { TableName = "Project" };
+            //var conString1 = ConfigurationManager.ConnectionStrings["LocalEvolution"];
+            //string connString = conString1.ConnectionString;
+            string connString = URLInfo.GetDataBaseConnectionString();
+
+
+            System.IO.StringWriter writer = new System.IO.StringWriter();
+            string returnString = "";
+            response response = new response();
+            response.result = 0;
+            using (System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(connString))
+            {
+                using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("GetReadersSpecificStory", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@JakataID", SqlDbType.NVarChar).Value = ID;
+                    con.Open();
+                    var dataReader = cmd.ExecuteReader();
+                    dataTable.Load(dataReader);
+                    dataTable.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+                    returnString = writer.ToString();
+                    int numberOfRecords = dataTable.Rows.Count;
+                    response.result = numberOfRecords;
+
+
+
+                    MothersHelpersList list = new MothersHelpersList();
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        mothersHelpers myprod = new mothersHelpers();
+                        myprod.ID = row["ID"].ToString();
+                        myprod.Name = row["Name"].ToString();
+
+
+                        list.mothersHelpersLists.Add(myprod);
+                    }
+                    response.AddMothersHelpersList(list);
+
+                    response.log.Add(numberOfRecords + " Records found");
+
+                }
+            }
+            return response;
+        }
+
+        public response GetReadersStory(int JakataID, int userID)
+        {
+
+            var dataTable = new DataTable();
+            dataTable = new DataTable { TableName = "Project" };
+            //var conString1 = ConfigurationManager.ConnectionStrings["LocalEvolution"];
+            //string connString = conString1.ConnectionString;
+            string connString = URLInfo.GetDataBaseConnectionString();
+
+
+            System.IO.StringWriter writer = new System.IO.StringWriter();
+            string returnString = "";
+            response response = new response();
+            response.result = 0;
+            using (System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(connString))
+            {
+                using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("GetReadersStory", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@JakataID", SqlDbType.NVarChar).Value = JakataID;
+                    cmd.Parameters.Add("@userID", SqlDbType.NVarChar).Value = userID;
+                    con.Open();
+                    var dataReader = cmd.ExecuteReader();
+                    dataTable.Load(dataReader);
+                    dataTable.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+                    returnString = writer.ToString();
+                    int numberOfRecords = dataTable.Rows.Count;
+                    response.result = numberOfRecords;
+
+
+
+                    ReadersStoryList list = new ReadersStoryList();
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        readersStory myprod = new readersStory();
+                        myprod.ID = row["ID"].ToString();
+                        myprod.Name = row["Name"].ToString();
+                        myprod.UserID = row["UserID"].ToString();
+                        myprod.JakataID = row["JakataID"].ToString();
+                        myprod.Comments = row["Comments"].ToString();
+                        myprod.Title = row["Title"].ToString();
+                        myprod.Illustrations = row["Illustrations"].ToString();
+                        myprod.Readers = row["Readers"].ToString();
+                        myprod.Music = row["Music"].ToString();
+                        myprod.Dance = row["Dance"].ToString();
+                        myprod.Admin = row["Admin"].ToString();
+                        myprod.Posted = row["Posted"].ToString();
+                        myprod.illustrationStartDate = row["illustrationStartDate"].ToString();
+                        myprod.illustrationStopDate = row["illustrationStopDate"].ToString();
+                        myprod.ReadersStartDate = row["ReadersStartDate"].ToString();
+                        myprod.ReadersStopDate = row["ReadersStopDate"].ToString();
+                        myprod.MusicStartDate = row["MusicStartDate"].ToString();
+                        myprod.MusicStopDate = row["MusicStoptDate"].ToString();
+                        myprod.DanceStartDate = row["DanceStartDate"].ToString();
+                        myprod.DanceStopDate = row["DanceStopDate"].ToString();
+
+
+                        list.readersStory.Add(myprod);
+                    }
+                    response.AddReadersStoryList(list);
+
+                    response.log.Add(numberOfRecords + " Records found");
+
+                }
+            }
+            return response;
+        }
+
+        public int Save(readersStory myStory)
+        {
+
+            var p = new DynamicParameters();
+
+
+            if (myStory.Illustrations != null)
+            {
+
+
+
+                var Illustrations = myStory.Illustrations;
+
+                Illustrations = Illustrations.Trim();
+
+                if (Illustrations.EndsWith(","))
+                {
+                    Illustrations = Illustrations.Remove(Illustrations.Length - 1, 1);
+                    myStory.Illustrations = Illustrations;
+                }
+            }
+
+            if (myStory.Music != null)
+            {
+
+                var Music = myStory.Music;
+
+                Music = Music.Trim();
+
+                if (Music.EndsWith(","))
+                {
+                    Music = Music.Remove(Music.Length - 1, 1);
+                    myStory.Music = Music;
+                }
+            }
+
+            if (myStory.Dance != null)
+            {
+
+                var Dance = myStory.Dance;
+
+                Dance = Dance.Trim();
+
+                if (Dance.EndsWith(","))
+                {
+                    Dance = Dance.Remove(Dance.Length - 1, 1);
+                    myStory.Dance = Dance;
+                }
+            }
+
+
+
+
+
+            p.Add("@JakataID", myStory.JakataID);
+            p.Add("@UserID", myStory.UserID);
+            p.Add("@Title", myStory.Title);
+            p.Add("@Comments", myStory.Comments);
+            p.Add("@Illustrations", myStory.Illustrations);
+
+
+            p.Add("@Music", myStory.Music);
+            p.Add("@Dance", myStory.Dance);
+            p.Add("@Admin", myStory.Admin);
+            p.Add("@posted", myStory.Posted);
+
+            p.Add("@illustrationStartDate", myStory.illustrationStartDate);
+            p.Add("@illustrationStopDate", myStory.illustrationStopDate);
+            p.Add("@ReadersStartDate", myStory.ReadersStartDate);
+            p.Add("@ReadersStopDate", myStory.ReadersStopDate);
+
+
+            p.Add("@MusicStartDate", myStory.MusicStartDate);
+            p.Add("@MusicStoptDate", myStory.MusicStopDate);
+            p.Add("@DanceStartDate", myStory.DanceStartDate);
+            p.Add("@DanceStopDate", myStory.DanceStopDate);
+            p.Add("@Mode", myStory.Mode);
+            p.Add("@Readers", "");
+
+
+
+
+
+            var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+            string strConnString = conString.ConnectionString;
+
+            int total = 0;
+
+            using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+            {
+                sqlConnection.Open();
+                const string storedProcedure = "dbo.SaveProject";
+                var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                foreach (var el in values)
+                {
+                    total = el.totalReceipesInt;
+                }
+            }
+
+            return total;
+
+        }
+
+
 
         public response GetStoryCategorytName()
         {
 
             var dataTable = new DataTable();
-            dataTable = new DataTable { TableName = "StoryCategorytName" };
+            dataTable = new DataTable { TableName = "Project" };
             //var conString1 = ConfigurationManager.ConnectionStrings["LocalEvolution"];
             //string connString = conString1.ConnectionString;
             string connString = URLInfo.GetDataBaseConnectionString();
@@ -696,7 +965,7 @@ namespace Stories.Factory
             return response;
         }
 
-        public response GetSpecificStory(int ID)
+        public response GetSpecificStory(int ID, string mode)
         {
 
             var dataTable = new DataTable();
@@ -715,6 +984,7 @@ namespace Stories.Factory
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@ID", SqlDbType.NVarChar).Value = ID;
+                    cmd.Parameters.Add("@Mode", SqlDbType.NVarChar).Value = mode;
                     con.Open();
                     var dataReader = cmd.ExecuteReader();
                     dataTable.Load(dataReader);
@@ -751,7 +1021,7 @@ namespace Stories.Factory
         }
 
         //public response GetSpecificStory(Story myStoryies)
-             public String GetSpecificStory(Story myStoryies)
+        public String GetSpecificStory(Story myStoryies)
         {
 
             var dataTable = new DataTable();
@@ -782,7 +1052,7 @@ namespace Stories.Factory
                     //cmd.Add("@StoryCategorytName", 1);
                     //cmd.Add("@Title", myStory.Title);
                     //cmd.Add("@AnimalType", myStory.AnimalType);
-                   
+
 
                     if (myStoryies.Title > 0)
                     {
@@ -794,7 +1064,7 @@ namespace Stories.Factory
                         cmd.Parameters.Add("@JakataID", SqlDbType.Int).Value = myStoryies.JakataID;
                     }
 
-                    if (myStoryies.AnimalType !="0")
+                    if (myStoryies.AnimalType != "0")
                     {
                         cmd.Parameters.Add("@AnimalType", SqlDbType.NVarChar).Value = myStoryies.AnimalType;
                     }
@@ -802,7 +1072,7 @@ namespace Stories.Factory
                     if (myStoryies.MoralType > 0)
                     {
                         cmd.Parameters.Add("@MoralType", SqlDbType.Int).Value = myStoryies.MoralType;
-                        
+
                     }
 
                     if (myStoryies.Comments != "0")
@@ -827,13 +1097,13 @@ namespace Stories.Factory
                     response.result = numberOfRecords;
 
 
-                    
+
                     //SpecificStoryList list = new SpecificStoryList();
                     foreach (DataRow row in dataTable.Rows)
                     {
                         //specificStory myprod = new specificStory();
-                        resultstring= resultstring+ row["ID"].ToString()+"|";
-                        
+                        resultstring = resultstring + row["ID"].ToString() + "|";
+
 
                         //list.specificStory.Add(myprod);
                     }

@@ -13,11 +13,16 @@ namespace Stories.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class StoriesController : ApiController
     {
-        public response Get(int ID)
+
+        [HttpGet]
+
+        [Route("api/Stories/getSpecificStory")]
+
+        public response Get(int ID, string mode)
         {
 
             GetStories myStories = new GetStories();
-            return myStories.GetSpecificStory(ID);
+            return myStories.GetSpecificStory(ID, mode);
         }
     }
 }

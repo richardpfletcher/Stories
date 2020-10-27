@@ -14,11 +14,6 @@ namespace Stories.Controllers
     public class AnimalTypeController : ApiController
     {
 
-        //// GET: api/Storiesapi
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
 
         public response Get()
         {
