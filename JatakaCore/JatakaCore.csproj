@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="alertify" Version="0.3.11" />
-    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Dapper" Version="1.50.5" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.3" />
     <PackageReference Include="Grpc.Core" Version="2.32.0" />
     <PackageReference Include="itext7" Version="7.1.12" />

@@ -22,6 +22,12 @@ namespace Stories.Models
         public DropdownModel toDo { get; set; }
         public string URL { get; set; }
 
+        public DropdownModel IllustrationsCombo { get; set; }
+        public DropdownModel ReadersCombo { get; set; }
+        public DropdownModel MusicCombo { get; set; }
+        public DropdownModel DanceCombo { get; set; }
+        public DropdownModel AdminCombo { get; set; }
+
 
     }
 

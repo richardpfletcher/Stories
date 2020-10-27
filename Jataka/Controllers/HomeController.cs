@@ -15,7 +15,7 @@ using Stories.Models;
 
 namespace Jataka.Controllers
 {
-   
+
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -75,26 +75,59 @@ namespace Jataka.Controllers
             return View(myStory);
         }
 
+        public ActionResult Project()
+        {
+            ViewBag.Title = "Project";
+            Story myStory = new Story();
+            DropdownModel model = new DropdownModel();
+            DropdownModel modelAnimal = new DropdownModel();
+            GetLookups myGetLookups = new GetLookups();
+            model = myGetLookups.GeLookupCatUsers(1);
+            myStory.IllustrationsCombo = model;
+            //ViewData["IllustrationsData"] = model.items;
+            model = myGetLookups.GeLookupCatUsers(2);
+            myStory.ReadersCombo = model;
+            //ViewData["ReadersData"] = model.items;
+            model = myGetLookups.GeLookupCatUsers(3);
+            myStory.MusicCombo = model;
+            //ViewData["MusicData"] = model.items;
+            model = myGetLookups.GeLookupCatUsers(4);
+            myStory.DanceCombo = model;
+            //ViewData["DanceData"] = model.items;
+            model = myGetLookups.GeLookupCatUsers(5);
+            myStory.AdminCombo = model;
+            //ViewData["AdminData"] = model.items;
+
+            model = myGetLookups.GeLookupJakataMaster();
+            ViewData["jakataMasterData"] = model.items;
 
 
-        [HttpPost]
+
+
+
+            return View(myStory);
+        }
+
+
+        //[HttpPost]
+        [HttpGet]
         //[AcceptVerbs(HttpVerbs.Post)]
 
 
 
-        public ActionResult SearchResults(String searchResults,string page)
+        public ActionResult SearchResults(String searchResults, string page)
         {
 
             Story modelStory = new Story();
             Story myStory = new Story();
 
-            if (searchResults =="")
+            if (searchResults == "")
             {
                 return View(myStory);
 
             }
             ViewBag.Message = "Your app description page.";
-            
+
 
             //page = "0";
 
@@ -112,7 +145,7 @@ namespace Jataka.Controllers
 
             ViewData["currentPage"] = page;
 
-            var rows  = searchResults;
+            var rows = searchResults;
 
             rows = searchResults.Trim();
 
@@ -123,8 +156,20 @@ namespace Jataka.Controllers
             ViewData["searchResults"] = rows;
 
             string[] rowschosen = rows.Split('|');
+            string choosen = "";
 
-           string choosen = rowschosen[Convert.ToInt16(page)];
+            try
+            {
+                choosen = rowschosen[Convert.ToInt16(page)];
+
+            }
+            catch (Exception ex)
+            {
+                choosen = rows;
+
+            }
+
+            //string choosen = rowschosen[Convert.ToInt16(page)];
 
             int total1 = rowschosen.Count();
             string total = total1.ToString();
@@ -144,7 +189,7 @@ namespace Jataka.Controllers
 
             DropdownModel model = new DropdownModel();
             GetLookups myGetLookups = new GetLookups();
-            
+
             modelStory = myGetLookups.GetSpecificStory(row);
 
             var ID1 = modelStory.ID.ToString();
@@ -272,28 +317,17 @@ namespace Jataka.Controllers
             myStory.toDo = model;
             ViewData["ToDo"] = model.items;
             ViewData["myStory"] = myStory;
-
-
-
-            //return View(myStory);
-            //RedirectToAction("Create", "SearchResults");
-
-            //Response.AddHeader("Refresh", "5");
-            ModelState.Clear();
-            ModelState.Remove("jakataMaster");
-
-
-
-            return View();
+            myStory.Stories = (string)ViewData["Stories"];
+            return View(modelStory);
 
 
         }
 
-       
+
         public ActionResult Test(String searchResults, string page)
         {
 
-           
+
 
             Story modelStory = new Story();
             Story myStory = new Story();
@@ -471,7 +505,7 @@ namespace Jataka.Controllers
 
 
             ViewData["jakataMasterData"] = model.items;
-            
+
 
             // titles done
             model = myGetLookups.GetStatus(1);
@@ -489,9 +523,10 @@ namespace Jataka.Controllers
             //RedirectToAction("Create", "SearchResults");
 
             //Response.AddHeader("Refresh", "5");
-            //ModelState.Clear();
-            ModelState.Remove("jakataMaster");
+            ModelState.Clear();
+            ModelState.Remove("Stories.Models.Story");
 
+            myStory.Stories = Stories;
             return View();
 
 
@@ -500,6 +535,6 @@ namespace Jataka.Controllers
 
     }
 
-   
 
-    }
+
+}

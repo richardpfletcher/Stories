@@ -1,9 +1,11 @@
-﻿@*@model Stories.Models.Story*@
+﻿@model Stories.Models.Story
 
 @{
 
     Stories.Models.Story myStories = new Stories.Models.Story();
     myStories = (Stories.Models.Story)ViewData["myStory"];
+
+
 }
 
 @{
@@ -55,13 +57,15 @@
 
 
 
-@using (Html.BeginForm("Home", "SearchResults", FormMethod.Post))
-{
+@*@using (Html.BeginForm("Home", "SearchResults", FormMethod.Post))
+    {
 
-}
+    }*@
 
 
-    <div class="container">
+<div class="container">
+
+    <div id="centerdivResults">
 
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
@@ -174,18 +178,20 @@
 
                                                         //int currentPage = (int)ViewData["currentPage"];
 
-                                                        if (pageNum <= 0)
+                                                        if (currentPage <= 1)
                                                         {
-                                                            <input type="button" hidden="true" id="Previous" onclick="previous()" disabled="true" value="Previous" />
+                                                            <input type="button" hidden="true" id="Previous" onclick="previous()" value="Previous" />
                                                         }
                                                         else
                                                         {
-                                                            <input type="button" id="Previous" onclick="previous()" disabled="false" value="Previous" />
+                                                            <input type="button" id="Previous" onclick="previous()" value="Previous" />
                                                         }
 
-                                                        if (pageNum > 1)
+                                                        if (currentPage >= 0)
                                                         {
+
                                                             <input type="button" id="Next" onclick="next()" value="Next" />
+
 
                                                         }
 
@@ -211,6 +217,8 @@
 
     menu = System.Web.HttpUtility.HtmlDecode(menu);
       @menu
+
+    
 }
 
 
@@ -247,7 +255,7 @@
 
                     </div>
 
-                    }
+
                     <div id="menu1" class="tab-pane fade">
 
                         <div>
@@ -303,134 +311,142 @@
                         </div>
 
                     </div>
+                </div>
 
 
 
 
 
-                    <script>
+                <script>
 
-                        function next() {
+                    function next() {
 
-                            if (parseInt(document.getElementById('currentPage').value) == parseInt(document.getElementById('numberOfPages').value)) {
+                        if (parseInt(document.getElementById('currentPage').value) == parseInt(document.getElementById('numberOfPages').value)) {
 
-                                alertify.success("End of search");
-                                $('#Previous').attr("disabled", false);
-                                $('#Next').attr("disabled", true);
-                                return;
-                            }
-                            else {
-
-                                $('#Next').attr("disabled", false);
-                                $('#Previous').attr("disabled", false);
-                                var x = parseInt(document.getElementById('currentPage').value) + 1
-                                document.getElementById('currentPage').value = x;
-                                var searchResults = document.getElementById('searchResults').value;
-
-
-                                var resultJSON = {
-                                    searchResults: searchResults, page: x,
-                                };
-
-                                $.ajax({
-                                    type: 'POST',
-                                    url: "http://localhost:27242//Home/SearchResults",
-                                    //url: "//Home/SearchResults",
-                                    data: resultJSON,
-                                    //dataType: "json",
-                                    success: function (data, status, xhr) {
-
-                                        alertify.success("Story next");
-                                        if (data == "") {
-                                            alertify.success("No records found");
-                                            return;
-                                        }
-                                        //window.location.reload();
-                                        //location.href = location.href;
-                                        //window.location.href = "http://localhost:27242/Home/SearchResults?searchResults=" + data + "&page="+page;
-
-                                        //$("body").html(response);
-                                        console.log(data[0]);
-                                        return;
-
-
-                                    },
-                                    error: function (xhr, ajaxOptions, thrownError) {
-                                        alertify.success("error");
-                                        //alert(thrownError);
-                                    }
-
-                                });
-
-
-                                return;
-                            }
-
+                            alertify.success("End of search");
+                            $('#Previous').attr("disabled", false);
+                            $('#Next').attr("disabled", true);
+                            return;
                         }
+                        else {
 
-                        function previous() {
-                            //alert("ddd");
                             $('#Next').attr("disabled", false);
-
-                            if (parseInt(document.getElementById('currentPage').value) == 0) {
-
-                                alertify.success("Beginning  of search");
-                                $('#Previous').attr("disabled", true);
-                                return;
-                            }
-                            else {
-
-                                $('#Previous').attr("disabled", false);
-                                var x = parseInt(document.getElementById('currentPage').value) - 1
-                                document.getElementById('currentPage').value = x;
-                                var searchResults = document.getElementById('searchResults').value;
-                                var resultJSON = {
-                                    searchResults: searchResults, page: x,
-                                };
-
-                                $.ajax({
-                                    type: 'POST',
-                                    url: "http://localhost:27242//Home/SearchResults",
-                                    //url: "//Home/SearchResults",
-                                    data: resultJSON,
-                                    //dataType: "json",
-                                    success: function (data, status, xhr) {
-
-                                        alertify.success("Story previous");
-                                        if (data == "") {
-                                            alertify.success("No records found");
-                                            return;
-                                        }
-                                        //window.location.reload();
-                                        //location.href = location.href;
-                                        //$("body").html(response);
-
-                                        console.log(data[0]);
-                                        return;
-
-
-                                    },
-                                    error: function (xhr, ajaxOptions, thrownError) {
-                                        alertify.success("error");
-                                    }
-
-                                });
-
-
-                                return;
-                            }
-
-                        }
-
-                        function PDF() {
-
-                            alertify.success("Creating your custum PDF. This will take a few minutes");
+                            $('#Previous').attr("disabled", false);
+                            var x = parseInt(document.getElementById('currentPage').value) + 1
+                            document.getElementById('currentPage').value = x;
                             var searchResults = document.getElementById('searchResults').value;
 
-                            window.location.replace("/MyFavorties/PdfResultsView?all=" + searchResults);
+
+                            var resultJSON = {
+                                searchResults: searchResults, page: x,
+                            };
+
+                            $.ajax({
+                                type: 'GET',
+                                url: "http://localhost:27242//Home/SearchResults",
+                                //url: "//Home/SearchResults",
+                                data: resultJSON,
+                                dataType: "html",
+                                cache: false,
+                                //dataType: "json",
+                                success: function (data, status, xhr) {
+
+                                    alertify.success("Story next");
+                                    if (data == "") {
+                                        alertify.success("No records found");
+                                        return;
+                                    }
+
+                                    var domElement = $(data); // create element from html
+                                    $("#centerdivResults").empty().append(domElement); // append to end of list
+                                    //window.location.reload();
+                                    //location.href = location.href;
+                                    //window.location.href = "http://localhost:27242/Home/SearchResults?searchResults=" + data + "&page="+page;
+
+                                    //$("body").html(response);
+                                    console.log(data[0]);
+
+                                    return;
+
+
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    alertify.success("error");
+                                    //alert(thrownError);
+                                }
+
+                            });
+
+
+                            return;
                         }
 
-                    </script>
+                    }
+
+                    function previous() {
+                        //alert("ddd");
+                        $('#Next').attr("disabled", false);
+
+                        if (parseInt(document.getElementById('currentPage').value) == 0) {
+
+                            alertify.success("Beginning  of search");
+                            $('#Previous').attr("disabled", true);
+                            return;
+                        }
+                        else {
+
+                            $('#Previous').attr("disabled", false);
+                            var x = parseInt(document.getElementById('currentPage').value) - 1
+                            document.getElementById('currentPage').value = x;
+                            var searchResults = document.getElementById('searchResults').value;
+                            var resultJSON = {
+                                searchResults: searchResults, page: x,
+                            };
+
+                            $.ajax({
+                                type: 'GET',
+                                url: "http://localhost:27242//Home/SearchResults",
+                                //url: "//Home/SearchResults",
+                                data: resultJSON,
+                                dataType: "html",
+                                cache: false,
+                                //dataType: "json",
+                                success: function (data, status, xhr) {
+
+                                    alertify.success("Story previous");
+                                    if (data == "") {
+                                        alertify.success("No records found");
+                                        return;
+                                    }
+                                    var domElement = $(data); // create element from html
+                                    $("#centerdivResults").empty().append(domElement); // append to end of list
+
+                                    console.log(data[0]);
+                                    return;
+
+
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    alertify.success("error");
+                                }
+
+                            });
+
+
+                            return;
+                        }
+
+                    }
+
+                    function PDF() {
+
+                        alertify.success("Creating your custum PDF. This will take a few minutes");
+                        var searchResults = document.getElementById('searchResults').value;
+
+                        window.location.replace("/MyFavorties/PdfResultsView?all=" + searchResults);
+                    }
+
+                </script>
 
 
 
