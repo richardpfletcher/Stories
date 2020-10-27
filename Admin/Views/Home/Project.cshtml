@@ -1,0 +1,523 @@
+﻿
+
+@{
+    ViewData["Title"] = "Project";
+}
+@model Stories.Models.Story
+
+<h1>Project</h1>
+
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+
+<div class="row">
+    <div class="col-md-4">
+        <table style="width: 55%">
+
+            <tr>
+                <td>
+                    @Html.Label("Title")
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+                    @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"], new { disabled = "disabled" })
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("Illustrations")
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+
+                    @for (int i = 0; i < Model.IllustrationsCombo.items.Count; i++)
+                    {
+                <tr>
+                    <td>
+                        @*@Html.CheckBoxFor(m => Model.ReadersCombo.items[i].Selected)*@
+                        @Html.DisplayFor(m => Model.IllustrationsCombo.items[i].Text, new { @class = "IllustrationsCombo" })
+
+                        @Html.CheckBoxFor(m => Model.IllustrationsCombo.items[i].Selected, new { @class = "IllustrationsCombo" })
+
+
+
+                    </td>
+                    <td>
+
+                        @Html.HiddenFor(m => Model.IllustrationsCombo.items[i].Value, new { @class = "IllustrationsCombo" })
+                        @Html.HiddenFor(m => Model.IllustrationsCombo.items[i].Text, new { @class = "IllustrationsCombo" })
+                    </td>
+
+
+                </tr>
+
+
+            }
+
+                    <tr>
+                        <td>
+
+                            Illustrations Start Date
+                            <div class="input-group date" data-date-format="mm/dd/yyyy" data-provide="datepicker-inline">
+                                <input type="text" id="illustrationStartDate" value="@Model.illustrationStartDate" size="10" maxlength="9" class="form-control">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+
+                            Illustrations Stop Date
+                            <div class="input-group date" data-date-format="mm/dd/yyyy" data-provide="datepicker-inline">
+                                <input type="text" id="illustrationStopDate" value="@Model.illustrationStopDate" size="10" maxlength="9" class="form-control">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+                <table style="width: 55%">
+                    <tr>
+                        <td>
+                            @Html.Label("Music")
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>
+
+                            @for (int i = 0; i < Model.MusicCombo.items.Count; i++)
+                            {
+                        <tr>
+                            <td>
+                                @*@Html.CheckBoxFor(m => Model.MusicCombo.items[i].Selected)*@
+                                @Html.DisplayFor(m => Model.MusicCombo.items[i].Text, new { @class = "MusicCombo" })
+                                @Html.CheckBoxFor(m => Model.MusicCombo.items[i].Selected, new { @class = "MusicCombo" })
+
+
+
+                            </td>
+                            <td>
+
+                                @Html.HiddenFor(m => Model.MusicCombo.items[i].Value, new { @class = "MusicCombo" })
+                                @Html.HiddenFor(m => Model.MusicCombo.items[i].Text, new { @class = "MusicCombo" })
+                            </td>
+                        </tr>
+
+
+                    }
+
+                            <tr>
+                                <td>
+
+                                    Music Start Date
+                                    <div class="input-group date" data-date-format="mm/dd/yyyy" data-provide="datepicker-inline">
+                                        <input type="text" id="MusicStartDate" value="@Model.MusicStartDate" size="10" maxlength="9" class="form-control">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+
+                                    Music Stop Date
+                                    <div class="input-group date" data-date-format="mm/dd/yyyy" data-provide="datepicker-inline">
+                                        <input type="text" id="MusicStoptDate" value="@Model.MusicStoptDate" size="10" maxlength="9" class="form-control">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                        </table>
+                        <p>
+                            <input type="button" id="Update" value="Save" />
+                        </p>
+
+
+
+                    </div>
+                    <div class="col-md-4">
+
+
+                        <table style="width: 55%">
+                            <tr>
+                                <td>
+                                    @Html.Label("Readers")
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>
+
+                                    @Html.TextBoxFor(model => Model.userName, new { id = "userName" })
+
+
+                                </td>
+                            </tr>
+
+
+                            }
+
+                            <tr>
+                                <td>
+
+                                    Readers Start Date
+                                    <div class="input-group date" data-date-format="mm/dd/yyyy" data-provide="datepicker-inline">
+                                        <input type="text" id="ReadersStartDate" value="@Model.ReadersStartDate" size="10" maxlength="9" class="form-control">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+
+                                    Readers Stop Date
+                                    <div class="input-group date" data-date-format="mm/dd/yyyy" data-provide="datepicker-inline">
+                                        <input type="text" id="ReadersStoptDate" value="@Model.ReadersStopDate" size="10" maxlength="9" class="form-control">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                        <table style="width: 55%">
+                            <tr>
+                                <td>
+                                    @Html.Label("Dance")
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>
+
+                                    @for (int i = 0; i < Model.DanceCombo.items.Count; i++)
+                                    {
+                                <tr>
+                                    <td>
+                                        @*@Html.CheckBoxFor(m => Model.DanceCombo.items[i].Selected)*@
+                                        @Html.DisplayFor(m => Model.DanceCombo.items[i].Text, new { @class = "DanceCombo" })
+                                        @Html.CheckBoxFor(m => Model.DanceCombo.items[i].Selected, new { @class = "DanceCombo" })
+
+
+
+                                    </td>
+                                    <td>
+
+                                        @Html.HiddenFor(m => Model.DanceCombo.items[i].Value, new { @class = "DanceCombo" })
+                                        @Html.HiddenFor(m => Model.DanceCombo.items[i].Text, new { @class = "DanceCombo" })
+                                    </td>
+                                </tr>
+
+
+                            }
+
+                                    <tr>
+                                        <td>
+
+                                            Dance Start Date
+                                            <div class="input-group date" data-provide="datepicker-inline">
+                                                <input type="text" id="DanceStartDate" value="@Model.DanceStartDate" size="10" maxlength="9" class="form-control">
+                                                <div class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-th"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+
+                                            Dance Stop Date
+                                            <div class="input-group date" data-date-format="mm/dd/yyyy" data-provide="datepicker-inline">
+                                                <input type="text" id="DanceStopDate" value="@Model.DanceStopDate" size="10" maxlength="9" class="form-control">
+                                                <div class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-th"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                </table>
+
+
+
+                            </div>
+                            <div class="col-md-4">
+                                Comments
+                                <textarea id="comments" name="elmeStory" rows="10" cols="20" style="width: 100%">
+		                @Model.Comments
+			                            </textarea>
+                                <table style="width: 55%">
+                                    <tr>
+                                        <td>
+                                            @Html.Label("Posted to You Tube")
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+
+                                            @Html.DropDownList("Posted", (IEnumerable<SelectListItem>)ViewData["postedData"])
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                                </table>
+
+
+                            </div>
+
+                            @{
+
+                                var current = ViewData["userID"];
+                                <input type="hidden" id="UserIDStory" name="UserIDStory" value=@current />
+
+                                var mode = ViewData["Mode"];
+                                <input type="hidden" id="Mode" name="Mode" value=@mode />
+
+                                
+
+                            }
+
+                        </div>
+
+
+
+                        <script type="text/javascript">
+
+                            $("#illustrationStartDate").datepicker({ format: "dd/mm/yyyy" });
+                            $("#illustrationStopDate").datepicker({ format: "dd/mm/yyyy" });
+                            $("#ReadersStartDate").datepicker({ format: "dd/mm/yyyy" });
+                            $("#ReadersStopDate").datepicker({ format: "dd/mm/yyyy" });
+
+                            $("#MusicStartDate").datepicker({ format: "dd/mm/yyyy" });
+                            $("#MusicStopDate").datepicker({ format: "dd/mm/yyyy" });
+                            $("#DanceStartDate").datepicker({ format: "dd/mm/yyyy" });
+                            $("#DanceStopDate").datepicker({ format: "dd/mm/yyyy" });
+
+                        </script>
+
+                        <script type="text/javascript">
+
+                            $(function () {
+
+                                $("#Update").click(function () {
+
+
+
+                                    var idslist = "";
+                                    var counter = 0;
+                                    var counter1 = 0;
+
+                                    var IllustrationsChoosen = "";
+
+                                    $("input:checkbox[class=IllustrationsCombo]").each(function () {
+
+                                        if ($(this).is(":checked")) {
+                                            var userid = $(this).attr("value");
+                                            if (idslist != "") {
+                                                idslist = idslist + ',' + userid;
+                                                counter1++;
+
+
+                                            }
+                                            else
+                                                idslist = userid;
+                                            IllustrationsChoosen = $("#IllustrationsCombo_items_" + counter + "__Value").val() + ',' + IllustrationsChoosen;
+                                        }
+                                        counter++;
+                                    });
+
+                                    var MusicChoosen = "";
+                                    counter = 0;
+
+                                    $("input:checkbox[class=MusicCombo]").each(function () {
+
+                                        if ($(this).is(":checked")) {
+                                            var userid = $(this).attr("value");
+                                            if (idslist != "") {
+                                                idslist = idslist + ',' + userid;
+                                                counter1++;
+
+
+                                            }
+                                            else
+                                                idslist = userid;
+                                            MusicChoosen = $("#MusicCombo_items_" + counter + "__Value").val() + ',' + MusicChoosen;
+                                        }
+                                        counter++;
+                                    });
+
+                                    var DanceChoosen = "";
+                                    counter = 0;
+
+                                    $("input:checkbox[class=DanceCombo]").each(function () {
+
+                                        if ($(this).is(":checked")) {
+                                            var userid = $(this).attr("value");
+                                            if (idslist != "") {
+                                                idsMusicCombolist = idslist + ',' + userid;
+                                                counter1++;
+
+
+                                            }
+                                            else
+                                                idslist = userid;
+                                            DanceChoosen = $("#DanceCombo_items_" + counter + "__Value").val() + ',' + DanceChoosen;
+                                        }
+                                        counter++;
+                                    });
+
+
+
+                                    var jakataMaster = $("#jakataMaster").val();
+
+
+                                    var title = $("#jakataMaster").val();
+
+                                    var comments = document.getElementById('comments').value;
+
+
+                                    var posted = $("#Posted").val();
+                                    if (posted == "0") {
+                                        posted = "1";
+                                        
+                                    }
+
+                                    var UserID = document.getElementById('UserIDStory').value;
+
+                                    var illustrationStartDate = document.getElementById('illustrationStartDate').value;
+                                    var illustrationStopDate = document.getElementById('illustrationStopDate').value;
+                                    var ReadersStartDate = document.getElementById('ReadersStartDate').value;
+                                    var ReadersStopDate = document.getElementById('ReadersStoptDate').value;
+                                    var MusicStartDate = document.getElementById('MusicStartDate').value;
+                                    var MusicStoptDate = document.getElementById('MusicStoptDate').value;
+                                    var DanceStartDate = document.getElementById('DanceStartDate').value;
+                                    var DanceStopDate = document.getElementById('DanceStopDate').value;
+
+                                    var Mode = document.getElementById('Mode').value;
+
+                                    var resultJSON = {
+                                        JakataID: jakataMaster, Title: jakataMaster, Comments: comments, Illustrations: IllustrationsChoosen, Music: MusicChoosen, Dance: DanceChoosen, Posted: posted, UserID: UserID, illustrationStartDate: illustrationStartDate, illustrationStopDate: illustrationStopDate, ReadersStartDate: ReadersStartDate, ReadersStopDate: ReadersStopDate, MusicStartDate: MusicStartDate, MusicStoptDate: MusicStoptDate, DanceStartDate: DanceStartDate, DanceStopDate: DanceStopDate,Mode:Mode
+                                    };
+
+
+                                    
+                                    //var resultJSON = {
+                                    //    JakataID: jakataMaster, StoryCategorytName: 1, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory
+                                    //};
+
+                                    $.ajax({
+                                        type: 'POST',
+
+                                        url: "http://localhost:5187/api/Project/save",
+
+
+                                        data: resultJSON,
+                                        dataType: "json",
+
+
+                                        success: function (data, status, xhr) {
+                                            //alert("Success: " + xhr.status + " : " + xhr.statusText);
+                                            alertify.success("Project Saved");
+                                            //window.location.href = "/Home/Update?row=" + data.foo;
+                                            //window.location.href = "/Home/Update?row=" + data.dataField;
+
+
+                                        },
+                                        error: function (xhr, ajaxOptions, thrownError) {
+                                            alert(xhr.status);
+                                            alert(thrownError);
+                                        }
+
+
+                                        //success: function (data) {
+
+                                        //    alertify.success("Story Saved");
+                                        //    $("#divLoading").hide();
+
+                                        //    window.location.href = "/Home/Update?row=" + data.foo;
+
+                                        //},
+
+
+                                    });
+
+                                    return;
+
+                                });
+
+                                //
+
+                            });
+                        </script>
+
+
+
+
+
+

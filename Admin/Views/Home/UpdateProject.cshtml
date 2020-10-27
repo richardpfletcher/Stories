@@ -1,0 +1,224 @@
+﻿
+@{
+    ViewBag.Title = "UpdateStory";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<h2>UpdateStory</h2>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <table style="width: 55%">
+            <tr>
+                <td>
+                    @Html.Label("Title")
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+                    @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"])
+                </td>
+            </tr>
+
+           
+        </table>
+
+
+
+
+    </div>
+
+    <div class="col-md-4">
+
+        <table style="width: 55%">
+            <tr>
+                <td>
+                    @Html.Label("New Reader")
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+                    @Html.DropDownList("newReader", (IEnumerable<SelectListItem>)ViewData["newReadersData"])
+                </td>
+
+
+
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <table style="width: 55%">
+            <tr>
+                <td>
+                    @Html.Label("Existing Reader")
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+                    @*@Html.DropDownList("existingReader", (IEnumerable<SelectListItem>)ViewData["existingReaderData"])*@
+
+                    <select name="existingReader" id="existingReader">
+                    </select>
+
+                </td>
+
+
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#jakataMaster").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var jakataMaster = $(this).val();
+
+
+            var resultJSON = {
+                id: jakataMaster
+            };
+
+            $.ajax({
+                type: 'GET',
+
+                url: "http://localhost:5187/api/Project/getReadersSpecificStory",
+
+
+                data: resultJSON,
+                dataType: "json",
+
+
+                success: function (data, status, xhr) {
+                    //alert("Success: " + xhr.status + " : " + xhr.statusText);
+                    //alertify.success("Story Saved");
+                    //window.location.href = "/Home/Update?row=" + data.foo;
+                    //window.location.href = "/Home/Update?row=" + data.dataField;
+                    var mothersHelpersLists = data.data[0].mothersHelpersLists;
+
+                    var s = '<option value="-0">Please Select ';
+                    for (var i = 0; i < mothersHelpersLists.length; i++) {
+                        s += '<option value="' + mothersHelpersLists[i].ID + '">' + mothersHelpersLists[i].Name + '</option>';
+                    }
+                    $("#existingReader").html(s);
+
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+
+
+
+
+            });
+
+
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#existingReader").change(function () {
+            var userName = $(this).find("option:selected").text();
+            var userID = $(this).val();
+
+            var title = $("#jakataMaster").val();
+
+            if (title == "0") {
+                alert('Title is required');
+                document.getElementById('jakataMaster').focus();
+                return;
+            }
+
+            if (confirm('Are you sure you want to continue with existing reader? ' + userName)) {
+                // Save it!
+                console.log('Thing was saved to the database.');
+            } else {
+                // Do nothing!
+                console.log('Thing was not saved to the database.');
+            }
+
+
+            var url = 'http://localhost:5188/Home/Project';
+        
+
+            var form = $('<form action="' + url + '" method="post">' +
+                '<input type="text" name="row" value="' + title + '" />' +
+                '<input type="text" name="userID" value="' + userID + '" />' +
+                '<input type="text" name="userName" value="' + userName + '" />' +
+                '<input type="text" name="mode" value="edit" />' +
+               
+                '</form>');
+            $('body').append(form);
+            form.submit();
+
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#newReader").change(function () {
+            var userName = $(this).find("option:selected").text();
+            var userID = $(this).val();
+
+            var title = $("#jakataMaster").val();
+
+            if (title == "0") {
+                alert('Title is required');
+                document.getElementById('jakataMaster').focus();
+                return;
+            }
+
+            if (confirm('Are you sure you want to continue with this new reader? ' + userName)) {
+                // Save it!
+                console.log('Thing was saved to the database.');
+            } else {
+                // Do nothing!
+                console.log('Thing was not saved to the database.');
+            }
+
+
+            var url = 'http://localhost:5188/Home/Project';
+
+
+            var form = $('<form action="' + url + '" method="post">' +
+                '<input type="text" name="row" value="' + title + '" />' +
+                '<input type="text" name="userID" value="' + userID + '" />' +
+                '<input type="text" name="userName" value="' + userName + '" />' +
+                '<input type="text" name="mode" value="new" />' +
+
+                '</form>');
+            $('body').append(form);
+            form.submit();
+
+        });
+    });
+</script>
+
+
+
