@@ -204,6 +204,7 @@
     <Compile Include="Controllers\MoralTypeController.cs" />
     <Compile Include="Controllers\MothersHelpersController.cs" />
     <Compile Include="Controllers\MyFavortiesController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\RomanController.cs" />
     <Compile Include="Controllers\RomanToArabicController.cs" />
     <Compile Include="Controllers\SpecificStoryDropdownController.cs" />

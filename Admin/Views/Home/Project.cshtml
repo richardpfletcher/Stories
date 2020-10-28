@@ -38,7 +38,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <table style="width: 55%">
+        <table >
 
             <tr>
                 <td>
@@ -90,9 +90,9 @@
                     <tr>
                         <td>
 
-                            Illustrations Start Date
+                            llustrations Start Date
                             <div class="input-group date" data-date-format="mm/dd/yyyy" data-provide="datepicker-inline">
-                                <input type="text" id="illustrationStartDate" value="@Model.illustrationStartDate" size="10" maxlength="9" class="form-control">
+                                <input type="text" id="illustrationStartDate" value="@Model.illustrationStartDate" size="9" maxlength="9" class="form-control">
                                 <div class="input-group-addon">
                                     <span class="glyphicon glyphicon-th"></span>
                                 </div>
@@ -115,7 +115,7 @@
                     </tr>
 
                 </table>
-                <table style="width: 55%">
+                <table >
                     <tr>
                         <td>
                             @Html.Label("Music")
@@ -173,20 +173,25 @@
                                     </div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td>
+                          
+                                <input type="button" id="Update" value="Save" />
+                          
 
+                        </td>
+
+                    </tr>
 
                         </table>
-                        <p>
-                            <input type="button" id="Update" value="Save" />
-                        </p>
-
+                       
 
 
                     </div>
                     <div class="col-md-4">
 
 
-                        <table style="width: 55%">
+                        <table >
                             <tr>
                                 <td>
                                     @Html.Label("Readers")
@@ -204,7 +209,6 @@
                             </tr>
 
 
-                            }
 
                             <tr>
                                 <td>
@@ -455,21 +459,33 @@
                                     var ReadersStartDate = document.getElementById('ReadersStartDate').value;
                                     var ReadersStopDate = document.getElementById('ReadersStoptDate').value;
                                     var MusicStartDate = document.getElementById('MusicStartDate').value;
-                                    var MusicStoptDate = document.getElementById('MusicStoptDate').value;
+                                    var MusicStopDate = document.getElementById('MusicStoptDate').value;
                                     var DanceStartDate = document.getElementById('DanceStartDate').value;
                                     var DanceStopDate = document.getElementById('DanceStopDate').value;
 
                                     var Mode = document.getElementById('Mode').value;
 
                                     var resultJSON = {
-                                        JakataID: jakataMaster, Title: jakataMaster, Comments: comments, Illustrations: IllustrationsChoosen, Music: MusicChoosen, Dance: DanceChoosen, Posted: posted, UserID: UserID, illustrationStartDate: illustrationStartDate, illustrationStopDate: illustrationStopDate, ReadersStartDate: ReadersStartDate, ReadersStopDate: ReadersStopDate, MusicStartDate: MusicStartDate, MusicStoptDate: MusicStoptDate, DanceStartDate: DanceStartDate, DanceStopDate: DanceStopDate,Mode:Mode
+                                        JakataID: jakataMaster,
+                                        Title: jakataMaster,
+                                        Comments: comments,
+                                        Illustrations: IllustrationsChoosen,
+                                        Music: MusicChoosen,
+                                        Dance: DanceChoosen,
+                                        Posted: posted,
+                                        UserID: UserID,
+                                        illustrationStartDate: illustrationStartDate,
+                                        illustrationStopDate: illustrationStopDate,
+                                        ReadersStartDate: ReadersStartDate,
+                                        ReadersStopDate: ReadersStopDate,
+                                        MusicStartDate: MusicStartDate,
+                                        MusicStopDate: MusicStopDate,
+                                        DanceStartDate: DanceStartDate,
+                                        DanceStopDate: DanceStopDate,
+                                        Mode: Mode
                                     };
 
 
-                                    
-                                    //var resultJSON = {
-                                    //    JakataID: jakataMaster, StoryCategorytName: 1, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory
-                                    //};
 
                                     $.ajax({
                                         type: 'POST',

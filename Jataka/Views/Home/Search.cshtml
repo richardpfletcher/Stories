@@ -119,30 +119,36 @@
 
                                     </table>
 
-                                    <table style="width: 55%">
-                                        <tr>
-                                            <td>
-                                                @Html.Label("Moral Type")
-                                            </td>
+                            <table style="width: 55%">
+                                <tr>
+                                    <td>
+                                        @Html.Label("Moral Type")
+                                    </td>
 
-                                        </tr>
-                                        <tr>
+                                </tr>
+                                <tr>
 
-                                            <td>
-                                                @Html.DropDownList("moralType", (IEnumerable<SelectListItem>)ViewData["moralTypeData"])
-                                            </td>
+                                    <td>
+                                        @Html.DropDownList("moralType", (IEnumerable<SelectListItem>)ViewData["moralTypeData"])
+                                    </td>
 
-                                        </tr>
-                                    </table>
+                                </tr>
+
+                                <tr>
+                                    <td>
+
+                                        <input type="button" id="Search" value="Search" />
+
+
+                                    </td>
+
+                                </tr>
+                            </table>
 
 
                                 </div>
 
 
-
-                                <p>
-                                    <input type="button" id="Search" value="Search" />
-                                </p>
 
                             </div>
                             <div class="col-sm-8">
