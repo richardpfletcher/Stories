@@ -94,6 +94,9 @@ namespace Stories.Factory
 
                 XDocument xml = XDocument.Parse(trima);
 
+                model.items.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
+
+
                 foreach (var el in xml.Descendants("mothersHelpersLists"))
                 {
                     string ID = el.Element("ID").Value;
@@ -406,6 +409,28 @@ namespace Stories.Factory
                 foreach (var el in xml.Descendants("specificStory"))
                 {
                     modelStory.ID = Convert.ToInt16(el.Element("ID").Value);
+
+                    if (el.Element("UserID").Value != null)
+                    {
+                        try
+                        {
+                            modelStory.UserID = Convert.ToInt16(el.Element("UserID").Value);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            modelStory.UserID = 0;
+
+                        }
+
+
+                    }
+                    else
+                    {
+                        modelStory.UserID = 0;
+
+                    }
+                    
                     modelStory.JakataID = Convert.ToInt16(el.Element("JakataID").Value);
                     modelStory.AnimalType = el.Element("AnimalType").Value;
                     modelStory.Comments = el.Element("Comments").Value; ;
@@ -413,6 +438,7 @@ namespace Stories.Factory
                     modelStory.Stories = el.Element("Stories").Value;
                     modelStory.StoryCategorytName = Convert.ToInt16(el.Element("StoryCategorytName").Value);
                     modelStory.Title = Convert.ToInt16(el.Element("Title").Value);
+                    
                 }
 
 
@@ -423,12 +449,12 @@ namespace Stories.Factory
 
         }
 
-        public DropdownModel GetYouTube(int row)
+        public DropdownModel GetYouTube(int row,int userID)
         {
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/YouTube/" + row);
+                var uri = new Uri("http://localhost:5187/api/YouTube/getYouTube/?ID="+row+"&UserID="+userID);
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;

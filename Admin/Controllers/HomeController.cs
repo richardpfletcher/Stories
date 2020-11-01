@@ -133,7 +133,7 @@ namespace Stories.Controllers
             myStory.animalCombo = model;
 
             GetLookups myYouTubeGetLookups = new GetLookups();
-            model = myYouTubeGetLookups.GetYouTube(JakataID);
+            model = myYouTubeGetLookups.GetYouTube(JakataID,0);
             //ViewData["youTubeData"] = model.items;
             myStory.youTubeCombo = model;
 
@@ -444,8 +444,17 @@ namespace Stories.Controllers
                 if (s.Value == title)
                 {
                     s.Selected = true;
+                    myStory.TitleString = s.Text;
                 }
             }
+
+            GetLookups myYouTubeGetLookups = new GetLookups();
+            model = myYouTubeGetLookups.GetYouTube(JakataID, userID);
+            //ViewData["youTubeData"] = model.items;
+            myStory.youTubeCombo = model;
+
+
+
 
 
             ViewData["jakataMasterData"] = model.items;

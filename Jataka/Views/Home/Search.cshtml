@@ -88,6 +88,24 @@
                             <table style="width: 55%">
                                 <tr>
                                     <td>
+                                        @Html.Label("New Reader")
+                                    </td>
+
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        @Html.DropDownList("newReader", (IEnumerable<SelectListItem>)ViewData["newReadersData"])
+                                    </td>
+
+
+
+                                </tr>
+                            </table>
+
+                            <table style="width: 55%">
+                                <tr>
+                                    <td>
                                         @Html.Label("Animal Type")
                                     </td>
 
@@ -119,31 +137,31 @@
 
                                     </table>
 
-                            <table style="width: 55%">
-                                <tr>
-                                    <td>
-                                        @Html.Label("Moral Type")
-                                    </td>
+                                    <table style="width: 55%">
+                                        <tr>
+                                            <td>
+                                                @Html.Label("Moral Type")
+                                            </td>
 
-                                </tr>
-                                <tr>
+                                        </tr>
+                                        <tr>
 
-                                    <td>
-                                        @Html.DropDownList("moralType", (IEnumerable<SelectListItem>)ViewData["moralTypeData"])
-                                    </td>
+                                            <td>
+                                                @Html.DropDownList("moralType", (IEnumerable<SelectListItem>)ViewData["moralTypeData"])
+                                            </td>
 
-                                </tr>
+                                        </tr>
 
-                                <tr>
-                                    <td>
+                                        <tr>
+                                            <td>
 
-                                        <input type="button" id="Search" value="Search" />
+                                                <input type="button" id="Search" value="Search" />
 
 
-                                    </td>
+                                            </td>
 
-                                </tr>
-                            </table>
+                                        </tr>
+                                    </table>
 
 
                                 </div>
@@ -201,7 +219,7 @@
                             var userid = $(this).attr("value");
                             if (idslist != "") {
                                 idslist = idslist + ',' + userid;
-                                counter1++;
+                                
 
 
                             }
@@ -239,6 +257,14 @@
                         //return;
                     }
 
+                    var newReader = $("#newReader").val();
+                    if (newReader == "0") {
+                        //alert('Moral Type is required');
+                        //document.getElementById('moralType').focus();
+                        newReader = 0;
+                        //return;
+                    }
+
 
 
 
@@ -263,7 +289,7 @@
                     //};
 
                     var resultJSON = {
-                        JakataID: jakataMaster, StoryCategorytName: 1, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory
+                        JakataID: jakataMaster, StoryCategorytName: 1, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory, UserID: newReader
                     };
 
                     console.log(resultJSON);

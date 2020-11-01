@@ -72,6 +72,16 @@ namespace Jataka.Controllers
             model = myGetLookups.GeLookupJakataMaster();
             ViewData["jakataMasterData"] = model.items;
 
+            DropdownModel modelUserID = new DropdownModel();
+           
+
+            modelUserID = myGetLookups.GeLookupCatUsers(2);
+            
+            //model.items.Add
+
+            ViewData["newReadersData"] = modelUserID.items;
+
+
             return View(myStory);
         }
 
@@ -160,7 +170,7 @@ namespace Jataka.Controllers
 
             try
             {
-                choosen = rowschosen[Convert.ToInt16(page)];
+                choosen = rowschosen[Convert.ToInt16(page)-1];
 
             }
             catch (Exception ex)
@@ -262,8 +272,10 @@ namespace Jataka.Controllers
             //Story myStory = new Story();
             myStory.animalCombo = model;
 
+            int userID = modelStory.UserID;
+
             GetLookups myYouTubeGetLookups = new GetLookups();
-            model = myYouTubeGetLookups.GetYouTube(JakataID);
+            model = myYouTubeGetLookups.GetYouTube(JakataID, userID);
             //ViewData["youTubeData"] = model.items;
             myStory.youTubeCombo = model;
 
@@ -324,213 +336,213 @@ namespace Jataka.Controllers
         }
 
 
-        public ActionResult Test(String searchResults, string page)
-        {
+        //public ActionResult Test(String searchResults, string page)
+        //{
 
 
 
-            Story modelStory = new Story();
-            Story myStory = new Story();
+        //    Story modelStory = new Story();
+        //    Story myStory = new Story();
 
-            if (searchResults == "")
-            {
-                return View(myStory);
+        //    if (searchResults == "")
+        //    {
+        //        return View(myStory);
 
-            }
-            ViewBag.Message = "Your app description page.";
+        //    }
+        //    ViewBag.Message = "Your app description page.";
 
 
-            //page = "0";
+        //    //page = "0";
 
 
 
-            //if (page == "0")
-            //{
-            //    page = "1";
-            //}
-            //else
-            //{
-            //    int pagenum = Convert.ToInt16(page) * 10;
-            //    page = pagenum.ToString();
-            //}
+        //    //if (page == "0")
+        //    //{
+        //    //    page = "1";
+        //    //}
+        //    //else
+        //    //{
+        //    //    int pagenum = Convert.ToInt16(page) * 10;
+        //    //    page = pagenum.ToString();
+        //    //}
 
-            ViewData["currentPage"] = page;
+        //    ViewData["currentPage"] = page;
 
-            var rows = searchResults;
+        //    var rows = searchResults;
 
-            rows = searchResults.Trim();
+        //    rows = searchResults.Trim();
 
-            if (rows.EndsWith("|"))
-            {
-                rows = rows.Remove(rows.Length - 1, 1);
-            }
-            ViewData["searchResults"] = rows;
+        //    if (rows.EndsWith("|"))
+        //    {
+        //        rows = rows.Remove(rows.Length - 1, 1);
+        //    }
+        //    ViewData["searchResults"] = rows;
 
-            string[] rowschosen = rows.Split('|');
+        //    string[] rowschosen = rows.Split('|');
 
-            string choosen = rowschosen[Convert.ToInt16(page)];
+        //    string choosen = rowschosen[Convert.ToInt16(page)];
 
-            int total1 = rowschosen.Count();
-            string total = total1.ToString();
-            int pages = 0;
+        //    int total1 = rowschosen.Count();
+        //    string total = total1.ToString();
+        //    int pages = 0;
 
-            try
-            {
-                pages = total1;
-                ViewData["total"] = pages;
-            }
-            catch
-            {
-                ViewData["total"] = 0;
-            }
+        //    try
+        //    {
+        //        pages = total1;
+        //        ViewData["total"] = pages;
+        //    }
+        //    catch
+        //    {
+        //        ViewData["total"] = 0;
+        //    }
 
-            int row = Convert.ToInt16(choosen);
+        //    int row = Convert.ToInt16(choosen);
 
-            DropdownModel model = new DropdownModel();
-            GetLookups myGetLookups = new GetLookups();
+        //    DropdownModel model = new DropdownModel();
+        //    GetLookups myGetLookups = new GetLookups();
 
-            modelStory = myGetLookups.GetSpecificStory(row);
+        //    modelStory = myGetLookups.GetSpecificStory(row);
 
-            var ID1 = modelStory.ID.ToString();
-            ViewData["id"] = ID1;
+        //    var ID1 = modelStory.ID.ToString();
+        //    ViewData["id"] = ID1;
 
-            var JakataID = modelStory.JakataID;
-            var JakataIDString = modelStory.JakataID.ToString();
-            ViewData["JakataID"] = JakataIDString;
+        //    var JakataID = modelStory.JakataID;
+        //    var JakataIDString = modelStory.JakataID.ToString();
+        //    ViewData["JakataID"] = JakataIDString;
 
-            var Comments = modelStory.Comments;
-            var Moraltype = modelStory.MoralType;
-            var Stories = modelStory.Stories;
-            var StoryCategorytName = modelStory.StoryCategorytName;
-            var Title = modelStory.Title;
+        //    var Comments = modelStory.Comments;
+        //    var Moraltype = modelStory.MoralType;
+        //    var Stories = modelStory.Stories;
+        //    var StoryCategorytName = modelStory.StoryCategorytName;
+        //    var Title = modelStory.Title;
 
-            ViewData["comments"] = Comments;
-            ViewData["Stories"] = Stories;
+        //    ViewData["comments"] = Comments;
+        //    ViewData["Stories"] = Stories;
 
 
 
 
 
-            model = myGetLookups.GeLookupSpecificStoryDropdown();
-            //DropdownModel model = new DropdownModel();
-            model = myGetLookups.GeLookupAnimal();
+        //    model = myGetLookups.GeLookupSpecificStoryDropdown();
+        //    //DropdownModel model = new DropdownModel();
+        //    model = myGetLookups.GeLookupAnimal();
 
 
-            var AnimalType = modelStory.AnimalType;
+        //    var AnimalType = modelStory.AnimalType;
 
-            if (AnimalType != null)
-            {
+        //    if (AnimalType != null)
+        //    {
 
-                AnimalType = AnimalType.Trim();
+        //        AnimalType = AnimalType.Trim();
 
-                if (AnimalType.EndsWith(","))
-                {
-                    AnimalType = AnimalType.Remove(AnimalType.Length - 1, 1);
-                }
+        //        if (AnimalType.EndsWith(","))
+        //        {
+        //            AnimalType = AnimalType.Remove(AnimalType.Length - 1, 1);
+        //        }
 
-                string[] Animalchosen = AnimalType.Split(',');
-                //model = new DropdownModel();
+        //        string[] Animalchosen = AnimalType.Split(',');
+        //        //model = new DropdownModel();
 
-                model = myGetLookups.GeLookupAnimal();
+        //        model = myGetLookups.GeLookupAnimal();
 
-                for (int i = 0; i < Animalchosen.Length; i++)
-                {
-                    var x = Animalchosen[i];
+        //        for (int i = 0; i < Animalchosen.Length; i++)
+        //        {
+        //            var x = Animalchosen[i];
 
 
-                    foreach (SelectListItem s in model.items)
-                    {
-                        if (s.Value == x)
-                        {
-                            s.Selected = true;
-                        }
-                    }
+        //            foreach (SelectListItem s in model.items)
+        //            {
+        //                if (s.Value == x)
+        //                {
+        //                    s.Selected = true;
+        //                }
+        //            }
 
 
-                }
+        //        }
 
 
-            }
+        //    }
 
 
 
 
 
-            ViewData["animalTypeData"] = model.items;
+        //    ViewData["animalTypeData"] = model.items;
 
-            //Story myStory = new Story();
-            myStory.animalCombo = model;
+        //    //Story myStory = new Story();
+        //    myStory.animalCombo = model;
 
-            GetLookups myYouTubeGetLookups = new GetLookups();
-            model = myYouTubeGetLookups.GetYouTube(JakataID);
-            //ViewData["youTubeData"] = model.items;
-            myStory.youTubeCombo = model;
+        //    GetLookups myYouTubeGetLookups = new GetLookups();
+        //    model = myYouTubeGetLookups.GetYouTube(JakataID);
+        //    //ViewData["youTubeData"] = model.items;
+        //    myStory.youTubeCombo = model;
 
 
 
 
-            //modelAnimal = model;
-            DropdownModel modelMoral = new DropdownModel();
+        //    //modelAnimal = model;
+        //    DropdownModel modelMoral = new DropdownModel();
 
-            modelMoral = myGetLookups.GeLookupMoral();
+        //    modelMoral = myGetLookups.GeLookupMoral();
 
 
-            var moral = Moraltype.ToString();
+        //    var moral = Moraltype.ToString();
 
-            foreach (SelectListItem s in modelMoral.items)
-            {
-                if (s.Value == moral)
-                {
-                    s.Selected = true;
-                }
-            }
-            ViewData["moralTypeData"] = modelMoral.items;
+        //    foreach (SelectListItem s in modelMoral.items)
+        //    {
+        //        if (s.Value == moral)
+        //        {
+        //            s.Selected = true;
+        //        }
+        //    }
+        //    ViewData["moralTypeData"] = modelMoral.items;
 
 
 
-            model = myGetLookups.GeLookupStorySource();
-            ViewData["storySourceData"] = model.items;
+        //    model = myGetLookups.GeLookupStorySource();
+        //    ViewData["storySourceData"] = model.items;
 
-            model = myGetLookups.GeLookupJakataMaster();
+        //    model = myGetLookups.GeLookupJakataMaster();
 
-            var title = JakataID.ToString();
+        //    var title = JakataID.ToString();
 
-            foreach (SelectListItem s in model.items)
-            {
-                if (s.Value == title)
-                {
-                    s.Selected = true;
-                }
-            }
+        //    foreach (SelectListItem s in model.items)
+        //    {
+        //        if (s.Value == title)
+        //        {
+        //            s.Selected = true;
+        //        }
+        //    }
 
 
-            ViewData["jakataMasterData"] = model.items;
+        //    ViewData["jakataMasterData"] = model.items;
 
 
-            // titles done
-            model = myGetLookups.GetStatus(1);
-            ViewData["Done"] = model.items;
-            myStory.done = model;
+        //    // titles done
+        //    model = myGetLookups.GetStatus(1);
+        //    ViewData["Done"] = model.items;
+        //    myStory.done = model;
 
-            model = myGetLookups.GetStatus(0);
-            myStory.toDo = model;
-            ViewData["ToDo"] = model.items;
-            ViewData["myStory"] = myStory;
+        //    model = myGetLookups.GetStatus(0);
+        //    myStory.toDo = model;
+        //    ViewData["ToDo"] = model.items;
+        //    ViewData["myStory"] = myStory;
 
 
 
-            //return View(myStory);
-            //RedirectToAction("Create", "SearchResults");
+        //    //return View(myStory);
+        //    //RedirectToAction("Create", "SearchResults");
 
-            //Response.AddHeader("Refresh", "5");
-            ModelState.Clear();
-            ModelState.Remove("Stories.Models.Story");
+        //    //Response.AddHeader("Refresh", "5");
+        //    ModelState.Clear();
+        //    ModelState.Remove("Stories.Models.Story");
 
-            myStory.Stories = Stories;
-            return View();
+        //    myStory.Stories = Stories;
+        //    return View();
 
 
-        }
+        //}
 
 
     }

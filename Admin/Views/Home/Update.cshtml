@@ -223,7 +223,7 @@
 
                         <div>
 
-                            <table>
+                            @*<table>
                                 <tr>
 
                                     <td>
@@ -245,7 +245,7 @@
                                     </td>
                                 </tr>
 
-                            </table>
+                            </table>*@
 
 
                             <p>
@@ -356,9 +356,7 @@
                                     var userid = $(this).attr("value");
                                     if (idslist != "") {
                                         idslist = idslist + ',' + userid;
-                                        counter1++;
-
-
+                                        
                                     }
                                     else
                                         idslist = userid;
@@ -469,78 +467,7 @@
 
 
 
-                <script type="text/javascript">
-
-                    $(function () {
-
-                        $("#UpdateURL").click(function () {
-
-
-                            var jakataMaster = $("#jakataMaster").val();
-                            var title = $("#jakataMaster").val();
-
-                            var url = document.getElementById('URL').value;
-                            url = url.replace("watch?", "embed?");
-
-
-
-                            if (url.length == 1) {
-                                alert('The URL field cant be empty');
-                                document.getElementById('URL').focus();
-                                return;
-                            }
-
-                            var id = document.getElementById('id').value;
-
-                            var resultJSON = {
-                                JakataID: jakataMaster, URL: url
-                            };
-
-                            $.ajax({
-                                type: 'POST',
-
-                                url: "http://localhost:5187/api/Storiesapi/inserturl",
-
-
-                                data: resultJSON,
-                                dataType: "json",
-
-
-                                success: function (data, status, xhr) {
-                                    //alert("Success: " + xhr.status + " : " + xhr.statusText);
-                                    alertify.success("Story Saved");
-                                    window.location.href = "/Home/Update?row=" + id;
-                                    //window.location.href = "/Home/Update?row=" + data.dataField;
-
-
-                                },
-                                error: function (xhr, ajaxOptions, thrownError) {
-                                    alert(xhr.status);
-                                    alert(thrownError);
-                                }
-
-
-                                //success: function (data) {
-
-                                //    alertify.success("Story Saved");
-                                //    $("#divLoading").hide();
-
-                                //    window.location.href = "/Home/Update?row=" + data.foo;
-
-                                //},
-
-
-                            });
-
-                            return;
-
-                        });
-
-                        //
-
-                    });
-                </script>
-
+                
                 <script>
 
                     function PDF() {

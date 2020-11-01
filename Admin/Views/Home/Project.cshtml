@@ -38,7 +38,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <table >
+        <table>
 
             <tr>
                 <td>
@@ -49,7 +49,8 @@
             <tr>
 
                 <td>
-                    @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"], new { disabled = "disabled" })
+                    @*@Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"], new { disabled = "disabled" })*@
+                    @Model.TitleString
                 </td>
 
             </tr>
@@ -115,7 +116,7 @@
                     </tr>
 
                 </table>
-                <table >
+                <table>
                     <tr>
                         <td>
                             @Html.Label("Music")
@@ -173,25 +174,25 @@
                                     </div>
                                 </td>
                             </tr>
-                    <tr>
-                        <td>
-                          
-                                <input type="button" id="Update" value="Save" />
-                          
+                            <tr>
+                                <td>
 
-                        </td>
+                                    <input type="button" id="Update" value="Save" />
 
-                    </tr>
+
+                                </td>
+
+                            </tr>
 
                         </table>
-                       
+
 
 
                     </div>
                     <div class="col-md-4">
 
 
-                        <table >
+                        <table>
                             <tr>
                                 <td>
                                     @Html.Label("Readers")
@@ -332,6 +333,50 @@
 
                                 </table>
 
+                                <table>
+                                    <tr>
+
+                                        <td>
+                                            URL:
+                                        </td>
+
+                                        <td>
+
+                                            @Html.TextBoxFor(model => model.URL, new { id = "URL" })
+
+                                            <input type="button" id="UpdateURL" value="UpdateURL" />
+                                            @{
+                                                string JakataID = (string)ViewData["JakataID"];
+                                            }
+                                            <input type="hidden" id="JakataID" name="JakataID" value="@JakataID" />
+
+
+
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                                <p>
+
+                                    @for (int i = 0; i < Model.youTubeCombo.items.Count; i++)
+                                    {
+
+
+
+                                        <iframe width="420" height="345"
+                                                src=@Model.youTubeCombo.items[i].Text></iframe>
+
+                                        @*@Model.youTubeCombo.items[i].Text;*@
+
+                                    }
+
+
+
+
+
+                                </p>
+
 
                             </div>
 
@@ -343,7 +388,7 @@
                                 var mode = ViewData["Mode"];
                                 <input type="hidden" id="Mode" name="Mode" value=@mode />
 
-                                
+
 
                             }
 
@@ -436,12 +481,12 @@
                                         counter++;
                                     });
 
+                                    
+
+                                    var jakataMaster = document.getElementById('JakataID').value
 
 
-                                    var jakataMaster = $("#jakataMaster").val();
-
-
-                                    var title = $("#jakataMaster").val();
+                                    var title = jakataMaster;
 
                                     var comments = document.getElementById('comments').value;
 
@@ -449,7 +494,7 @@
                                     var posted = $("#Posted").val();
                                     if (posted == "0") {
                                         posted = "1";
-                                        
+
                                     }
 
                                     var UserID = document.getElementById('UserIDStory').value;
@@ -531,6 +576,71 @@
 
                             });
                         </script>
+
+                        <script type="text/javascript">
+
+                            $(function () {
+
+                                $("#UpdateURL").click(function () {
+
+
+                                    var jakataMaster = document.getElementById('JakataID').value
+                                    var title = jakataMaster;
+
+                                    var url = document.getElementById('URL').value;
+                                    url = url.replace("watch?", "embed?");
+
+
+
+                                    if (url.length == 1) {
+                                        alert('The URL field cant be empty');
+                                        document.getElementById('URL').focus();
+                                        return;
+                                    }
+
+                                    var UseID = document.getElementById('UserIDStory').value;
+                                    
+                                    var resultJSON = {
+                                        JakataID: jakataMaster, URL: url, UseID: UseID
+                                    };
+
+                                    $.ajax({
+                                        type: 'POST',
+
+                                        url: "http://localhost:5187/api/Storiesapi/inserturl",
+
+
+                                        data: resultJSON,
+                                        dataType: "json",
+
+
+                                        success: function (data, status, xhr) {
+                                            //alert("Success: " + xhr.status + " : " + xhr.statusText);
+                                            alertify.success("Story Saved");
+                                            window.location.href = "/Home/Update?row=" + id;
+                                            //window.location.href = "/Home/Update?row=" + data.dataField;
+
+
+                                        },
+                                        error: function (xhr, ajaxOptions, thrownError) {
+                                            alert(xhr.status);
+                                            alert(thrownError);
+                                        }
+
+
+
+
+                                    });
+
+                                    return;
+
+                                });
+
+                                //
+
+                            });
+                        </script>
+
 
 
 

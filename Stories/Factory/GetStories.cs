@@ -95,6 +95,8 @@ namespace Stories.Factory
 
             p.Add("@JakataID", myStory.JakataID);
             p.Add("@URL", myStory.URL);
+            p.Add("@UseID", myStory.UseID);
+            
 
             var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
             string strConnString = conString.ConnectionString;
@@ -916,7 +918,7 @@ namespace Stories.Factory
             return response;
         }
 
-        public response GetYouTube(int JakataID)
+        public response GetYouTube(int JakataID,int UserID)
         {
 
             var dataTable = new DataTable();
@@ -935,6 +937,11 @@ namespace Stories.Factory
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@JakataID", SqlDbType.NVarChar).Value = JakataID;
+
+                    if (UserID != 0)
+                    { 
+                    cmd.Parameters.Add("@UserID", SqlDbType.NVarChar).Value = UserID;
+                    }
                     con.Open();
                     var dataReader = cmd.ExecuteReader();
                     dataTable.Load(dataReader);
@@ -1008,6 +1015,19 @@ namespace Stories.Factory
                         myprod.StoryCategorytName = row["StoryCategorytName"].ToString();
                         myprod.Title = row["Title"].ToString();
 
+                        if (row["UserID"].ToString()!=null)
+                        {
+                            myprod.UserID = row["UserID"].ToString();
+                        }
+
+                        else
+                        {
+
+                            myprod.UserID = "0";
+                        }
+
+                        
+
 
                         list.specificStory.Add(myprod);
                     }
@@ -1038,6 +1058,19 @@ namespace Stories.Factory
 
             SpecificStoryList list = new SpecificStoryList();
 
+            if (myStoryies.AnimalType != null)
+            {
+
+                var AnimalType = myStoryies.AnimalType;
+
+                AnimalType = AnimalType.Trim();
+
+                if (AnimalType.EndsWith(","))
+                {
+                    AnimalType = AnimalType.Remove(AnimalType.Length - 1, 1);
+                    myStoryies.AnimalType = AnimalType;
+                }
+            }
 
 
             using (SqlConnection con = new SqlConnection(connString))
@@ -1062,6 +1095,11 @@ namespace Stories.Factory
                     if (myStoryies.JakataID > 0)
                     {
                         cmd.Parameters.Add("@JakataID", SqlDbType.Int).Value = myStoryies.JakataID;
+                    }
+
+                    if (myStoryies.UserID > 0)
+                    {
+                        cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = myStoryies.UserID;
                     }
 
                     if (myStoryies.AnimalType != "0")

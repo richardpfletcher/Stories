@@ -12,11 +12,13 @@ namespace Stories.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class YouTubeController : ApiController
     {
-        public response Get(int ID)
+        [Route("api/YouTube/getYouTube")]
+
+        public response GetYouTube(int ID,int UserID)
         {
 
             GetStories myStories = new GetStories();
-            return myStories.GetYouTube(ID);
+            return myStories.GetYouTube(ID, UserID);
 
 
 

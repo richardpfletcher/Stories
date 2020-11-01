@@ -13,6 +13,8 @@ namespace Stories.Models
 
         public int ID { get; set; }
         public int JakataID { get; set; }
+
+        public int UserID { get; set; }
         public int StoryCategorytName { get; set; }
         public int Title { get; set; }
         public string AnimalType { get; set; }
@@ -39,6 +41,10 @@ namespace Stories.Models
         public string ID { get; set; }
         public string JakataID { get; set; }
         public string URL { get; set; }
+
+        public string UseID { get; set; }
+
+        
     }
 
     public class ReceipeTotalModel

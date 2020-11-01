@@ -95,7 +95,10 @@ namespace Stories.Factory
 
             p.Add("@JakataID", myStory.JakataID);
             p.Add("@URL", myStory.URL);
-          
+            p.Add("@UseID", myStory.UseID);
+
+            
+
             var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
             string strConnString = conString.ConnectionString;
 

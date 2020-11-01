@@ -560,12 +560,12 @@ namespace Stories.Factory
 
         }
 
-        public DropdownModel GetYouTube(int row)
+        public DropdownModel GetYouTube(int row, int userID)
         {
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/YouTube/" + row);
+                var uri = new Uri("http://localhost:5187/api/YouTube/getYouTube/?ID=" + row + "&UserID=" + userID);
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;

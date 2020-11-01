@@ -187,6 +187,7 @@ namespace Stories.Factory
     {
         public string ID { get; set; }
         public string JakataID { get; set; }
+        public string UserID { get; set; }
         public string StoryCategorytName { get; set; }
         public string Title { get; set; }
         public string AnimalType { get; set; }

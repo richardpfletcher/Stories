@@ -156,41 +156,46 @@
 
                                                 </div>
 
-                                                <p>
-                                                    @{
-                                                        int pageNum = (int)ViewData["total"];
-                                                        var current = ViewData["currentPage"];
-                                                        int currentPage = Convert.ToInt16(current);
-                                                        var searchResults = Convert.ToString(ViewData["searchResults"]);
-
-                                                        //int currentPage = (int)ViewData["currentPage"];
-
-                                                        if (currentPage <= 1)
-                                                        {
-                                                            <input type="button" hidden="true" id="Previous" onclick="previous()" value="Previous" />
-                                                        }
-                                                        else
-                                                        {
-                                                            <input type="button" id="Previous" onclick="previous()" value="Previous" />
-                                                        }
-
-                                                        if (currentPage >= 0)
-                                                        {
-
-                                                            <input type="button" id="Next" onclick="next()" value="Next" />
+                                        <p>
+                                            @{
+                                                int pageNum = (int)ViewData["total"];
+                                                var current = ViewData["currentPage"];
+                                                int currentPage = Convert.ToInt16(current);
+                                                var searchResults = Convert.ToString(ViewData["searchResults"]);
+                                                string present = current + " of " + pageNum;
 
 
-                                                        }
+                                                //int currentPage = (int)ViewData["currentPage"];
+
+                                                if (currentPage <= 1)
+                                                {
+                                                    <input type="button" hidden="true" id="Previous" onclick="previous()" value="Previous" />
+                                            }
+                                            else
+                                            {
+                                            <input type="button" id="Previous" onclick="previous()" value="Previous" />
+                                            }
+
+                                            if (currentPage >= 0)
+                                            {
+
+                                            <input type="button" id="Next" onclick="next()" value="Next" />
 
 
-                                                        <input type="hidden" id="numberOfPages" name="numberOfPages" value="@pageNum" />
-                                                        <input type="hidden" id="currentPage" name="currentPage" value="@currentPage" />
-                                                        <input type="hidden" id="searchResults" name="searchResults" value="@searchResults" />
-
-                                                    }
+                                            }
 
 
-                                                </p>
+
+
+                                            <input type="hidden" id="numberOfPages" name="numberOfPages" value="@pageNum" />
+                                            <input type="hidden" id="currentPage" name="currentPage" value="@currentPage" />
+                                            <input type="hidden" id="searchResults" name="searchResults" value="@searchResults" />
+
+                                            }
+
+                                            @present
+                                            
+                                        </p>
 
                                             </div>
                                             <div class="col-sm-8">
