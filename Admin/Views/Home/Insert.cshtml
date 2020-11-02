@@ -129,7 +129,7 @@
             </div>
         </div>
 
-        <script type="text/javascript">
+<script type="text/javascript">
 
             $(function () {
 
@@ -167,7 +167,7 @@
 
                     var jakataMaster = $("#jakataMaster").val();
 
-                   
+
                     var title = $("#jakataMaster").val();
 
                     if (title == "0") {
@@ -199,6 +199,8 @@
                         return;
                     }
 
+                    var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                    
 
 
                     //var resultJSON = {
@@ -213,7 +215,8 @@
                     $.ajax({
                         type: 'POST',
 
-                        url: "http://localhost:5187/api/Storiesapi/insert",
+                        url: apiUrl+"api/Storiesapi/insert",
+                        //url: "http://localhost:5187/api/Storiesapi/insert",
 
 
                         data: resultJSON,
@@ -253,4 +256,4 @@
                 //
 
             });
-        </script>
+</script>

@@ -356,7 +356,7 @@
                                     var userid = $(this).attr("value");
                                     if (idslist != "") {
                                         idslist = idslist + ',' + userid;
-                                        
+
                                     }
                                     else
                                         idslist = userid;
@@ -405,10 +405,8 @@
 
                             var id = document.getElementById('id').value;
 
-                            //var resultJSON = {
-                            //    htmlSourceReceipe: rec, htmlSourceComments: comments, htmlSourceIngred: IngredHTML, title: title, mainIngred: mainIngred, ethnic: ethnic, cat: cat, meal: meal, seasonal: seasonal,
-                            //    cookingLevelCode: cookingLevelCode, Servings: Servings, PrepTime: PrepTime, CookTime: CookTime, youtube: youtube, pictureName: pictureName
-                            //};
+                            var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+
 
                             var resultJSON = {
                                 ID: id, JakataID: jakataMaster, StoryCategorytName: 1, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory
@@ -417,7 +415,8 @@
                             $.ajax({
                                 type: 'POST',
 
-                                url: "http://localhost:5187/api/Storiesapi/update",
+                                url: apiUrl+"api/Storiesapi/update",
+                                //url: "http://localhost:5187/api/Storiesapi/update",
 
 
                                 data: resultJSON,

@@ -481,7 +481,7 @@
                                         counter++;
                                     });
 
-                                    
+
 
                                     var jakataMaster = document.getElementById('JakataID').value
 
@@ -509,6 +509,8 @@
                                     var DanceStopDate = document.getElementById('DanceStopDate').value;
 
                                     var Mode = document.getElementById('Mode').value;
+                                    var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+
 
                                     var resultJSON = {
                                         JakataID: jakataMaster,
@@ -535,7 +537,8 @@
                                     $.ajax({
                                         type: 'POST',
 
-                                        url: "http://localhost:5187/api/Project/save",
+                                        url: apiUrl+"api/Project/save",
+                                        //url: "http://localhost:5187/api/Project/save",
 
 
                                         data: resultJSON,
@@ -545,9 +548,7 @@
                                         success: function (data, status, xhr) {
                                             //alert("Success: " + xhr.status + " : " + xhr.statusText);
                                             alertify.success("Project Saved");
-                                            //window.location.href = "/Home/Update?row=" + data.foo;
-                                            //window.location.href = "/Home/Update?row=" + data.dataField;
-
+                                           
 
                                         },
                                         error: function (xhr, ajaxOptions, thrownError) {
@@ -555,15 +556,6 @@
                                             alert(thrownError);
                                         }
 
-
-                                        //success: function (data) {
-
-                                        //    alertify.success("Story Saved");
-                                        //    $("#divLoading").hide();
-
-                                        //    window.location.href = "/Home/Update?row=" + data.foo;
-
-                                        //},
 
 
                                     });
@@ -599,7 +591,9 @@
                                     }
 
                                     var UseID = document.getElementById('UserIDStory').value;
-                                    
+
+                                    var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+
                                     var resultJSON = {
                                         JakataID: jakataMaster, URL: url, UseID: UseID
                                     };
@@ -607,7 +601,9 @@
                                     $.ajax({
                                         type: 'POST',
 
-                                        url: "http://localhost:5187/api/Storiesapi/inserturl",
+                                        url: apiUrl+"api/Storiesapi/inserturl",
+                                        //url: "http://localhost:5187/api/Storiesapi/inserturl",
+
 
 
                                         data: resultJSON,
@@ -615,11 +611,10 @@
 
 
                                         success: function (data, status, xhr) {
-                                            //alert("Success: " + xhr.status + " : " + xhr.statusText);
+                                           
                                             alertify.success("Story Saved");
                                             window.location.href = "/Home/Update?row=" + id;
-                                            //window.location.href = "/Home/Update?row=" + data.dataField;
-
+                                            
 
                                         },
                                         error: function (xhr, ajaxOptions, thrownError) {

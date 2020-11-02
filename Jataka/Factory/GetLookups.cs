@@ -9,18 +9,29 @@ using System.Text;
 using System.Xml.XPath;
 using Stories.Models;
 using System;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace Stories.Factory
 {
     public class GetLookups
     {
+
+        //NameValueCollection myKeys = ConfigurationManager.AppSettings;
+        
+
+
         public DropdownModel GeLookupAnimal()
         {
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/AnimalType/");
+                //var uri = new Uri("http://localhost:5187/api/AnimalType/");
 
+                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var uri = new Uri(settings+"api/AnimalType/");
+
+             
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;
@@ -70,9 +81,12 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/MothersHelpers/getMothersHelpersTypeUsers?id=" + id);
-                //var uri = new Uri("https://localhost:44302/api/MothersHelpers/getMothersHelpersTypeUsers?id=" + id);
 
+                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var uri = new Uri(settings + "api/MothersHelpers/getMothersHelpersTypeUsers?id=" + id);
+
+                //var uri = new Uri("http://localhost:5187/api/MothersHelpers/getMothersHelpersTypeUsers?id=" + id);
+                
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;
@@ -125,8 +139,11 @@ namespace Stories.Factory
         {
             using (var client = new System.Net.Http.HttpClient())
             {
+                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var uri = new Uri(settings + "api/MoralType/");
 
-                var uri = new Uri("http://localhost:5187/api/MoralType/");
+
+                //var uri = new Uri("http://localhost:5187/api/MoralType/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -177,7 +194,11 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/StorySource/");
+                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var uri = new Uri(settings + "api/StorySource/");
+
+
+                //var uri = new Uri("http://localhost:5187/api/StorySource/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -229,7 +250,11 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/JakataMaster/");
+                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var uri = new Uri(settings + "api/JakataMaster/");
+
+
+                //var uri = new Uri("http://localhost:5187/api/JakataMaster/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -280,7 +305,11 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/SpecificStoryDropdown/");
+                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var uri = new Uri(settings + "api/SpecificStoryDropdown/");
+
+
+                //var uri = new Uri("http://localhost:5187/api/SpecificStoryDropdown/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -332,10 +361,12 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/ToDo/" + status1);
-                //var uri = new Uri("http://localhost:5187/api/Storiesapi/ToDo/"+status1);
-                //var uri = new Uri("http://localhost:5187/api/JakataMaster/");
+                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var uri = new Uri(settings + "api/ToDo/" + status1);
 
+
+                //var uri = new Uri("http://localhost:5187/api/ToDo/" + status1);
+               
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;
@@ -385,7 +416,11 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/Stories/getSpecificStory?ID=" + row + "&Mode=ID");
+                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var uri = new Uri(settings + "api/Stories/getSpecificStory?ID=" + row + "&Mode=ID");
+
+
+                //var uri = new Uri("http://localhost:5187/api/Stories/getSpecificStory?ID=" + row + "&Mode=ID");
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;
@@ -454,7 +489,11 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/YouTube/getYouTube/?ID="+row+"&UserID="+userID);
+                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var uri = new Uri(settings + "api/YouTube/getYouTube/?ID=" + row + "&UserID=" + userID);
+
+
+                //var uri = new Uri("http://localhost:5187/api/YouTube/getYouTube/?ID="+row+"&UserID="+userID);
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;

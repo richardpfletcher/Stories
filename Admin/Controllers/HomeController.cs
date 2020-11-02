@@ -66,7 +66,7 @@ namespace Stories.Controllers
             DropdownModel model = new DropdownModel();
             GetLookups myGetLookups = new GetLookups();
             Story modelStory = new Story();
-            modelStory = myGetLookups.GetSpecificStory(row);
+            modelStory = myGetLookups.GetSpecificStory(row,"JakataID");
 
             var ID1 = modelStory.ID.ToString();
             ViewData["id"] = ID1;
@@ -428,7 +428,7 @@ namespace Stories.Controllers
 
             
             Story modelStory = new Story();
-            modelStory = myGetLookups.GetSpecificStory(row);
+            modelStory = myGetLookups.GetSpecificStory(row,"jakataID");
 
             var ID1 = modelStory.ID.ToString();
             ViewData["id"] = ID1;

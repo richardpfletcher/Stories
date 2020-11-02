@@ -72,7 +72,7 @@ namespace Stories.Controllers
                     var jatakaID = Convert.ToInt16(rowschosen[i]);
                     GetLookups myGetLookups = new GetLookups();
 
-                    modelStory = myGetLookups.GetSpecificStory(jatakaID);
+                    modelStory = myGetLookups.GetSpecificStory(jatakaID,"ID");
                     var Stories = modelStory.Stories;
 
                     Paragraph para = new Paragraph(Stories);

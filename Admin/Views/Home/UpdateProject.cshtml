@@ -94,6 +94,7 @@
             var selectedText = $(this).find("option:selected").text();
             var jakataMaster = $(this).val();
 
+            var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
 
             var resultJSON = {
                 id: jakataMaster
@@ -102,7 +103,8 @@
             $.ajax({
                 type: 'GET',
 
-                url: "http://localhost:5187/api/Project/getReadersSpecificStory",
+                url: apiUrl+"api/Project/getReadersSpecificStory",
+                //url: "http://localhost:5187/api/Project/getReadersSpecificStory",
 
 
                 data: resultJSON,
@@ -162,16 +164,21 @@
                 console.log('Thing was not saved to the database.');
             }
 
+             var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
 
-            var url = 'http://localhost:5188/Home/Project';
-        
+
+
+            var url = apiUrl+"/Home/Project";
+            //var url = 'http://localhost:5188/Home/Project';
+
+
 
             var form = $('<form action="' + url + '" method="post">' +
                 '<input type="text" name="row" value="' + title + '" />' +
                 '<input type="text" name="userID" value="' + userID + '" />' +
                 '<input type="text" name="userName" value="' + userName + '" />' +
                 '<input type="text" name="mode" value="edit" />' +
-               
+
                 '</form>');
             $('body').append(form);
             form.submit();
@@ -202,8 +209,12 @@
                 console.log('Thing was not saved to the database.');
             }
 
+            var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
 
-            var url = 'http://localhost:5188/Home/Project';
+
+
+            var url = apiUrl+"Home/Project";
+            //var url = 'http://localhost:5188/Home/Project';
 
 
             var form = $('<form action="' + url + '" method="post">' +

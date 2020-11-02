@@ -16,7 +16,7 @@ using System.Xml.Linq;
 using System.Text;
 using System.Xml.XPath;
 using Stories.Models;
-
+using System.Configuration;
 
 namespace Stories.Factory
 {
@@ -27,7 +27,7 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var uri = new Uri("http://localhost:5187/api/AnimalType/");
+                var uri = new Uri(ConfigurationManager.ConnectionStrings["LocalWebApi"] +"api /AnimalType/");
 
                 var response = client.GetAsync(uri).Result;
 
