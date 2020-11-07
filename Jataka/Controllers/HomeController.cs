@@ -81,6 +81,12 @@ namespace Jataka.Controllers
 
             ViewData["newReadersData"] = modelUserID.items;
 
+            model = myGetLookups.GetStoryCategorytName();
+            ViewData["StoryCategorytNameData"] = model.items;
+
+
+
+
 
             return View(myStory);
         }
@@ -125,7 +131,7 @@ namespace Jataka.Controllers
 
 
 
-        public ActionResult SearchResults(String searchResults, string page)
+        public ActionResult SearchResults(String searchResults, string page,int userIdPost)
         {
 
             Story modelStory = new Story();
@@ -274,13 +280,7 @@ namespace Jataka.Controllers
 
             int userID = modelStory.UserID;
 
-            GetLookups myYouTubeGetLookups = new GetLookups();
-            model = myYouTubeGetLookups.GetYouTube(JakataID, userID);
-            //ViewData["youTubeData"] = model.items;
-            myStory.youTubeCombo = model;
-
-
-
+            
 
             //modelAnimal = model;
             DropdownModel modelMoral = new DropdownModel();
@@ -330,6 +330,55 @@ namespace Jataka.Controllers
             ViewData["ToDo"] = model.items;
             ViewData["myStory"] = myStory;
             myStory.Stories = (string)ViewData["Stories"];
+
+            model = myGetLookups.GeLookupCatUsers(2);
+            myStory.ReadersCombo = model;
+
+            foreach (SelectListItem s in model.items)
+            {
+                if (s.Value == userID.ToString())
+                {
+                    s.Selected = true;
+                    modelStory.UserName = s.Text;
+                    if (s.Value == "0")
+                    {
+                        modelStory.UserName = "";
+                    }
+                }
+            }
+
+            ViewData["userIdPost"] = userIdPost;
+
+            GetLookups myYouTubeGetLookups = new GetLookups();
+           
+
+            model = myYouTubeGetLookups.GetYouTube(JakataID, userIdPost);
+            myStory.youTubeCombo = model;
+
+
+
+            //myStory.StoryCategorytName
+            model = myGetLookups.GetStoryCategorytName();
+
+            foreach (SelectListItem s in model.items)
+            {
+                if (s.Value == myStory.StoryCategorytName.ToString())
+                {
+                    s.Selected = true;
+                    modelStory.StoryCategorytNameString = s.Text;
+
+                    if (s.Value == "0")
+                    {
+                        modelStory.StoryCategorytNameString = "";
+                    }
+                }
+            }
+
+           
+
+
+
+
             return View(modelStory);
 
 

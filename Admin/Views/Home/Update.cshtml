@@ -118,7 +118,7 @@
                                                         <tr>
 
                                                             <td>
-                                                               
+
                                                                 <select id="moralType">
                                                                     @for (int i = 0; i < Model.moralCombo.items.Count; i++)
                                                                     {
@@ -140,21 +140,40 @@
                                                     </table>
 
 
-                                                    @*<table style="width: 55%">
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.Label("Story Source")
-                                                                </td>
+                                                    <table style="width: 55%">
+                                                        <tr>
+                                                            <td>
+                                                                @Html.Label("Story Category")
+                                                            </td>
 
-                                                            </tr>
-                                                            <tr>
+                                                        </tr>
+                                                    
+                                                        <tr>
 
-                                                                <td>
-                                                                    @Html.DropDownList("storySource", (IEnumerable<SelectListItem>)ViewData["storySourceData"])
-                                                                </td>
+                                                            <td>
 
-                                                            </tr>
-                                                        </table>*@
+                                                                <select id="StoryCategorytName">
+                                                                    @for (int i = 0; i < Model.StoryCategorytNameCombo.items.Count; i++)
+                                                                    {
+                                                                        if (Model.StoryCategorytNameCombo.items[i].Selected == true)
+                                                                        {
+                                                                            <option selected="selected" value=@Model.StoryCategorytNameCombo.items[i].Value>@Model.StoryCategorytNameCombo.items[i].Text</option>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <option value=@Model.StoryCategorytNameCombo.items[i].Value>@Model.StoryCategorytNameCombo.items[i].Text</option>
+                                                                        }
+
+                                                                    }
+                                                                </select>
+
+                                                            </td>
+
+                                                        </tr>
+
+
+                                                    </table>
+
 
 
                                                 </div>
@@ -405,11 +424,19 @@
 
                             var id = document.getElementById('id').value;
 
+                            var StoryCategorytName = $("#StoryCategorytName").val();
+                            if (StoryCategorytName == "0") {
+                                //alert('Moral Type is required');
+                                //document.getElementById('moralType').focus();
+                                StoryCategorytName = 1;
+                                //return;
+                            }
+
                             var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
 
 
                             var resultJSON = {
-                                ID: id, JakataID: jakataMaster, StoryCategorytName: 1, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory
+                                ID: id, JakataID: jakataMaster, StoryCategorytName: StoryCategorytName, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory
                             };
 
                             $.ajax({
@@ -427,15 +454,12 @@
                                 success: function (data, status, xhr) {
                                     //alert("Success: " + xhr.status + " : " + xhr.statusText);
                                     alertify.success("Story Saved");
-                                    window.location.href = "/Home/Update?row=" + data.dataField;
+                                    //window.location.href = "/Home/Update?row=" + data.dataField;
 
                                     //var domElement = $(data); // create element from html
                                     //$("#centerdivResults").empty().append(domElement); // append to end of list
 
-                                    //window.location.href = "/Home/Update?row=" + data.foo;
-                                    //window.location.href = "/Home/Update?row=" + data.dataField;
-
-
+                                  
                                 },
                                 error: function (xhr, ajaxOptions, thrownError) {
                                     alert(xhr.status);

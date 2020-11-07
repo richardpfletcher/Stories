@@ -11,7 +11,9 @@ namespace Stories.Models
         public int ID { get; set; }
         public int JakataID { get; set; }
         public int UserID { get; set; }
+        public string UserName { get; set; }
         public int StoryCategorytName { get; set; }
+        public string StoryCategorytNameString { get; set; }
         public int Title { get; set; }
         public string AnimalType { get; set; }
         public int MoralType { get; set; }

@@ -350,6 +350,60 @@ namespace Stories.Factory
             }
         }
 
+        public DropdownModel GetStoryCategorytName()
+        {
+            using (var client = new System.Net.Http.HttpClient())
+            {
+                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var uri = new Uri(settings + "api/StoryCategorytName/");
+
+
+                //var uri = new Uri("http://localhost:5187/api/MoralType/");
+
+                var response = client.GetAsync(uri).Result;
+
+                var responseContent = response.Content;
+                var responseString = responseContent.ReadAsStringAsync().Result;
+
+
+                var x = JObject.Parse(responseString);
+
+                XNode node = JsonConvert.DeserializeXNode(x.ToString(), "data");
+
+                string a = node.ToString();
+                string trima = a.Replace("\r\n", "");
+                trima = a.Replace("{", "");
+                trima = a.Replace("}", "");
+
+
+                DropdownModel model = new DropdownModel();
+                model.items.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
+
+                XDocument xml = XDocument.Parse(trima);
+
+                foreach (var el in xml.Descendants("storyCategorytNameLists"))
+                {
+                    string ID = el.Element("ID").Value;
+                    string AnimalType = el.Element("StoryCategorytName").Value;
+                    model.items.Add(new SelectListItem { Text = AnimalType, Value = ID });
+                }
+
+                var animalType = "";
+
+                foreach (SelectListItem s in model.items)
+                {
+                    if (s.Value == animalType)
+                    {
+                        s.Selected = true;
+                    }
+                }
+
+                return model;
+                //ViewData["animalTypeData"] = model.items;
+
+            }
+        }
+
         public DropdownModel GeLookupSpecificStoryDropdown()
         {
             using (var client = new System.Net.Http.HttpClient())

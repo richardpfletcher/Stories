@@ -49,6 +49,10 @@ namespace Stories.Controllers
             model = myGetLookups.GeLookupJakataMaster();
             ViewData["jakataMasterData"] = model.items;
 
+            model = myGetLookups.GetStoryCategorytName();
+            ViewData["StoryCategorytNameData"] = model.items;
+
+
 
 
             return View(myStory);
@@ -191,6 +195,28 @@ namespace Stories.Controllers
             myStory.toDo= model;
             ViewData["ToDo"] = model.items;
             myStory.Stories = Stories;
+
+            model = myGetLookups.GetStoryCategorytName();
+
+            StoryCategorytName = modelStory.StoryCategorytName;
+
+            foreach (SelectListItem s in model.items)
+            {
+                if (s.Value == StoryCategorytName.ToString())
+                {
+                    s.Selected = true;
+                    modelStory.StoryCategorytNameString = s.Text;
+
+                    if (s.Value == "0")
+                    {
+                        modelStory.StoryCategorytNameString = "";
+                    }
+                }
+            }
+
+            myStory.StoryCategorytNameCombo= model;
+
+           
 
             return View(myStory);
         }

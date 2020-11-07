@@ -145,7 +145,7 @@ namespace Stories.Factory
 
             p.Add("@ID", myStory.ID);
             p.Add("@JakataID", myStory.JakataID);
-            p.Add("@StoryCategorytName", 1);
+            p.Add("@StoryCategorytName", myStory.StoryCategorytName);
             p.Add("@Title", myStory.Title);
             p.Add("@AnimalType", myStory.AnimalType);
             p.Add("@MoralType", myStory.MoralType);
@@ -1112,6 +1112,14 @@ namespace Stories.Factory
                         cmd.Parameters.Add("@MoralType", SqlDbType.Int).Value = myStoryies.MoralType;
 
                     }
+
+                    if (myStoryies.StoryCategorytName > 0)
+                    {
+                        cmd.Parameters.Add("@StoryCategorytName", SqlDbType.Int).Value = myStoryies.StoryCategorytName;
+
+                    }
+
+
 
                     if (myStoryies.Comments != "0")
                     {

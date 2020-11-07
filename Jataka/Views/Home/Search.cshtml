@@ -106,6 +106,25 @@
                             <table style="width: 55%">
                                 <tr>
                                     <td>
+                                        @Html.Label("Story Category")
+                                    </td>
+
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        @Html.DropDownList("StoryCategorytName", (IEnumerable<SelectListItem>)ViewData["StoryCategorytNameData"])
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+                            
+
+                            <table style="width: 55%">
+                                <tr>
+                                    <td>
                                         @Html.Label("Animal Type")
                                     </td>
 
@@ -257,6 +276,14 @@
                         //return;
                     }
 
+                    var StoryCategorytName = $("#StoryCategorytName").val();
+                    if (StoryCategorytName == "0") {
+                        //alert('Moral Type is required');
+                        //document.getElementById('moralType').focus();
+                        StoryCategorytName = 1;
+                        //return;
+                    }
+
                     var newReader = $("#newReader").val();
                     if (newReader == "0") {
                         //alert('Moral Type is required');
@@ -281,15 +308,16 @@
                         //return;
                     }
 
-
-
-                    //var resultJSON = {
-                    //    htmlSourceReceipe: rec, htmlSourceComments: comments, htmlSourceIngred: IngredHTML, title: title, mainIngred: mainIngred, ethnic: ethnic, cat: cat, meal: meal, seasonal: seasonal,
-                    //    cookingLevelCode: cookingLevelCode, Servings: Servings, PrepTime: PrepTime, CookTime: CookTime, youtube: youtube, pictureName: pictureName
-                    //};
+                    var userIdPost = $("#newReader").val();
+                    if (newReader == "0") {
+                        //alert('Moral Type is required');
+                        //document.getElementById('moralType').focus();
+                        userIdPost = 0;
+                        //return;
+                    }
 
                     var resultJSON = {
-                        JakataID: jakataMaster, StoryCategorytName: 1, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory, UserID: newReader
+                        JakataID: jakataMaster, StoryCategorytName: StoryCategorytName, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory, UserID: newReader
                     };
 
                     console.log(resultJSON);
@@ -314,8 +342,8 @@
                                 return;
                             }
 
-                            //window.location.href = "http://localhost:27242/Home/SearchResults?searchResults=" + data + "&page=1";
-                            window.location.href = localStoryUrl+"Home/SearchResults?searchResults=" + data + "&page=1";
+                            //window.location.href = "http://localhost:27242/Home/SearchResults?searchResults=" + data + "&page=1&userIdPost="+userIdPost;
+                            window.location.href = localStoryUrl + "Home/SearchResults?searchResults=" + data + "&page=1&userIdPost=" + userIdPost;
 
 
                             console.log(data[0]);

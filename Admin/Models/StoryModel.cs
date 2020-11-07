@@ -18,6 +18,10 @@ namespace Stories.Models
         
         public int JakataID { get; set; }
         public int StoryCategorytName { get; set; }
+
+        public string StoryCategorytNameString { get; set; }
+
+        
         public int Title { get; set; }
         public string TitleString { get; set; }
         public string AnimalType { get; set; }
@@ -27,6 +31,9 @@ namespace Stories.Models
         public string Stories { get; set; }
         public DropdownModel animalCombo { get; set; }
         public DropdownModel moralCombo { get; set; }
+        public DropdownModel StoryCategorytNameCombo { get; set; }
+
+
         public DropdownModel youTubeCombo { get; set; }
         public DropdownModel done { get; set; }
         public DropdownModel toDo { get; set; }

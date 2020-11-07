@@ -96,6 +96,42 @@
                                                 </tr>
                                             </table>
 
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        @Html.Label("Readers")
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td>
+
+                                                        @Html.TextBoxFor(model => Model.UserName, new { id = "userName" })
+
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        @Html.Label("Story Category")
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td>
+
+                                                        @Html.TextBoxFor(model => Model.StoryCategorytNameString, new { id = "StoryCategorytNameString" })
+
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+
                                             <table style="width: 55%">
                                                 <tr>
                                                     <td>
@@ -156,46 +192,53 @@
 
                                                 </div>
 
-                                        <p>
-                                            @{
-                                                int pageNum = (int)ViewData["total"];
-                                                var current = ViewData["currentPage"];
-                                                int currentPage = Convert.ToInt16(current);
-                                                var searchResults = Convert.ToString(ViewData["searchResults"]);
-                                                string present = current + " of " + pageNum;
-
-
-                                                //int currentPage = (int)ViewData["currentPage"];
-
-                                                if (currentPage <= 1)
-                                                {
-                                                    <input type="button" hidden="true" id="Previous" onclick="previous()" value="Previous" />
-                                            }
-                                            else
-                                            {
-                                            <input type="button" id="Previous" onclick="previous()" value="Previous" />
-                                            }
-
-                                            if (currentPage >= 0)
-                                            {
-
-                                            <input type="button" id="Next" onclick="next()" value="Next" />
-
-
-                                            }
+                                                <p>
+                                                    @{
+                                                        int pageNum = (int)ViewData["total"];
+                                                        var current = ViewData["currentPage"];
+                                                        int currentPage = Convert.ToInt16(current);
+                                                        var searchResults = Convert.ToString(ViewData["searchResults"]);
+                                                        string present = current + " of " + pageNum;
+                                                        var userIdPost = ViewData["userIdPost"];
 
 
 
 
-                                            <input type="hidden" id="numberOfPages" name="numberOfPages" value="@pageNum" />
-                                            <input type="hidden" id="currentPage" name="currentPage" value="@currentPage" />
-                                            <input type="hidden" id="searchResults" name="searchResults" value="@searchResults" />
+                                                        //int currentPage = (int)ViewData["currentPage"];
 
-                                            }
+                                                        if (currentPage <= 1)
+                                                        {
+                                                            <input type="button" hidden="true" id="Previous" onclick="previous()" value="Previous" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="button" id="Previous" onclick="previous()" value="Previous" />
+                                                        }
 
-                                            @present
-                                            
-                                        </p>
+                                                        if (currentPage >= 0)
+                                                        {
+
+                                                            <input type="button" id="Next" onclick="next()" value="Next" />
+
+
+
+                                                        }
+
+
+
+
+                                                        <input type="hidden" id="numberOfPages" name="numberOfPages" value="@pageNum" />
+                                                        <input type="hidden" id="currentPage" name="currentPage" value="@currentPage" />
+                                                        <input type="hidden" id="searchResults" name="searchResults" value="@searchResults" />
+                                                        <input type="hidden" id="userIdPost" name="userIdPost" value="@userIdPost" />
+
+
+
+                                                    }
+
+                                                    @present
+
+                                                </p>
 
                                             </div>
                                             <div class="col-sm-8">
@@ -326,11 +369,22 @@
                             $('#Previous').attr("disabled", false);
                             var x = parseInt(document.getElementById('currentPage').value) + 1
                             document.getElementById('currentPage').value = x;
+
+                            var userIdPost = $("#userIdPost").val();
+                            //if (newReader == "0") {
+
+                            //    userIdPost = 0;
+                            //    //return;
+                            //}
+
+
+
                             var searchResults = document.getElementById('searchResults').value;
+                            var userIdPost = document.getElementById('userIdPost').value;
 
 
                             var resultJSON = {
-                                searchResults: searchResults, page: x,
+                                searchResults: searchResults, page: x, userIdPost: userIdPost,
                             };
 
                             $.ajax({
@@ -391,8 +445,11 @@
                             var x = parseInt(document.getElementById('currentPage').value) - 1
                             document.getElementById('currentPage').value = x;
                             var searchResults = document.getElementById('searchResults').value;
+                            var userIdPost = document.getElementById('userIdPost').value;
+
+
                             var resultJSON = {
-                                searchResults: searchResults, page: x,
+                                searchResults: searchResults, page: x, userIdPost: userIdPost,
                             };
 
                             $.ajax({
