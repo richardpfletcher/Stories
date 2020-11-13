@@ -318,7 +318,7 @@ namespace Stories.Factory
 
                 DropdownModel model = new DropdownModel();
                 
-                if (id==2)
+                if (id==2 || id==0)
                 {
                     model.items.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
                 }

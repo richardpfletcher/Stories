@@ -26,4 +26,82 @@
     </div>
 
 
+
+    @using (Html.BeginForm("UploadPicture", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+
+        <table style="width: 55%">
+
+            <tr>
+                <td>
+                    <h2>Upload Your File</h2>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <p>Upload all your precious work here. </p>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.Label("Mothere's Helper")
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+                    @Html.DropDownList("newReader", (IEnumerable<SelectListItem>)ViewData["newReadersData"])
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.Label("Comments")
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+
+                    <textarea name="comments" id="comments" cols="20" rows="5"></textarea>
+                </td>
+            </tr>
+
+
+        </table>
+
+
+        string idpic = (string)ViewData["id"];
+
+
+
+        <input type="file" id="FileData" name="FileData" />
+
+        <input type="submit" id="UpdatePhoto" value="Upload File" />
+
+        @*<input type="hidden" id="idPhoto" name="idPhoto" value="@idpic" />*@
+        <input type="hidden" id="idPhoto" name="idPhoto"  />
+
+    }
+
+
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#newReader").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            document.getElementById('idPhoto').value = selectedValue;
+          
+
+        });
+    });
+</script>

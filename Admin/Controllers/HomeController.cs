@@ -1,17 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Web;
+﻿
 using System.Web.Mvc;
 using Stories.Factory;
+
+using Stories.Models;
+using Dapper;
+//using HtmlAgilityPack;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Web;
+using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Xml;
-using System.Xml.Linq;
-using System.Text;
-using System.Xml.XPath;
-using Stories.Models;
 
 namespace Stories.Controllers
 {
@@ -20,6 +27,17 @@ namespace Stories.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
+
+           
+            DropdownModel model = new DropdownModel();
+            GetLookups myGetLookups = new GetLookups();
+
+
+            model = myGetLookups.GeLookupCatUsers(0);
+            //model.items.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
+
+            ViewData["newReadersData"] = model.items;
+
 
             return View();
         }
@@ -492,7 +510,91 @@ namespace Stories.Controllers
 
             return View(myStory);
         }
+       
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UploadPicture(FormCollection form)
+        {
+            System.Web.HttpPostedFileBase httpPostedFileBase = base.Request.Files["FileData"];
+            string userID = base.Request.Form["idPhoto"];
+            string comments = base.Request.Form["comments"];
+            string filename1 = httpPostedFileBase.FileName;
+            string text2 = base.Server.MapPath("~/images/upload/" + System.IO.Path.GetFileName(httpPostedFileBase.FileName));
+            string value = string.Empty;
+            string text3 = System.IO.Path.GetExtension(httpPostedFileBase.FileName);
+            text3 = text3.ToLower();
+            GetStories myGetStories = new GetStories();
+           
+            ViewData["filename1"] = filename1;
 
+
+            if (userID == "" || userID ==null)
+            {
+                return RedirectToAction("..\\Home");
+
+            }
+
+            var email = myGetStories.GetMothersEmail(Convert.ToInt16(userID));
+
+
+            if (text3 == ".jpg" || text3 == ".gif" || text3 == ".png" || text3 == ".mp3" || text3 == ".mp4")
+            {
+                if (httpPostedFileBase.ContentLength > 0)
+                {
+                    //string filename = base.Server.MapPath("/images/upload/" + text + text3);
+                    string filename = base.Server.MapPath("/images/upload/" + filename1);
+                    httpPostedFileBase.SaveAs(filename);
+                    
+                    DynamicParameters dynamicParameters = new DynamicParameters();
+
+
+                    dynamicParameters.Add("@Comments", comments, null, null, null);
+                    dynamicParameters.Add("@fileName", filename1, null, null, null);
+
+                    dynamicParameters.Add("@userID", System.Convert.ToInt16(userID), null, null, null);
+                    ConnectionStringSettings connectionStringSettings = ConfigurationManager.ConnectionStrings["LocalStory"];
+                    string connectionString = connectionStringSettings.ConnectionString;
+
+                    using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(connectionString))
+                    {
+                        sqlConnection.Open();
+                        const string storedProcedure = "dbo.InsertPicture";
+                        var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, dynamicParameters, commandType: CommandType.StoredProcedure);
+                    }
+
+                    using (MailMessage mail = new MailMessage())
+                    {
+                        mail.From = new MailAddress("JatakaFun@gmail.com");
+                        mail.To.Add(email);
+                        mail.Subject = "Thank you for your work";
+                        mail.Body = "<h2>Thanks for uploading your file "+ filename1+" </h2>";
+                        mail.IsBodyHtml = true;
+                        //mail.Attachments.Add(new Attachment("C:\\file.zip"));
+
+                        using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                        {
+                            smtp.UseDefaultCredentials = false;
+                            smtp.EnableSsl = true;
+                            smtp.Credentials = new NetworkCredential("JatakaFun@gmail.com", "3Monkeys!");
+                            smtp.Send(mail);
+                        }
+                    }
+
+
+                    return View();
+                }
+                else
+                {
+                    
+                    return RedirectToAction("..\\Home");
+
+                }
+
+            }
+           
+            return View();
+        }
+
+       
 
         public ActionResult BookGenerator()
         {

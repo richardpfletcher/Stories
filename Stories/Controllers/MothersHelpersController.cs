@@ -35,5 +35,17 @@ namespace Stories.Controllers
 
 
         }
+
+        [Route("api/MothersHelpers/getMothersEmail")]
+
+        public response GetMothersEmail(int id)
+        {
+
+            GetStories myStories = new GetStories();
+            return myStories.GetMothersEmail(id);
+
+
+
+        }
     }
 }
