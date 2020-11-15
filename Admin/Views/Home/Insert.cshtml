@@ -226,8 +226,22 @@
                         //return;
                     }
 
-                    var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
-                    
+                    var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+                    var apiUrl = "";
+
+                    if (env == "Dev") {
+                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                    }
+                    else {
+                        
+                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+
+                    }
+
+
+                    //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+
 
 
                     var resultJSON = {

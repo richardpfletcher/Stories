@@ -322,8 +322,25 @@
 
                     console.log(resultJSON);
 
-                    var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
-                    var localStoryUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalStoryUrl"]';
+                    var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+                    var apiUrl = "";
+                    var localStoryUrl = "";
+
+                    if (env == "Dev") {
+                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                        localStoryUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalStoryUrl"]';
+                    }
+                    else {
+
+                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                        localStoryUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalStoryUrl"]';
+
+                    }
+                    //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+
+
+                    //var localStoryUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalStoryUrl"]';
 
                     $.ajax({
                         type: 'POST',

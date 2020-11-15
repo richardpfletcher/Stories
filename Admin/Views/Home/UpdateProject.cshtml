@@ -30,7 +30,7 @@
                 </td>
             </tr>
 
-           
+
         </table>
 
 
@@ -94,7 +94,20 @@
             var selectedText = $(this).find("option:selected").text();
             var jakataMaster = $(this).val();
 
-            var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+             var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+                    var apiUrl = "";
+
+                    if (env == "Dev") {
+                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                    }
+                    else {
+
+                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+
+                    }
+
+            //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
 
             var resultJSON = {
                 id: jakataMaster
@@ -164,7 +177,18 @@
                 console.log('Thing was not saved to the database.');
             }
 
-            var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
+            var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+            var LocalAdminUrl = "";
+
+            if (env == "Dev") {
+            LocalAdminUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
+            }
+            else {
+            LocalAdminUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionAdminUrl"]';
+            }
+
+            //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
 
 
 

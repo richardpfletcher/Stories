@@ -511,7 +511,20 @@
                                     var DanceStopDate = document.getElementById('DanceStopDate').value;
 
                                     var Mode = document.getElementById('Mode').value;
-                                    var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+
+                                     var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+                                    var apiUrl = "";
+
+                                    if (env == "Dev") {
+                                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                                    }
+                                    else {
+
+                                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+
+                                    }
+                                    //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
 
 
                                     var resultJSON = {
@@ -618,7 +631,21 @@
 
                                             alertify.success("Story Saved");
 
-                                            var LocalAdminUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
+
+                                             var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+                                            var LocalAdminUrl = "";
+
+                                                                if (env == "Dev") {
+                                                                    LocalAdminUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
+                                                                }
+                                                                else {
+
+                                                                    LocalAdminUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionAdminUrl"]';
+
+                                                                }
+
+                                            //var LocalAdminUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
                                             //window.location.href = "/Home/Update?row=" + id;
 
                                             resultJSON = {

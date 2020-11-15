@@ -28,7 +28,20 @@ namespace Stories.Factory
 
                 //var uri = new Uri("http://localhost:5187/api/AnimalType/");
 
-                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var env = ConfigurationManager.AppSettings["Enviroment"];
+                var settings = "";
+
+                if (env == "Dev")
+                {
+                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                }
+                else
+                {
+                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+
+                }
+
+
                 var uri = new Uri(settings+"api/AnimalType/");
 
              
@@ -82,7 +95,20 @@ namespace Stories.Factory
             {
 
 
-                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var env = ConfigurationManager.AppSettings["Enviroment"];
+                var settings = "";
+
+                if (env == "Dev")
+                {
+                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                }
+                else
+                {
+                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+
+                }
+
+
                 var uri = new Uri(settings + "api/MothersHelpers/getMothersHelpersTypeUsers?id=" + id);
 
                 //var uri = new Uri("http://localhost:5187/api/MothersHelpers/getMothersHelpersTypeUsers?id=" + id);
@@ -139,7 +165,20 @@ namespace Stories.Factory
         {
             using (var client = new System.Net.Http.HttpClient())
             {
-                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var env = ConfigurationManager.AppSettings["Enviroment"];
+                var settings = "";
+
+                if (env == "Dev")
+                {
+                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                }
+                else
+                {
+                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+
+                }
+
+
                 var uri = new Uri(settings + "api/MoralType/");
 
 
@@ -193,7 +232,20 @@ namespace Stories.Factory
         {
             using (var client = new System.Net.Http.HttpClient())
             {
-                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var env = ConfigurationManager.AppSettings["Enviroment"];
+                var settings = "";
+
+                if (env == "Dev")
+                {
+                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                }
+                else
+                {
+                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+
+                }
+
+
                 var uri = new Uri(settings + "api/StoryCategorytName/");
 
 
@@ -248,7 +300,20 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var env = ConfigurationManager.AppSettings["Enviroment"];
+                var settings = "";
+
+                if (env == "Dev")
+                {
+                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                }
+                else
+                {
+                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+
+                }
+
+
                 var uri = new Uri(settings + "api/StorySource/");
 
 
@@ -304,7 +369,20 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var env = ConfigurationManager.AppSettings["Enviroment"];
+                var settings = "";
+
+                if (env == "Dev")
+                {
+                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                }
+                else
+                {
+                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+
+                }
+
+
                 var uri = new Uri(settings + "api/JakataMaster/");
 
 
@@ -359,7 +437,20 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var env = ConfigurationManager.AppSettings["Enviroment"];
+                var settings = "";
+
+                if (env == "Dev")
+                {
+                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                }
+                else
+                {
+                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+
+                }
+
+
                 var uri = new Uri(settings + "api/SpecificStoryDropdown/");
 
 
@@ -415,7 +506,20 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var env = ConfigurationManager.AppSettings["Enviroment"];
+                var settings = "";
+
+                if (env == "Dev")
+                {
+                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                }
+                else
+                {
+                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+
+                }
+
+
                 var uri = new Uri(settings + "api/ToDo/" + status1);
 
 
@@ -470,7 +574,20 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var env = ConfigurationManager.AppSettings["Enviroment"];
+                var settings = "";
+
+                if (env == "Dev")
+                {
+                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                }
+                else
+                {
+                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+
+                }
+
+
                 var uri = new Uri(settings + "api/Stories/getSpecificStory?ID=" + row + "&Mode=ID");
 
 
@@ -543,7 +660,20 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                var env = ConfigurationManager.AppSettings["Enviroment"];
+                var settings = "";
+
+                if (env == "Dev")
+                {
+                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                }
+                else
+                {
+                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+
+                }
+
+
                 var uri = new Uri(settings + "api/YouTube/getYouTube/?ID=" + row + "&UserID=" + userID);
 
 
