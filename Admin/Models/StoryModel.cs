@@ -30,6 +30,7 @@ namespace Stories.Models
         public string Comments { get; set; }
         public string Stories { get; set; }
         public DropdownModel animalCombo { get; set; }
+        public DropdownModel MothersHelpersTypeCombo { get; set; }
         public DropdownModel moralCombo { get; set; }
         public DropdownModel StoryCategorytNameCombo { get; set; }
 

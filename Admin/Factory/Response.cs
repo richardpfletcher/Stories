@@ -48,6 +48,24 @@ namespace Stories.Factory
         }
     }
 
+    public class mothersHelpersSpecific
+    {
+        public string UserID { get; set; }
+        public string MothersHelpersType { get; set; }
+
+    }
+
+    public class MothersHelpersSpecificList
+    {
+        [XmlArray("mothersHelpersSpecific")]
+        [XmlArrayItem("mothersHelpersSpecific")]
+        public List<mothersHelpersSpecific> mothersHelpersSpecificLists { get; set; }
+        public MothersHelpersSpecificList()
+        {
+            mothersHelpersSpecificLists = new List<mothersHelpersSpecific>();
+        }
+    }
+
     public class storySource
     {
         public string ID { get; set; }
@@ -233,6 +251,13 @@ namespace Stories.Factory
             data.Add(list);
             return data;
         }
+
+        public IList AddMothersHelpersSpecificList(MothersHelpersSpecificList list)
+        {
+            data.Add(list);
+            return data;
+        }
+
 
 
         public IList AddStorySourceList(StorySourceList list)

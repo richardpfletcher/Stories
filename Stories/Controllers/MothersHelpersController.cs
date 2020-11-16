@@ -24,6 +24,32 @@ namespace Stories.Controllers
 
         }
 
+        [Route("api/MothersHelpers/getMothersHelpersType")]
+
+        public response GetMothersHelpersType()
+        {
+
+            GetStories myStories = new GetStories();
+            return myStories.GetMothersHelpersType();
+
+
+
+        }
+
+
+        [Route("api/MothersHelpers/getMothersHelpersTypeSpecific")]
+
+        public response GetMothersHelpersTypeSpecific(int id)
+        {
+
+            GetStories myStories = new GetStories();
+            return myStories.GetMothersHelpersTypeSpecific(id);
+
+
+
+        }
+
+
         [Route("api/MothersHelpers/getMothersHelpersTypeUsers")]
 
         public response GetMothersHelpersTypeUsers(int id)
@@ -47,5 +73,7 @@ namespace Stories.Controllers
 
 
         }
+
+
     }
 }

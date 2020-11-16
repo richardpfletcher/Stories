@@ -426,6 +426,56 @@ namespace Stories.Factory
             return response;
         }
 
+        public MothersHelpersSpecificList GetMothersHelpersTypeSpecific(int id)
+        {
+
+            var dataTable = new DataTable();
+            dataTable = new DataTable { TableName = "MothersHelpers" };
+            //var conString1 = ConfigurationManager.ConnectionStrings["LocalEvolution"];
+            //string connString = conString1.ConnectionString;
+            string connString = URLInfo.GetDataBaseConnectionString();
+
+
+            System.IO.StringWriter writer = new System.IO.StringWriter();
+            string returnString = "";
+            response response = new response();
+            response.result = 0;
+            MothersHelpersSpecificList list = new MothersHelpersSpecificList();
+            using (System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(connString))
+            {
+                using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("GetMothersHelpersTypeSpecific", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@userID", SqlDbType.NVarChar).Value = id;
+                    con.Open();
+                    var dataReader = cmd.ExecuteReader();
+                    dataTable.Load(dataReader);
+                    dataTable.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+                    returnString = writer.ToString();
+                    int numberOfRecords = dataTable.Rows.Count;
+                    response.result = numberOfRecords;
+
+
+
+                    //MothersHelpersSpecificList list = new MothersHelpersSpecificList();
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        mothersHelpersSpecific myprod = new mothersHelpersSpecific();
+                        myprod.UserID = row["UserID"].ToString();
+                        myprod.MothersHelpersType = row["MothersHelpersType"].ToString();
+
+
+                        list.mothersHelpersSpecificLists.Add(myprod);
+                    }
+                    //response.AddMothersHelpersSpecificList(list);
+
+                    //response.log.Add(numberOfRecords + " Records found");
+
+                }
+            }
+            return list;
+        }
+
 
         public response GetStoryCategorytName()
         {

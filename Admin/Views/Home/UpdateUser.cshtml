@@ -1,0 +1,196 @@
+﻿@model Stories.Models.Story
+
+@{
+    ViewBag.Title = "UpdateUser";
+}
+
+
+
+<h2>Update User</h2>
+<div class="col-md-4">
+
+    <table style="width: 55%">
+
+
+
+        <tr>
+            <td>
+                @Html.Label("Mothere's Helper")
+            </td>
+
+        </tr>
+        <tr>
+
+            <td>
+
+                <label for="name">@ViewData["userName"]</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.Label("Email")
+            </td>
+
+        </tr>
+        <tr>
+
+            <td>
+                @{
+
+                    var email = ViewData["email"];
+                    <input id="email" name="email" value=@email />
+
+
+                }
+            </td>
+        </tr>
+
+
+    </table>
+
+    <table style="width: 55%">
+
+        <tr>
+
+            <td>
+
+                @for (int i = 0; i < Model.MothersHelpersTypeCombo.items.Count; i++)
+                {
+            <tr>
+                <td>
+                    @*@Html.CheckBoxFor(m => Model.MothersHelpersTypeCombo.items[i].Selected)*@
+                    @Html.CheckBoxFor(m => Model.MothersHelpersTypeCombo.items[i].Selected, new { @class = "MothersHelpersTypeCombo" })
+
+
+
+                </td>
+                <td>
+                    @Html.DisplayFor(m => Model.MothersHelpersTypeCombo.items[i].Text, new { @class = "MothersHelpersTypeCombo" })
+                    @Html.HiddenFor(m => Model.MothersHelpersTypeCombo.items[i].Value, new { @class = "MothersHelpersTypeCombo" })
+                    @Html.HiddenFor(m => Model.MothersHelpersTypeCombo.items[i].Text, new { @class = "MothersHelpersTypeCombo" })
+                </td>
+            </tr>
+
+
+        }
+
+
+            </table>
+
+            <p>
+                <input type="button" id="Update" value="Save" />
+                @{
+                    string id = (string)ViewData["id"];
+                }
+                <input type="hidden" id="id" name="id" value="@id" />
+            </p>
+
+
+
+        </div>
+
+        <div class="col-md-4">
+
+
+        </div>
+
+        <script type="text/javascript">
+
+                    $(function () {
+
+                        $("#Update").click(function () {
+
+
+
+                            var idslist = "";
+                            var counter = 0;
+                            var counter1 = 0;
+                            var animalChoosen = "";
+
+                            $("input:checkbox[class=MothersHelpersTypeCombo]").each(function () {
+
+                                if ($(this).is(":checked")) {
+                                    var userid = $(this).attr("value");
+                                    if (idslist != "") {
+                                        idslist = idslist + ',' + userid;
+
+                                    }
+                                    else
+                                        idslist = userid;
+                                    animalChoosen = $("#MothersHelpersTypeCombo_items_" + counter1 + "__Value").val() + ',' + animalChoosen;
+                                }
+                                counter1++;
+                            });
+
+                            if (counter1 == 0) {
+                                alert('You must choose an animal type');
+                                return;
+                            }
+
+
+
+
+                            var title = $("#email").val();
+
+                            if (title == "0") {
+                                alert('Email is required');
+                                document.getElementById('email').focus();
+                                return;
+                            }
+
+
+                            var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+                            var apiUrl = "";
+
+                            if (env == "Dev") {
+                                apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                            }
+                            else {
+
+                                apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+
+                            }
+
+                            //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+
+
+                            //var resultJSON = {
+                            //    ID: id, JakataID: jakataMaster, StoryCategorytName: StoryCategorytName, Title: jakataMaster, AnimalType: animalChoosen, MoralType: moralType, Comments: comments, Stories: elmeStory
+                            //};
+
+                            //$.ajax({
+                            //    type: 'POST',
+
+                            //    url: apiUrl+"api/Storiesapi/update",
+                            //    //url: "http://localhost:5187/api/Storiesapi/update",
+
+
+                            //    data: resultJSON,
+                            //    dataType: "json",
+
+
+                            //    success: function (data, status, xhr) {
+                            //       alertify.success("Story Saved");
+
+                            //    },
+                            //    error: function (xhr, ajaxOptions, thrownError) {
+                            //        alert(xhr.status);
+                            //        alert(thrownError);
+                            //    }
+
+
+
+                            //});
+
+                            return;
+
+                        });
+
+                        //
+
+                    });
+        </script>
+
+

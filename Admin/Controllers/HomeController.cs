@@ -594,7 +594,103 @@ namespace Stories.Controllers
             return View();
         }
 
-       
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UpdateUser(FormCollection form)
+        {
+            string userID = base.Request.Form["idPhoto"];
+            GetStories myGetStories = new GetStories();
+            var email = myGetStories.GetMothersEmail(Convert.ToInt16(userID));
+            ViewData["email"] = email;
+            string userName = base.Request.Form["userName"];
+            ViewData["userName"] = userName;
+
+            MothersHelpersSpecificList myMothersHelpersSpecificList = new MothersHelpersSpecificList();
+            myMothersHelpersSpecificList = myGetStories.GetMothersHelpersTypeSpecific(Convert.ToInt16(userID));
+
+           
+
+            DropdownModel model = new DropdownModel();
+            GetLookups myGetLookups = new GetLookups();
+
+            Story myStory = new Story();
+
+            model = myGetLookups.GetMothersHelpersType();
+
+            for (int i = 0; i < myMothersHelpersSpecificList.mothersHelpersSpecificLists.Count; i++)
+            {
+                var x = myMothersHelpersSpecificList.mothersHelpersSpecificLists[i].MothersHelpersType;
+
+
+                foreach (SelectListItem s in model.items)
+                {
+                    if (s.Value == x)
+                    {
+                        s.Selected = true;
+                    }
+                }
+
+
+            }
+
+
+            //var AnimalType = modelStory.AnimalType;
+
+            //AnimalType = AnimalType.Trim();
+
+            //if (AnimalType.EndsWith(","))
+            //{
+            //    AnimalType = AnimalType.Remove(AnimalType.Length - 1, 1);
+            //}
+
+            //string[] Animalchosen = AnimalType.Split(',');
+            ////model = new DropdownModel();
+
+            //model = myGetLookups.GeLookupAnimal();
+
+            //for (int i = 0; i < Animalchosen.Length; i++)
+            //{
+            //    var x = Animalchosen[i];
+
+
+            //    foreach (SelectListItem s in model.items)
+            //    {
+            //        if (s.Value == x)
+            //        {
+            //            s.Selected = true;
+            //        }
+            //    }
+
+
+            //}
+
+            ViewData["MothersHelpersTypeData"] = model.items;
+            myStory.MothersHelpersTypeCombo = model;
+
+
+
+
+            return View(myStory);
+
+        }
+
+
+            public ActionResult User()
+        {
+            ViewBag.Message = "Your app description page.";
+
+            DropdownModel model = new DropdownModel();
+            GetLookups myGetLookups = new GetLookups();
+
+
+            model = myGetLookups.GeLookupCatUsers(0);
+            //model.items.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
+
+            ViewData["newReadersData"] = model.items;
+
+
+
+            return View();
+        }
 
         public ActionResult BookGenerator()
         {

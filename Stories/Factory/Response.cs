@@ -48,6 +48,42 @@ namespace Stories.Factory
         }
     }
 
+    public class mothersHelpersType
+    {
+        public string ID { get; set; }
+        public string Name { get; set; }
+
+    }
+
+    public class MothersHelpersTypeList
+    {
+        [XmlArray("mothersHelpersType")]
+        [XmlArrayItem("mothersHelpersType")]
+        public List<mothersHelpersType> mothersHelpersTypeLists { get; set; }
+        public MothersHelpersTypeList()
+        {
+            mothersHelpersTypeLists = new List<mothersHelpersType>();
+        }
+    }
+
+    public class mothersHelpersSpecific
+    {
+        public string UserID { get; set; }
+        public string MothersHelpersType { get; set; }
+       
+    }
+
+    public class MothersHelpersSpecificList
+    {
+        [XmlArray("mothersHelpersSpecific")]
+        [XmlArrayItem("mothersHelpersSpecific")]
+        public List<mothersHelpersSpecific> mothersHelpersSpecificLists { get; set; }
+        public MothersHelpersSpecificList()
+        {
+            mothersHelpersSpecificLists = new List<mothersHelpersSpecific>();
+        }
+    }
+
     public class storySource
     {
         public string ID { get; set; }
@@ -300,6 +336,18 @@ namespace Stories.Factory
         }
 
         public IList AddMothersHelpersList(MothersHelpersList list)
+        {
+            data.Add(list);
+            return data;
+        }
+
+        public IList AddMothersHelpersSpecificList(MothersHelpersSpecificList list)
+        {
+            data.Add(list);
+            return data;
+        }
+
+        public IList AddMothersHelpersTypeList(MothersHelpersTypeList list)
         {
             data.Add(list);
             return data;

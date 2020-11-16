@@ -179,13 +179,13 @@
 
             var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
 
-            var LocalAdminUrl = "";
+            var apiUrl = "";
 
             if (env == "Dev") {
-            LocalAdminUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
+                apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
             }
             else {
-            LocalAdminUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionAdminUrl"]';
+                apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionAdminUrl"]';
             }
 
             //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';

@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "User";
+}
+
+<h2>User</h2>
+
+@using (Html.BeginForm("UpdateUser", "Home", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return validateForm()"}))
+{
+
+    <table style="width: 55%">
+
+
+
+        <tr>
+            <td>
+                @Html.Label("Mothere's Helper")
+            </td>
+
+        </tr>
+        <tr>
+
+            <td>
+                @Html.DropDownList("newReader", (IEnumerable<SelectListItem>)ViewData["newReadersData"])
+            </td>
+        </tr>
+
+       
+
+    </table>
+    <input type="hidden" id="idPhoto" name="idPhoto" />
+    <input type="hidden" id="userName" name="userName" />
+    <input type="submit" id="UpdateUser"  value="Edit User" />
+}
+
+<script type="text/javascript">
+    $(function () {
+        $("#newReader").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            document.getElementById('idPhoto').value = selectedValue;
+            document.getElementById('userName').value = selectedText;
+
+
+        });
+    });
+
+    
+</script>
+
+<script>
+    function validateForm() {
+        var newReader = $("#newReader").val();
+        if (newReader == "0") {
+            alert('Please choose a user is required');
+            document.getElementById('newReader').focus();
+            return false;
+        }
+        else {
+            return true;
+            //form1.submit();
+        }
+    }
+</script>
+
+
+
+
