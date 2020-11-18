@@ -36,6 +36,18 @@ namespace Stories.Models
 
     }
 
+    public class useRoles
+    {
+        public string userName { get; set; }
+
+        public string UserID { get; set; }
+        public string email { get; set; }
+        public string motherhelpers { get; set; }
+
+
+    }
+
+
     public class youTubeModel
     {
         public string ID { get; set; }

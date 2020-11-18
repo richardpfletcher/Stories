@@ -83,6 +83,77 @@ namespace Stories.Factory
         }
 
 
+        public int UpdateRoles(useRoles myStory)
+        {
+            var p = new DynamicParameters();
+
+            var motherhelpers = myStory.motherhelpers;
+
+            motherhelpers = motherhelpers.Trim();
+
+            if (motherhelpers.EndsWith(","))
+            {
+                motherhelpers = motherhelpers.Remove(motherhelpers.Length - 1, 1);
+                myStory.motherhelpers = motherhelpers;
+            }
+
+            int total = 0;
+
+            if (myStory.UserID !="0")
+            {
+       
+
+            //update MothersHelpers table
+
+            p.Add("@Email", myStory.email);
+            p.Add("@Name", myStory.userName);
+            p.Add("@ID", myStory.UserID);
+            p.Add("@motherhelpers", myStory.motherhelpers);
+
+            var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+            string strConnString = conString.ConnectionString;
+
+
+            using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+            {
+                sqlConnection.Open();
+                const string storedProcedure = "dbo.UpdateRoles";
+                var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                foreach (var el in values)
+                {
+                    total = el.totalReceipesInt;
+                }
+            }
+
+            }
+            else
+            {
+                p.Add("@Email", myStory.email);
+                p.Add("@Name", myStory.userName);
+                p.Add("@motherhelpers", myStory.motherhelpers);
+
+                var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+                string strConnString = conString.ConnectionString;
+
+
+                using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+                {
+                    sqlConnection.Open();
+                    const string storedProcedure = "dbo.InsertRoles";
+                    var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                    foreach (var el in values)
+                    {
+                        total = el.totalReceipesInt;
+                    }
+                }
+            }
+            
+
+            return total;
+
+        }
+
+
         /// <summary>
         /// Inserts a new account
         /// </summary>
@@ -1119,6 +1190,53 @@ namespace Stories.Factory
             }
             return response;
         }
+
+        public string GetStoryCategoryNameByID(int id)
+        {
+
+            var dataTable = new DataTable();
+            dataTable = new DataTable { TableName = "StoryCategorytName" };
+            //var conString1 = ConfigurationManager.ConnectionStrings["LocalEvolution"];
+            //string connString = conString1.ConnectionString;
+            string connString = URLInfo.GetDataBaseConnectionString();
+
+
+            System.IO.StringWriter writer = new System.IO.StringWriter();
+            string returnString = "";
+            response response = new response();
+            response.result = 0;
+
+            string StoryCategorytName = "";
+
+
+            using (System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(connString))
+            {
+                using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("GetStoryCategoryNameByID", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
+                    con.Open();
+                    var dataReader = cmd.ExecuteReader();
+                    dataTable.Load(dataReader);
+                    dataTable.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+                    returnString = writer.ToString();
+                    int numberOfRecords = dataTable.Rows.Count;
+                    response.result = numberOfRecords;
+
+
+
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        StoryCategorytName = row["StoryCategorytName"].ToString();
+
+                    }
+
+                }
+            }
+            return StoryCategorytName;
+        }
+
+
 
         public response GetSpecificStory(int ID, string mode)
         {

@@ -40,10 +40,7 @@
 
                     @Html.TextBoxFor(model => Model.userName, new { id = "userName" })
 
-                    var userID = ViewData["userID"];
-                    <input type="hidden" id="userID" name="userID" value=@userID />
-
-
+                   
                 }
 
 
@@ -59,13 +56,9 @@
         <tr>
 
             <td>
-                @{
-
-                    var email = ViewData["email"];
-                    <input id="email" name="email" value=@email />
+                <input id="email" name="email"/>
 
 
-                }
             </td>
         </tr>
 
@@ -103,10 +96,7 @@
 
             <p>
                 <input type="button" id="Update" value="Save" />
-                @{
-                    string id = (string)ViewData["id"];
-                }
-                <input type="hidden" id="id" name="id" value="@id" />
+               
             </p>
 
 
@@ -163,7 +153,6 @@
                                 return;
                             }
 
-                            var userID = document.getElementById('userID').value;
                             var userName = $("#userName").val();
 
                             if (userName == "") {
@@ -190,7 +179,7 @@
 
 
                             var resultJSON = {
-                                userID: userID, userName: userName, email: email, motherhelpers: motherhelpers,                           };
+                                userID: "0", userName: userName, email: email, motherhelpers: motherhelpers,                           };
 
                             $.ajax({
                                 type: 'POST',

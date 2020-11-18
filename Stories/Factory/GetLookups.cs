@@ -27,21 +27,21 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var env = ConfigurationManager.AppSettings["Enviroment"];
-                var settings = "";
+                //var env = ConfigurationManager.AppSettings["Enviroment"];
+                //var settings = "";
 
-                if (env == "Dev")
-                {
-                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
-                }
-                else
-                {
-                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+                //if (env == "Dev")
+                //{
+                //    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                //}
+                //else
+                //{
+                //    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
 
-                }
+                //}
 
 
-                var uri = new Uri(settings + "api /AnimalType/");
+                var uri = new Uri("http://api.jataka.fun/api/AnimalType/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -92,20 +92,20 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var env = ConfigurationManager.AppSettings["Enviroment"];
-                var settings = "";
+                //var env = ConfigurationManager.AppSettings["Enviroment"];
+                //var settings = "";
 
-                if (env == "Dev")
-                {
-                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
-                }
-                else
-                {
-                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+                //if (env == "Dev")
+                //{
+                //    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                //}
+                //else
+                //{
+                //    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
 
-                }
+                //}
 
-                var uri = new Uri(settings+"api/MoralType/");
+                var uri = new Uri("http://api.jataka.fun/api/MoralType/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -155,21 +155,21 @@ namespace Stories.Factory
         {
             using (var client = new System.Net.Http.HttpClient())
             {
-                var env = ConfigurationManager.AppSettings["Enviroment"];
-                var settings = "";
+                //var env = ConfigurationManager.AppSettings["Enviroment"];
+                //var settings = "";
 
-                if (env == "Dev")
-                {
-                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
-                }
-                else
-                {
-                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+                //if (env == "Dev")
+                //{
+                //    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                //}
+                //else
+                //{
+                //    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
 
-                }
+                //}
 
 
-                var uri = new Uri(settings+"api/StorySource/");
+                var uri = new Uri("http://api.jataka.fun/api/StorySource/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -221,20 +221,20 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var env = ConfigurationManager.AppSettings["Enviroment"];
-                var settings = "";
+                //var env = ConfigurationManager.AppSettings["Enviroment"];
+                //var settings = "";
 
-                if (env == "Dev")
-                {
-                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
-                }
-                else
-                {
-                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+                //if (env == "Dev")
+                //{
+                //    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                //}
+                //else
+                //{
+                //    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
 
-                }
+                //}
 
-                var uri = new Uri(settings+"api/JakataMaster/");
+                var uri = new Uri("http://api.jataka.fun/api/JakataMaster/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -285,21 +285,21 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var env = ConfigurationManager.AppSettings["Enviroment"];
-                var settings = "";
+                //var env = ConfigurationManager.AppSettings["Enviroment"];
+                //var settings = "";
 
-                if (env == "Dev")
-                {
-                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
-                }
-                else
-                {
-                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+                //if (env == "Dev")
+                //{
+                //    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                //}
+                //else
+                //{
+                //    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
 
-                }
+                //}
 
-                var uri = new Uri(settings+"api/MothersHelpers/getMothersHelpersTypeUsers?id=" + id);
-                //var uri = new Uri("https://localhost:44302/api/MothersHelpers/getMothersHelpersTypeUsers?id=" + id);
+                //var uri = new Uri(settings+"api/MothersHelpers/getMothersHelpersTypeUsers?id=" + id);
+                var uri = new Uri("http://api.jataka.fun/api/MothersHelpers/getMothersHelpersTypeUsers?id=" + id);
 
                 var response = client.GetAsync(uri).Result;
 
@@ -350,20 +350,20 @@ namespace Stories.Factory
         {
             using (var client = new System.Net.Http.HttpClient())
             {
-                var env = ConfigurationManager.AppSettings["Enviroment"];
-                var settings = "";
+                //var env = ConfigurationManager.AppSettings["Enviroment"];
+                //var settings = "";
 
-                if (env == "Dev")
-                {
-                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
-                }
-                else
-                {
-                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+                //if (env == "Dev")
+                //{
+                //    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                //}
+                //else
+                //{
+                //    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
 
-                }
+                //}
 
-                var uri = new Uri(settings+"api/SpecificStoryDropdown/");
+                var uri = new Uri("http://api.jataka.fun/api/SpecificStoryDropdown/");
 
                 var response = client.GetAsync(uri).Result;
 
@@ -415,21 +415,21 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var env = ConfigurationManager.AppSettings["Enviroment"];
-                var settings = "";
+                //var env = ConfigurationManager.AppSettings["Enviroment"];
+                //var settings = "";
 
-                if (env == "Dev")
-                {
-                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
-                }
-                else
-                {
-                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+                //if (env == "Dev")
+                //{
+                //    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                //}
+                //else
+                //{
+                //    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
 
-                }
+                //}
 
-                var uri = new Uri(settings+"api/ToDo/" + status1);
-                //var uri = new Uri("http://localhost:5187/api/Storiesapi/ToDo/"+status1);
+                //var uri = new Uri(settings+"api/ToDo/" + status1);
+                var uri = new Uri("http://api.jataka.fun/api/Storiesapi/ToDo/" + status1);
                 //var uri = new Uri("http://localhost:5187/api/JakataMaster/");
 
                 var response = client.GetAsync(uri).Result;
@@ -481,20 +481,20 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var env = ConfigurationManager.AppSettings["Enviroment"];
-                var settings = "";
+                //var env = ConfigurationManager.AppSettings["Enviroment"];
+                //var settings = "";
 
-                if (env == "Dev")
-                {
-                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
-                }
-                else
-                {
-                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+                //if (env == "Dev")
+                //{
+                //    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                //}
+                //else
+                //{
+                //    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
 
-                }
+                //}
 
-                var uri = new Uri(settings+"api/Stories/" + row);
+                var uri = new Uri("http://api.jataka.fun/api/Stories/" + row);
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;
@@ -540,20 +540,20 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-                var env = ConfigurationManager.AppSettings["Enviroment"];
-                var settings = "";
+                //var env = ConfigurationManager.AppSettings["Enviroment"];
+                //var settings = "";
 
-                if (env == "Dev")
-                {
-                    settings = ConfigurationManager.AppSettings["LocalWebApi"];
-                }
-                else
-                {
-                    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
+                //if (env == "Dev")
+                //{
+                //    settings = ConfigurationManager.AppSettings["LocalWebApi"];
+                //}
+                //else
+                //{
+                //    settings = ConfigurationManager.AppSettings["ProductionWebApi"];
 
-                }
+                //}
 
-                var uri = new Uri(settings+"api/YouTube/" + row);
+                var uri = new Uri("http://api.jataka.fun/api/YouTube/" + row);
                 var response = client.GetAsync(uri).Result;
 
                 var responseContent = response.Content;

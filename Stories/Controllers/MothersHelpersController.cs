@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Stories.Factory;
 using System.Web.Http.Cors;
+using Stories.Models;
 
 
 namespace Stories.Controllers
@@ -21,6 +22,20 @@ namespace Stories.Controllers
             return myStories.GetMothersHelpers();
 
 
+
+        }
+
+        [Route("api/MothersHelpers/updateRoles")]
+
+        public HttpResponseMessage UpdateRoles(useRoles myuseRoles)
+        {
+
+            GetStories myStories = new GetStories();
+
+            int lastRecord = myStories.UpdateRoles(myuseRoles);
+            MyOder order = new MyOder();
+            order.MyData = lastRecord.ToString();
+            return Request.CreateResponse<MyOder>(HttpStatusCode.Created, order);
 
         }
 

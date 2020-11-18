@@ -13,11 +13,30 @@ namespace Stories.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class StoryCategorytNameController : ApiController
     {
+        [HttpGet]
+
         public response Get()
         {
 
             GetStories myStories = new GetStories();
             return myStories.GetStoryCategorytName();
         }
+
+        [HttpGet]
+        [Route("api/StoryCategorytName/search")]
+
+
+        public string Search(int id)
+
+        {
+
+            GetStories myStories = new GetStories();
+            string StoryCategoryName = myStories.GetStoryCategoryNameByID(id);
+
+            return StoryCategoryName;
+
+
+        }
+
     }
 }

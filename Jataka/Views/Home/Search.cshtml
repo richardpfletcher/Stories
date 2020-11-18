@@ -344,7 +344,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: apiUrl+"api/Storiesapi/search",
+                        url: "http://api.jataka.fun/api/Storiesapi/search",
                         //url: "http://localhost:5187/api/Storiesapi/search",
                         data: resultJSON,
                         dataType: "json",
@@ -360,7 +360,9 @@
                             }
 
                             //window.location.href = "http://localhost:27242/Home/SearchResults?searchResults=" + data + "&page=1&userIdPost="+userIdPost;
-                            window.location.href = localStoryUrl + "Home/SearchResults?searchResults=" + data + "&page=1&userIdPost=" + userIdPost;
+                            window.location.href = "http://jataka.fun/Home/SearchResults?searchResults=" + data + "&page=1&userIdPost=" + userIdPost;
+
+                            //window.location.href = localStoryUrl + "Home/SearchResults?searchResults=" + data + "&page=1&userIdPost=" + userIdPost;
 
 
                             console.log(data[0]);

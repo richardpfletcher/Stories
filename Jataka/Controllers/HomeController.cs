@@ -355,24 +355,26 @@ namespace Jataka.Controllers
             model = myYouTubeGetLookups.GetYouTube(JakataID, userIdPost);
             myStory.youTubeCombo = model;
 
+            GetStories myGetstories = new GetStories();
 
+            //modelStory.StoryCategorytNameString =myGetstories.GetStoryCategoryNameByID(StoryCategorytName);
 
             //myStory.StoryCategorytName
-            model = myGetLookups.GetStoryCategorytName();
+            //model = myGetLookups.GetStoryCategorytName();
 
-            foreach (SelectListItem s in model.items)
-            {
-                if (s.Value == myStory.StoryCategorytName.ToString())
-                {
-                    s.Selected = true;
-                    modelStory.StoryCategorytNameString = s.Text;
+            //foreach (SelectListItem s in model.items)
+            //{
+            //    if (s.Value == myStory.StoryCategorytName.ToString())
+            //    {
+            //        s.Selected = true;
+            //        modelStory.StoryCategorytNameString = s.Text;
 
-                    if (s.Value == "0")
-                    {
-                        modelStory.StoryCategorytNameString = "";
-                    }
-                }
-            }
+            //        if (s.Value == "0")
+            //        {
+            //            modelStory.StoryCategorytNameString = "";
+            //        }
+            //    }
+            //}
 
            
 
