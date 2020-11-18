@@ -213,7 +213,6 @@
     <Compile Include="Controllers\StoryCategorytNameController.cs" />
     <Compile Include="Controllers\StorySourceController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\YouTubeController.cs" />
     <Compile Include="Factory\GetLookups.cs" />
     <Compile Include="Factory\GetStories.cs" />
