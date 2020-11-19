@@ -23,10 +23,10 @@ namespace Stories.Controllers
         }
 
         [HttpGet]
-        [Route("api/StoryCategorytName/search")]
+        [Route("api/StoryCategorytName/getStoryCategoryNameByID]")]
 
 
-        public string Search(int id)
+        public string GetStoryCategoryNameByID(int id)
 
         {
 

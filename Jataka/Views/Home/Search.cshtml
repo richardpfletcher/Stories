@@ -41,18 +41,7 @@
 <div class="container">
 
     <br>
-    <!-- Nav tabs -->
-    @*<ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
-            </li>
-        </ul>*@
+   
 
     <!-- Tab panes -->
     <div class="tab-content">
@@ -326,15 +315,18 @@
 
                     var apiUrl = "";
                     var localStoryUrl = "";
+                    var url = "";
 
                     if (env == "Dev") {
                         apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
                         localStoryUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalStoryUrl"]';
+                        url = "http://localhost:5187/api/Storiesapi/search";
                     }
                     else {
 
                         apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
                         localStoryUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalStoryUrl"]';
+                        url = "http://api.jataka.fun/api/Storiesapi/search";
 
                     }
                     //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
@@ -344,7 +336,9 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: "http://api.jataka.fun/api/Storiesapi/search",
+                        url: url,
+
+                        //put back in
                         //url: "http://localhost:5187/api/Storiesapi/search",
                         data: resultJSON,
                         dataType: "json",
@@ -360,7 +354,9 @@
                             }
 
                             //window.location.href = "http://localhost:27242/Home/SearchResults?searchResults=" + data + "&page=1&userIdPost="+userIdPost;
-                            window.location.href = "http://jataka.fun/Home/SearchResults?searchResults=" + data + "&page=1&userIdPost=" + userIdPost;
+                            //window.location.href = "http://jataka.fun/Home/SearchResults?searchResults=" + data + "&page=1&userIdPost=" + userIdPost;
+                            window.location.href = "/Home/SearchResults?searchResults=" + data + "&page=1&userIdPost=" + userIdPost;
+
 
                             //window.location.href = localStoryUrl + "Home/SearchResults?searchResults=" + data + "&page=1&userIdPost=" + userIdPost;
 

@@ -358,29 +358,9 @@ namespace Jataka.Controllers
             GetStories myGetstories = new GetStories();
 
             //modelStory.StoryCategorytNameString =myGetstories.GetStoryCategoryNameByID(StoryCategorytName);
+            modelStory.StoryCategorytNameString = myGetLookups.GetStoryCategoryNameByID(StoryCategorytName);
 
-            //myStory.StoryCategorytName
-            //model = myGetLookups.GetStoryCategorytName();
-
-            //foreach (SelectListItem s in model.items)
-            //{
-            //    if (s.Value == myStory.StoryCategorytName.ToString())
-            //    {
-            //        s.Selected = true;
-            //        modelStory.StoryCategorytNameString = s.Text;
-
-            //        if (s.Value == "0")
-            //        {
-            //            modelStory.StoryCategorytNameString = "";
-            //        }
-            //    }
-            //}
-
-           
-
-
-
-
+            
             return View(modelStory);
 
 

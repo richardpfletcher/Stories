@@ -352,7 +352,7 @@
 
 
 
-                <script>
+        <script>
 
                     function next() {
 
@@ -371,11 +371,25 @@
                             document.getElementById('currentPage').value = x;
 
                             var userIdPost = $("#userIdPost").val();
-                            //if (newReader == "0") {
 
-                            //    userIdPost = 0;
-                            //    //return;
-                            //}
+                            //
+
+                            var url = "";
+                            var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+
+                            if (env == "Dev") {
+
+                                url = "http://localhost:27242//Home/SearchResults";
+                            }
+                            else {
+
+                                url = "http://jataka.fun//Home/SearchResults";
+
+                            }
+
+
+                            //
 
 
 
@@ -390,7 +404,8 @@
                             $.ajax({
                                 type: 'GET',
                                 //url: "http://localhost:27242//Home/SearchResults",
-                                url: "http://jataka.fun//Home/SearchResults",
+                                //url: "http://jataka.fun//Home/SearchResults",
+                                url: url,
                                 //url: "//Home/SearchResults",
                                 data: resultJSON,
                                 dataType: "html",
@@ -446,8 +461,21 @@
                             var x = parseInt(document.getElementById('currentPage').value) - 1
                             document.getElementById('currentPage').value = x;
                             var searchResults = document.getElementById('searchResults').value;
-                            var userIdPost = document.getElementById('userIdPost').value;
+                            var userIdPost = document.getElementById('userIdPost').value;;
 
+                            var url = "";
+                            var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+
+                            if (env == "Dev") {
+
+                                url = "http://localhost:27242//Home/SearchResults";
+                            }
+                            else {
+
+                                url = "http://jataka.fun//Home/SearchResults";
+
+                            }
 
                             var resultJSON = {
                                 searchResults: searchResults, page: x, userIdPost: userIdPost,
@@ -456,7 +484,8 @@
                             $.ajax({
                                 type: 'GET',
                                 //url: "http://localhost:27242//Home/SearchResults",
-                                url: "http://jataka.fun//Home/SearchResults",
+                                //url: "http://jataka.fun//Home/SearchResults",
+                                url:url,
                                 //url: "//Home/SearchResults",
                                 data: resultJSON,
                                 dataType: "html",
@@ -497,7 +526,7 @@
                         window.location.replace("/MyFavorties/PdfResultsView?all=" + searchResults);
                     }
 
-                </script>
+        </script>
 
 
 

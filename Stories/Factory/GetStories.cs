@@ -1223,8 +1223,6 @@ namespace Stories.Factory
                     int numberOfRecords = dataTable.Rows.Count;
                     response.result = numberOfRecords;
 
-
-
                     foreach (DataRow row in dataTable.Rows)
                     {
                         StoryCategorytName = row["StoryCategorytName"].ToString();
