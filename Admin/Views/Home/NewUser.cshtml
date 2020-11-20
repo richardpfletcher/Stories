@@ -166,14 +166,17 @@
 
                             var apiUrl = "";
 
-                            if (env == "Dev") {
-                                apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                             if (env == "Dev") {
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                                apiUrl = "http://localhost:5187/api/Storiesapi/update";
                             }
                             else {
 
-                                apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                                 apiUrl = "http://api.jataka.fun/api/MothersHelpers/updateRoles";
 
                             }
+
 
                             //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
 
@@ -183,8 +186,8 @@
 
                             $.ajax({
                                 type: 'POST',
-
-                                url: apiUrl +"api/MothersHelpers/updateRoles",
+                                url: apiUrl,
+                                //url: apiUrl +"api/MothersHelpers/updateRoles",
                                 //url: "http://localhost:5187/api/Storiesapi/update",
 
 

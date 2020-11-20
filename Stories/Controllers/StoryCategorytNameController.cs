@@ -23,15 +23,15 @@ namespace Stories.Controllers
         }
 
         [HttpGet]
-        [Route("api/StoryCategorytName/getStoryCategoryNameByID]")]
+        [Route("api/StoryCategorytName/GetStoryCategoryNameByID")]
 
 
-        public string GetStoryCategoryNameByID(int id)
+        public response GetStoryCategoryNameByID(int id)
 
         {
 
             GetStories myStories = new GetStories();
-            string StoryCategoryName = myStories.GetStoryCategoryNameByID(id);
+            response StoryCategoryName = myStories.GetStoryCategoryNameByID(id);
 
             return StoryCategoryName;
 

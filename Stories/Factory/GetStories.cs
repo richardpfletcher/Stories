@@ -1191,7 +1191,7 @@ namespace Stories.Factory
             return response;
         }
 
-        public string GetStoryCategoryNameByID(int id)
+        public response GetStoryCategoryNameByID(int id)
         {
 
             var dataTable = new DataTable();
@@ -1223,15 +1223,24 @@ namespace Stories.Factory
                     int numberOfRecords = dataTable.Rows.Count;
                     response.result = numberOfRecords;
 
+                    StoryCategorytNameList list = new StoryCategorytNameList();
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        StoryCategorytName = row["StoryCategorytName"].ToString();
+                        storyCategorytName myprod = new storyCategorytName();
+                        myprod.ID = row["ID"].ToString();
+                        myprod.StoryCategorytName = row["StoryCategorytName"].ToString();
 
+
+                        list.storyCategorytNameLists.Add(myprod);
                     }
+                    response.AddStoryCategorytNameList(list);
+
+                    response.log.Add(numberOfRecords + " Records found");
+
 
                 }
             }
-            return StoryCategorytName;
+            return response;
         }
 
 

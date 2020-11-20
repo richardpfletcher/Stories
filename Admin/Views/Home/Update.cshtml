@@ -437,11 +437,13 @@
                             var apiUrl = "";
 
                             if (env == "Dev") {
-                                apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                                apiUrl = "http://localhost:5187/api/Storiesapi/update";
                             }
                             else {
 
-                                apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                                apiUrl = "http://api.jataka.fun/api/Storiesapi/update";
 
                             }
 
@@ -455,7 +457,7 @@
                             $.ajax({
                                 type: 'POST',
 
-                                url: apiUrl+"api/Storiesapi/update",
+                                url: apiUrl,
                                 //url: "http://localhost:5187/api/Storiesapi/update",
 
 

@@ -173,21 +173,21 @@ namespace Stories.Factory
             using (var client = new System.Net.Http.HttpClient())
             {
 
-
                 var env = ConfigurationManager.AppSettings["Enviroment"];
                 var settings = "";
-                var uri = new Uri("http://api.jataka.fun/api/StoryCategorytName/getStoryCategoryNameByID?id="+id);
+                var uri = new Uri("http://api.jataka.fun/api/StoryCategorytName/GetStoryCategoryNameByID?id=" + id);
 
                 if (env == "Dev")
                 {
                     settings = ConfigurationManager.AppSettings["LocalWebApi"];
-                     uri = new Uri("http://localhost:5187/api/StoryCategorytName/getStoryCategoryNameByID?id="+id);
+
+                     uri = new Uri("http://localhost:5187/api/StoryCategorytName/GetStoryCategoryNameByID?id=" + id);
 
                 }
                 else
                 {
                     settings = ConfigurationManager.AppSettings["ProductionWebApi"];
-                    uri = new Uri("http://api.jataka.fun/api/StoryCategorytName/getStoryCategoryNameByID?id="+id);
+                    uri = new Uri("http://api.jataka.fun/api/StoryCategorytName/GetStoryCategoryNameByID?id="+id);
 
 
                 }

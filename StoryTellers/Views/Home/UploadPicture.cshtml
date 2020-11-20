@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Uploaded File";
+}
+
+<h2>Uploaded File</h2>
+
+@{ 
+
+    string filename1 = (string)ViewData["filename1"];
+    filename1 = filename1 + " Uploaded";
+
+}
+
+ 
+@filename1

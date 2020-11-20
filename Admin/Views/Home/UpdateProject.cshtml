@@ -99,11 +99,14 @@
                     var apiUrl = "";
 
                     if (env == "Dev") {
-                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                        //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                        apiUrl = "http://localhost:5187/api/Project/getReadersSpecificStory";
+
                     }
                     else {
 
-                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                        //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                        apiUrl = "http://api.jataka.fun/api/Project/getReadersSpecificStory";
 
                     }
 
@@ -115,8 +118,8 @@
 
             $.ajax({
                 type: 'GET',
-
-                url: apiUrl+"api/Project/getReadersSpecificStory",
+                url: apiUrl,
+                //url: apiUrl+"api/Project/getReadersSpecificStory",
                 //url: "http://localhost:5187/api/Project/getReadersSpecificStory",
 
 
@@ -182,17 +185,22 @@
             var apiUrl = "";
 
             if (env == "Dev") {
-                apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
+                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
+                apiUrl = "http://localhost:5188/Home/Project";
+
             }
             else {
-                apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionAdminUrl"]';
+                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionAdminUrl"]';
+                apiUrl = "http://admin.jataka.fun/Home/Project";
+
             }
 
             //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
 
 
 
-            var url = apiUrl+"/Home/Project";
+            //var url = apiUrl + "/Home/Project";
+            var url = apiUrl;
             //var url = 'http://localhost:5188/Home/Project';
 
 
@@ -233,11 +241,25 @@
                 console.log('Thing was not saved to the database.');
             }
 
-            var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
+            
+            var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+            var apiUrl = "";
+
+            if (env == "Dev") {
+                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
+                apiUrl = "http://localhost:5188/Home/Project";
+
+            }
+            else {
+                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionAdminUrl"]';
+                apiUrl = "http://api.jataka.fun/Home/Project";
+
+            }
 
 
-
-            var url = apiUrl+"Home/Project";
+            var url = apiUrl;
+            //var url = apiUrl+"Home/Project";
             //var url = 'http://localhost:5188/Home/Project';
 
 

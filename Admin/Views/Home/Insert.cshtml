@@ -178,10 +178,10 @@
                         counter++;
                     });
 
-                    if (counter1 == 0)
-                    {
-                        alert('You must choose an animal type');
-                    }
+                    //if (counter1 == 0)
+                    //{
+                    //    alert('You must choose an animal type');
+                    //}
 
 
                     var jakataMaster = $("#jakataMaster").val();
@@ -229,15 +229,22 @@
                     var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
 
                     var apiUrl = "";
+                    var url = "";
 
-                    if (env == "Dev") {
-                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
-                    }
-                    else {
-                        
-                        apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                    var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
 
-                    }
+                            var apiUrl = "";
+
+                             if (env == "Dev") {
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                                 apiUrl = "http://localhost:5187/api/Storiesapi/insert";
+                            }
+                            else {
+
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                                 apiUrl = "http://api.jataka.fun/api/Storiesapi/insert";
+
+                            }
 
 
                     //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
@@ -251,7 +258,7 @@
                     $.ajax({
                         type: 'POST',
 
-                        url: apiUrl+"api/Storiesapi/insert",
+                        url: apiUrl,
                         //url: "http://localhost:5187/api/Storiesapi/insert",
 
 
