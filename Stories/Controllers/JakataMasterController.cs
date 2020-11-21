@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Stories.Factory;
 using System.Web.Http.Cors;
+using Stories.Models;
 
 namespace Stories.Controllers
 {
@@ -22,5 +23,21 @@ namespace Stories.Controllers
 
 
         }
+
+        [HttpPost]
+        [Route("api/JakataMasterype/updateJakata")]
+
+        public HttpResponseMessage updateJakata(JakataMaster myJakataMaster)
+        {
+
+            GetStories myStories = new GetStories();
+            int lastRecord = myStories.JakataMaster(myJakataMaster);
+            MyOder order = new MyOder();
+            order.MyData = lastRecord.ToString();
+            return Request.CreateResponse<MyOder>(HttpStatusCode.Created, order);
+
+
+        }
+
     }
 }

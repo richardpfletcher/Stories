@@ -10,8 +10,30 @@
         <h2>Getting started</h2>
         <p>
             The first phase is to captue all the Jataka stories and put them into a database. We then have a central location for all stories. This will allow us great flexibility.
+
+        </p>
+
+        <h2>Jakata Master</h2>
+        <p>
+         The Jataka master database keeps all this information. it assigns a jataka id and gives it a roman numeral equilivent number. The tile is also inserted into the database.
+
+        </p>
+
+        <p><a class="btn btn-info" href="/Home/JatakaMaster">Existing Jataka Story</a></p>
+        <p><a class="btn btn-info" href="/Home/NewJatakaMaster">New Jataka Story</a></p>
+
+        <p>
+            Next we add the Story, Animals. Moral and comments. The story is copied and paste into the story field.
+        <p>
+
+        <p>
             <a class="btn btn-info" href="/Home/Insert">Insert new story</a>
         </p>
+
+        <h2>Morals</h2>
+        <p>New and existing morals are kept in the database. </p>
+        <p><a class="btn btn-info" href="/Home/Morals">Existing Morals</a></p>
+        <p><a class="btn btn-info" href="/Home/NewMorals">New Morals</a></p>
 
     </div>
     <div class="col-md-6">
@@ -24,90 +46,22 @@
         <p>Keep up to date on each project. </p>
         <p><a class="btn btn-info" href="/Home/UpdateProject">Project Status</a></p>
 
-        <h2>Mother's Helpers</h2>
-        <p>Contributor Info </p>
-        <p><a class="btn btn-info" href="/Home/User">Existing Mother's Helpers</a></p>
-        <p><a class="btn btn-info" href="/Home/NewUser">New Mother's Helpers</a></p>
+        <h2>Story Tellers</h2>
+        <p> 
+        We can add or edit existing Story Tellers </p>
+        <p><a class="btn btn-info" href="/Home/User">Existing Story Tellers</a></p>
+        <p><a class="btn btn-info" href="/Home/NewUser">New Story Tellers</a></p>
+
+        <h2>Animals</h2>
+        <p> We can add or edit existing animals </p>
+        <p><a class="btn btn-info" href="/Home/Animals">Existing Animals</a></p>
+        <p><a class="btn btn-info" href="/Home/NewAnimals">New Animals</a></p>
 
     </div>
 
 
 
-    @using (Html.BeginForm("UploadPicture", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-
-
-        <table style="width: 55%">
-
-            <tr>
-                <td>
-                    <h2>Upload Your File</h2>
-                </td>
-
-            </tr>
-
-            <tr>
-                <td>
-                    <p>Upload all your precious work here. </p>
-                </td>
-
-            </tr>
-
-            <tr>
-                <td>
-                    @Html.Label("Mothere's Helper")
-                </td>
-
-            </tr>
-            <tr>
-
-                <td>
-                    @Html.DropDownList("newReader", (IEnumerable<SelectListItem>)ViewData["newReadersData"])
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    @Html.Label("Comments")
-                </td>
-
-            </tr>
-            <tr>
-
-                <td>
-
-                    <textarea name="comments" id="comments" cols="20" rows="5"></textarea>
-                </td>
-            </tr>
-
-
-        </table>
-
-
-        string idpic = (string)ViewData["id"];
-
-
-
-        <input type="file" id="FileData" name="FileData" />
-
-        <input type="submit" id="UpdatePhoto" value="Upload File" />
-
-        @*<input type="hidden" id="idPhoto" name="idPhoto" value="@idpic" />*@
-        <input type="hidden" id="idPhoto" name="idPhoto"  />
-
-    }
-
+   
 
 </div>
 
-<script type="text/javascript">
-    $(function () {
-        $("#newReader").change(function () {
-            var selectedText = $(this).find("option:selected").text();
-            var selectedValue = $(this).val();
-            document.getElementById('idPhoto').value = selectedValue;
-          
-
-        });
-    });
-</script>

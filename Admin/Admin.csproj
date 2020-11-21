@@ -322,6 +322,12 @@
     <Content Include="Views\Home\User.cshtml" />
     <Content Include="Views\Home\UpdateUser.cshtml" />
     <Content Include="Views\Home\NewUser.cshtml" />
+    <Content Include="Views\Home\Animals.cshtml" />
+    <Content Include="Views\Home\NewAnimals.cshtml" />
+    <Content Include="Views\Home\Morals.cshtml" />
+    <Content Include="Views\Home\NewMorals.cshtml" />
+    <Content Include="Views\Home\JatakaMaster.cshtml" />
+    <Content Include="Views\Home\NewJatakaMaster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

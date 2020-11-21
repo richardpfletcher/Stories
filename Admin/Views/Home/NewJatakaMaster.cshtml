@@ -1,0 +1,147 @@
+﻿@model Stories.Models.Story
+
+@{
+    ViewBag.Title = "New Animal";
+}
+
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+
+
+<h2> Insert New Animal</h2>
+<div class="col-md-4">
+
+    <table style="width: 55%">
+
+
+
+        <tr>
+            <td>
+                @Html.Label("New Jataka Story")
+            </td>
+
+        </tr>
+        <tr>
+
+            <td>
+
+
+
+                @{
+
+                    <input id="title" name="title" />
+
+                }
+
+
+            </td>
+        </tr>
+
+    </table>
+    <p>
+        <input type="hidden" id="id" name="id" value="0" />
+        <input type="button" id="Update" value="Save" />
+
+    </p>
+
+</div>
+
+<script type="text/javascript">
+
+                    $(function () {
+
+                        $("#Update").click(function () {
+
+
+
+                            var idslist = "";
+                            var counter = 0;
+                            var counter1 = 0;
+                            var motherhelpers = "";
+
+                            var id = document.getElementById('id').value;
+                            var title = $("#title").val();
+
+                            if (title == "") {
+                                alert('Title is required');
+                                document.getElementById('title').focus();
+                                return;
+                            }
+
+
+
+
+                            var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+                            var apiUrl = "";
+
+                            if (env == "Dev") {
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                                apiUrl = "http://localhost:5187/api/JakataMasterype/updateJakata";
+                            }
+                            else {
+
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                                apiUrl = "http://api.jataka.fun/api/JakataMasterype/updateJakata";
+
+                            }
+
+                            //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                            var Roman = "";
+                            var Comments = "";
+                            var StoryImported = "0";
+
+
+                            var resultJSON = {
+                                JakataID: id, Title: title, Roman: Roman, Comments: Comments, StoryImported: StoryImported};
+
+                            $.ajax({
+                                type: 'POST',
+
+                                //url: apiUrl + "api/MothersHelpers/updateRoles",
+                                url: apiUrl,
+                                //url: "http://localhost:5187/api/Storiesapi/update",
+
+
+                                data: resultJSON,
+                                dataType: "json",
+
+
+                                success: function (data, status, xhr) {
+                                   alertify.success("Mother Helper Roles Saved");
+
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    alert(xhr.status);
+                                    alert(thrownError);
+                                }
+
+
+
+                            });
+
+                            return;
+
+                        });
+
+                        //
+
+                    });
+</script>
+
+
+
+
+
+
+
+

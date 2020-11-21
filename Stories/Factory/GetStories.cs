@@ -194,6 +194,207 @@ namespace Stories.Factory
 
         }
 
+
+        public int updateAnimal(int id, string AnimalType)
+        {
+            
+            int total = 0;
+
+            if (id > 0)
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@id", id);
+                p.Add("@AnimalType", AnimalType);
+
+
+                var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+                string strConnString = conString.ConnectionString;
+
+
+                using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+                {
+                    sqlConnection.Open();
+                    const string storedProcedure = "dbo.updateAnimal";
+                    var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                    foreach (var el in values)
+                    {
+                        total = el.totalReceipesInt;
+                    }
+                }
+
+                return total;
+            }
+            else
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@AnimalType", AnimalType);
+
+
+                var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+                string strConnString = conString.ConnectionString;
+
+
+                using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+                {
+                    sqlConnection.Open();
+                    const string storedProcedure = "dbo.insertAnimal";
+                    var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                    foreach (var el in values)
+                    {
+                        total = el.totalReceipesInt;
+                    }
+                }
+
+                return total;
+
+            }
+
+
+
+
+
+
+        }
+
+        public int updateMoralType(int id, string MoralType)
+        {
+
+            int total = 0;
+
+            if (id > 0)
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@id", id);
+                p.Add("@MoralType", MoralType);
+
+
+                var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+                string strConnString = conString.ConnectionString;
+
+
+                using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+                {
+                    sqlConnection.Open();
+                    const string storedProcedure = "dbo.updateMoraltype";
+                    var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                    foreach (var el in values)
+                    {
+                        total = el.totalReceipesInt;
+                    }
+                }
+
+                return total;
+            }
+            else
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@MoralType", MoralType);
+
+
+                var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+                string strConnString = conString.ConnectionString;
+
+
+                using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+                {
+                    sqlConnection.Open();
+                    const string storedProcedure = "dbo.InserMoralType";
+                    var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                    foreach (var el in values)
+                    {
+                        total = el.totalReceipesInt;
+                    }
+                }
+
+                return total;
+
+            }
+
+
+
+
+
+
+        }
+
+        public int JakataMaster(JakataMaster myJakataMaster)
+        {
+
+            int total = 0;
+
+            if (myJakataMaster.JakataID > 0)
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@JakataID", myJakataMaster.JakataID);
+                p.Add("@Title", myJakataMaster.Title);
+
+
+                var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+                string strConnString = conString.ConnectionString;
+
+
+                using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+                {
+                    sqlConnection.Open();
+                    const string storedProcedure = "dbo.updateJakataMaster";
+                    var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                    foreach (var el in values)
+                    {
+                        total = el.totalReceipesInt;
+                    }
+                }
+
+                return total;
+            }
+            else
+            {
+                var p = new DynamicParameters();
+
+                myJakataMaster.Comments = "";
+                myJakataMaster.Roman = "";
+
+                p.Add("@Title", myJakataMaster.Title);
+                p.Add("@JakataID", myJakataMaster.JakataID);
+                p.Add("@Comments", myJakataMaster.Comments);
+                p.Add("@StoryImported", myJakataMaster.StoryImported);
+
+                p.Add("@Roman", myJakataMaster.Roman);
+
+
+
+
+
+                var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+                string strConnString = conString.ConnectionString;
+
+
+                using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+                {
+                    sqlConnection.Open();
+                    const string storedProcedure = "dbo.InsertJakataMaster";
+                    var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                    foreach (var el in values)
+                    {
+                        total = el.totalReceipesInt;
+                    }
+                }
+
+                return total;
+
+            }
+
+
+
+
+
+
+        }
+
         /// <summary>
         /// Inserts a new account
         /// </summary>

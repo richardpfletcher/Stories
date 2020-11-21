@@ -36,6 +36,17 @@ namespace Stories.Models
 
     }
 
+    public class JakataMaster
+    {
+        public int ID { get; set; }
+        public int JakataID { get; set; }
+        public string Comments { get; set; }
+        public string Roman { get; set; }
+        public string Title { get; set; }
+        public int StoryImported { get; set; }
+      
+    }
+
     public class useRoles
     {
         public string userName { get; set; }

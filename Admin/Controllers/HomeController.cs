@@ -683,6 +683,131 @@ namespace Stories.Controllers
             return View();
         }
 
+        public ActionResult NewAnimals()
+        {
+            //ViewBag.Message = "Your app description page.";
+            //DropdownModel model = new DropdownModel();
+            //GetLookups myGetLookups = new GetLookups();
+            //GetStories myGetStories = new GetStories();
+            //MothersHelpersSpecificList myMothersHelpersSpecificList = new MothersHelpersSpecificList();
+            //myMothersHelpersSpecificList = myGetStories.GetMothersHelpersTypeSpecific(0);
+            //Story myStory = new Story();
+
+            //model = myGetLookups.GetMothersHelpersType();
+            //myStory.MothersHelpersTypeCombo = model;
+
+            return View();
+
+
+        }
+
+
+        public ActionResult Animals()
+        {
+            ViewBag.Message = "Your app description page.";
+
+            DropdownModel model = new DropdownModel();
+            GetLookups myGetLookups = new GetLookups();
+            model = myGetLookups.GeLookupAnimal();
+
+
+
+            //ViewData["animalTypeData"] = model.items;
+
+
+
+            //model = myGetLookups.GeLookupCatUsers(0);
+            //model.items.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
+
+            ViewData["newReadersData"] = model.items;
+
+
+
+            return View();
+        }
+
+        public ActionResult NewMorals()
+        {
+            ViewBag.Message = "Your app description page.";
+            //DropdownModel model = new DropdownModel();
+            //GetLookups myGetLookups = new GetLookups();
+            //GetStories myGetStories = new GetStories();
+            //MothersHelpersSpecificList myMothersHelpersSpecificList = new MothersHelpersSpecificList();
+            //myMothersHelpersSpecificList = myGetStories.GetMothersHelpersTypeSpecific(0);
+            //Story myStory = new Story();
+
+            //model = myGetLookups.GetMothersHelpersType();
+            //myStory.MothersHelpersTypeCombo = model;
+
+            return View();
+
+
+        }
+
+
+        public ActionResult Morals()
+        {
+            ViewBag.Message = "Your app description page.";
+
+            DropdownModel model = new DropdownModel();
+            GetLookups myGetLookups = new GetLookups();
+            model = myGetLookups.GeLookupMoral();
+
+            //ViewData["animalTypeData"] = model.items;
+
+
+
+            //model = myGetLookups.GeLookupCatUsers(0);
+            //model.items.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
+
+            ViewData["newReadersData"] = model.items;
+
+
+
+            return View();
+        }
+
+        public ActionResult NewJatakaMaster()
+        {
+            ViewBag.Message = "Your app description page.";
+            //DropdownModel model = new DropdownModel();
+            //GetLookups myGetLookups = new GetLookups();
+            //GetStories myGetStories = new GetStories();
+            //MothersHelpersSpecificList myMothersHelpersSpecificList = new MothersHelpersSpecificList();
+            //myMothersHelpersSpecificList = myGetStories.GetMothersHelpersTypeSpecific(0);
+            //Story myStory = new Story();
+
+            //model = myGetLookups.GetMothersHelpersType();
+            //myStory.MothersHelpersTypeCombo = model;
+
+            return View();
+
+
+        }
+
+
+        public ActionResult JatakaMaster()
+        {
+            ViewBag.Message = "Your app description page.";
+
+            DropdownModel model = new DropdownModel();
+            GetLookups myGetLookups = new GetLookups();
+            model = myGetLookups.GeLookupJakataMaster();
+
+            //ViewData["animalTypeData"] = model.items;
+
+
+
+            //model = myGetLookups.GeLookupCatUsers(0);
+            //model.items.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
+
+            ViewData["newReadersData"] = model.items;
+
+
+
+            return View();
+        }
+
         public ActionResult BookGenerator()
         {
             ViewBag.Message = "Your app description page.";

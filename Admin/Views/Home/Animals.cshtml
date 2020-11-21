@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "Edit existing Animal";
+}
+
+<h2>Edit existing Animal</h2>
+
+
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+
+
+
+<table style="width: 55%">
+
+
+
+    <tr>
+        <td>
+            @Html.Label("Animals")
+        </td>
+
+    </tr>
+    <tr>
+
+        <td>
+            @Html.DropDownList("newReader", (IEnumerable<SelectListItem>)ViewData["newReadersData"])
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <input id="animal" name="animal" />
+        </td>
+
+    </tr>
+
+</table>
+<input type="hidden" id="id" name="id" />
+<input type="button" id="Update" value="Save" />
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#newReader").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            document.getElementById('id').value = selectedValue;
+            document.getElementById('animal').value = selectedText;
+
+
+        });
+    });
+
+
+</script>
+
+
+<script type="text/javascript">
+
+                    $(function () {
+
+                        $("#Update").click(function () {
+
+
+
+                            var idslist = "";
+                            var counter = 0;
+                            var counter1 = 0;
+                            var motherhelpers = "";
+
+                            var id = document.getElementById('id').value;
+                            var animal = $("#animal").val();
+
+                            if (animal == "") {
+                                alert('Animal name is required');
+                                document.getElementById('animal').focus();
+                                return;
+                            }
+
+
+
+
+                            var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+                            var apiUrl = "";
+
+                            if (env == "Dev") {
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                                apiUrl = "http://localhost:5187/api/AnimalType/updateAnimal";
+                            }
+                            else {
+
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                                apiUrl = "http://api.jataka.fun/api/AnimalType/updateAnimal";
+
+                            }
+
+                            //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+
+
+                            var resultJSON = {
+                                ID: id, AnimalType: animal,};
+
+                            $.ajax({
+                                type: 'POST',
+
+                                //url: apiUrl + "api/MothersHelpers/updateRoles",
+                                url: apiUrl,
+                                //url: "http://localhost:5187/api/Storiesapi/update",
+
+
+                                data: resultJSON,
+                                dataType: "json",
+
+
+                                success: function (data, status, xhr) {
+                                   alertify.success("Mother Helper Roles Saved");
+
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    alert(xhr.status);
+                                    alert(thrownError);
+                                }
+
+
+
+                            });
+
+                            return;
+
+                        });
+
+                        //
+
+                    });
+</script>
+
+
+
+
+
+
