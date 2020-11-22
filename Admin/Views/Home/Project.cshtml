@@ -516,6 +516,8 @@
 
                                     var apiUrl = "";
 
+                                    var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
                                     if (env == "Dev") {
                                         //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
                                         apiUrl = "http://localhost:5187/api/Project/save";
@@ -524,6 +526,7 @@
 
                                         //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
                                         apiUrl = "http://api.jataka.fun/api/Project/save";
+                                        
 
                                     }
                                     //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
@@ -614,6 +617,8 @@
 
 
                                     var apiUrl = "";
+                                    var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
 
                                     if (env == "Dev") {
                                         //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
@@ -650,7 +655,7 @@
 
                                              var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
 
-                                           
+
 
                                             var apiUrl = "";
 
@@ -662,7 +667,7 @@
                                         else {
                                             //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionAdminUrl"]';
                                              apiUrl = "http://api.jataka.fun/api/Project/save";
-                                             
+
                                         }
 
                                             //var LocalAdminUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalAdminUrl"]';
