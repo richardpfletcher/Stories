@@ -66,6 +66,7 @@ namespace Stories.Models
         public string PostedString { get; set; }
 
         public DropdownModel Posted { get; set; }
+        public string postedDate { get; set; }
         public string userName { get; set; }
         public string Mode { get; set; }
 

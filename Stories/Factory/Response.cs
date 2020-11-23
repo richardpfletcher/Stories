@@ -265,6 +265,7 @@ namespace Stories.Factory
         public string Dance { get; set; }
         public string Admin { get; set; }
         public string Posted { get; set; }
+        public string postedDate { get; set; }
         public string illustrationStartDate { get; set; }
         public string illustrationStopDate { get; set; }
 
@@ -277,6 +278,8 @@ namespace Stories.Factory
         public string DanceStartDate { get; set; }
 
         public string DanceStopDate { get; set; }
+
+        
         public string Mode { get; set; }
 
 

@@ -945,6 +945,7 @@ namespace Stories.Factory
                         myprod.MusicStopDate = row["MusicStoptDate"].ToString();
                         myprod.DanceStartDate = row["DanceStartDate"].ToString();
                         myprod.DanceStopDate = row["DanceStopDate"].ToString();
+                        myprod.postedDate = row["postedDate"].ToString();
 
 
                         list.readersStory.Add(myprod);

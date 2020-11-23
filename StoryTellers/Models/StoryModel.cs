@@ -63,6 +63,7 @@ namespace Stories.Models
         public string MusicStoptDate { get; set; }
         public string DanceStartDate { get; set; }
         public string DanceStopDate { get; set; }
+        public string postedDate { get; set; }
         public string PostedString { get; set; }
 
         public DropdownModel Posted { get; set; }

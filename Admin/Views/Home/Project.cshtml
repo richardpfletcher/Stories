@@ -316,6 +316,7 @@
                                         <tr>
                                             <td>
                                                 @Html.Label("Posted to You Tube")
+
                                             </td>
 
                                         </tr>
@@ -326,6 +327,14 @@
                                                 @Html.DropDownList("Posted", (IEnumerable<SelectListItem>)ViewData["postedData"])
 
                                             </td>
+                                           
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Posted Date
+                                                <input type="text" readonly id="postedDate" value="@Model.postedDate" size="10" maxlength="9" class="form-control">
+                                            </td>
+
                                         </tr>
 
 
@@ -666,7 +675,7 @@
                                         }
                                         else {
                                             //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionAdminUrl"]';
-                                             apiUrl = "http://api.jataka.fun/api/Project/save";
+                                             apiUrl = "http://admin.jataka.fun/Home/Project";
 
                                         }
 

@@ -876,9 +876,10 @@ namespace Stories.Factory
                     modelStory.MusicStoptDate = el.Element("MusicStopDate").Value; ;
                     modelStory.DanceStartDate = el.Element("DanceStartDate").Value; ;
                     modelStory.DanceStopDate = el.Element("DanceStopDate").Value; ;
+                    modelStory.postedDate = el.Element("postedDate").Value;
 
 
-    }
+                }
 
 
 
