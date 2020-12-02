@@ -186,6 +186,18 @@ namespace Stories.Controllers
 
 
             model = myGetLookups.GeLookupStorySource();
+
+            
+            var categorytName = myStory.StoryCategorytName.ToString();
+
+            foreach (SelectListItem s in model.items)
+            {
+                if (s.Value == categorytName)
+                {
+                    s.Selected = true;
+
+                }
+            }
             ViewData["storySourceData"] = model.items;
 
             model = myGetLookups.GeLookupJakataMaster();
@@ -466,6 +478,19 @@ namespace Stories.Controllers
             ViewData["jakataMasterData"] = model.items;
 
             model = myGetLookups.GeLookupStorySource();
+            var categorytName = myStory.StoryCategorytName.ToString();
+
+            foreach (SelectListItem s in model.items)
+            {
+                if (s.Value == categorytName)
+                {
+                    s.Selected = true;
+
+                }
+            }
+
+
+
             ViewData["storySourceData"] = model.items;
 
             model = myGetLookups.GeLookupJakataMaster();

@@ -194,6 +194,40 @@ namespace Stories.Factory
 
         }
 
+        public int DeleteURL(youTubeModel myStory)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@JakataID", myStory.JakataID);
+            p.Add("@UseID", myStory.UseID);
+
+
+            var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+            string strConnString = conString.ConnectionString;
+
+            int total = 0;
+
+            using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+            {
+                sqlConnection.Open();
+                const string storedProcedure = "dbo.DeleteURL";
+                var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                foreach (var el in values)
+                {
+                    total = el.totalReceipesInt;
+                }
+            }
+
+            return total;
+
+
+
+
+
+
+        }
+
+
 
         public int updateAnimal(int id, string AnimalType)
         {

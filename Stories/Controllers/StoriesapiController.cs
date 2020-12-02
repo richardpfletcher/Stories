@@ -54,6 +54,24 @@ namespace Stories.Controllers
         }
 
 
+        [HttpPost]
+        [Route("api/Storiesapi/deleteurl")]
+
+        public HttpResponseMessage DeleteURL(youTubeModel myYoutube)
+        {
+            GetStories myStories = new GetStories();
+
+
+
+            int lastRecord = myStories.DeleteURL(myYoutube);
+            MyOder order = new MyOder();
+            order.MyData = lastRecord.ToString();
+            return Request.CreateResponse<MyOder>(HttpStatusCode.Created, order);
+
+
+        }
+
+
 
         [HttpPost]
         [Route("api/Storiesapi/update")]

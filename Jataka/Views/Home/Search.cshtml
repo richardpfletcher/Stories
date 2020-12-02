@@ -5,7 +5,7 @@
 
 @model Stories.Models.Story
 
-<h2>Search</h2>
+
 
 <!DOCTYPE html>
 
@@ -37,6 +37,7 @@
 
 </head>
 
+<h2> <input type="button" id="Search" value="Search" /></h2>
 
 <div class="container">
 
@@ -55,10 +56,13 @@
 
 
                         <div>
-
+                           
 
 
                             <table style="width: 55%">
+
+                              
+
                                 <tr>
                                     <td>
                                         @Html.Label("Title")
@@ -77,7 +81,7 @@
                             <table style="width: 55%">
                                 <tr>
                                     <td>
-                                        @Html.Label("New Reader")
+                                        @Html.Label("Story Teller")
                                     </td>
 
                                 </tr>
@@ -95,7 +99,7 @@
                             <table style="width: 55%">
                                 <tr>
                                     <td>
-                                        @Html.Label("Story Category")
+                                        @Html.Label("Source")
                                     </td>
 
                                 </tr>
@@ -109,12 +113,12 @@
 
 
                             </table>
-                            
+
 
                             <table style="width: 55%">
                                 <tr>
                                     <td>
-                                        @Html.Label("Animal Type")
+                                        @Html.Label("Animal")
                                     </td>
 
                                 </tr>
@@ -148,7 +152,7 @@
                                     <table style="width: 55%">
                                         <tr>
                                             <td>
-                                                @Html.Label("Moral Type")
+                                                @Html.Label("Moral")
                                             </td>
 
                                         </tr>
@@ -160,15 +164,7 @@
 
                                         </tr>
 
-                                        <tr>
-                                            <td>
-
-                                                <input type="button" id="Search" value="Search" />
-
-
-                                            </td>
-
-                                        </tr>
+                                      
                                     </table>
 
 
@@ -179,7 +175,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <div>
-                                    Copy and Paste story below
+                                   
                                     <textarea id="elmeStory" name="elmeStory" rows="30" cols="90" style="width: 100%">
 		  
 			</textarea>
