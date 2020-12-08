@@ -1,169 +1,238 @@
 ﻿
+@model Stories.Models.Story
+
 @{
 
     Stories.Models.Story myStories = new Stories.Models.Story();
     myStories = (Stories.Models.Story)ViewData["myStory"];
+
+
 }
 
-<div class="container">
-
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-        <li><a data-toggle="tab" href="#menu1">YouTube</a></li>
-
-        <li><a data-toggle="tab" href="#menu3">PDF Generator</a></li>
-        <li><a data-toggle="tab" href="#menu4">Read Chapter hello</a></li>
-    </ul>
-
-    <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
+<link href="~/Content/Site.css?seed=7" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-            <div id="exTab1" class="container">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-                <div class="page-wrapper">
-                    <div class="tab-content clearfix">
-                        <div class="tab-pane active" id="1a">
-                            <div class="row">
-                                <div class="col-sm-4">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+<script src="~/Scripts/jquery.redirect.js"></script>
+
+<div id="centerdivResults">
+    <div class="container">
+
+
+        <div class="float-left">
+            <p class="site-title">@Html.ActionLink("Jataka Tales", "Index", "Home")</p>
+        </div>
+
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+            <li><a data-toggle="tab" href="#menu1">YouTube</a></li>
+
+            <li><a data-toggle="tab" href="#menu3">PDF Generator</a></li>
+            <li><a data-toggle="tab" href="#menu4">Read Chapter </a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+
+
+                <div id="exTab1" class="container">
+
+                    <div class="page-wrapper">
+                        <div class="tab-content clearfix">
+                            <div class="tab-pane active" id="1a">
+                                <div class="row">
+                                    <div class="col-sm-4">
 
 
 
-                                    <div>
+                                        <div>
 
 
 
-                                        <table style="width: 55%">
-                                            <tr>
-                                                <td>
-                                                    @Html.Label("Title")
-                                                </td>
-
-                                            </tr>
-                                            <tr>
-
-                                                <td>
-                                                    @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"])
-                                                </td>
-
-                                            </tr>
-                                        </table>
-
-                                        <table style="width: 55%">
-                                            <tr>
-                                                <td>
-                                                    @Html.Label("Animal Type")
-                                                </td>
-
-                                            </tr>
-                                            <tr>
-
-                                                <td>
-
-                                                    @for (int i = 0; i < myStories.animalCombo.items.Count; i++)
-                                                    {
+                                            <table style="width: 55%">
                                                 <tr>
                                                     <td>
-                                                        @Html.CheckBoxFor(m => myStories.animalCombo.items[i].Selected)
-
-                                                        @*@Html.CheckBoxFor(m => myStories.animalCombo.items[i].Selected, new { @class = "animalCombo" })*@
-
-
-                                                        @Html.DisplayFor(m => myStories.animalCombo.items[i].Text, new { @class = "animalCombo" })
-                                                        @Html.HiddenFor(m => myStories.animalCombo.items[i].Value, new { @class = "animalCombo" })
-
-                                                        @Html.HiddenFor(m => myStories.animalCombo.items[i].Text, new { @class = "animalCombo" })
-
-
-
+                                                        @Html.Label("Title")
                                                     </td>
+
+                                                </tr>
+                                                <tr>
+
                                                     <td>
+                                                        @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"], new { @disabled = "" })
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        @Html.Label("Readers")
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td>
+
+                                                        @Html.TextBoxFor(model => Model.UserName, new { id = "userName" })
+
+
                                                     </td>
                                                 </tr>
+                                            </table>
+
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        @Html.Label("Story Category")
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td>
+
+                                                        @Html.TextBoxFor(model => Model.StoryCategorytNameString, new { id = "StoryCategorytNameString" })
 
 
-                                            }
+                                                    </td>
+                                                </tr>
+                                            </table>
 
+                                            <table style="width: 55%">
+                                                <tr>
+                                                    <td>
+                                                        @Html.Label("Animal Type")
+                                                    </td>
 
-                                                </table>
+                                                </tr>
+                                                <tr>
 
+                                                    <td>
 
-
-
-                                                <table style="width: 55%">
+                                                        @for (int i = 0; i < myStories.animalCombo.items.Count; i++)
+                                                        {
                                                     <tr>
                                                         <td>
-                                                            @Html.Label("Moral Type")
+                                                            @Html.CheckBoxFor(m => myStories.animalCombo.items[i].Selected, new { @disabled = "" })
+
+
+
+                                                            @Html.DisplayFor(m => myStories.animalCombo.items[i].Text, new { @class = "animalCombo" })
+                                                            @Html.HiddenFor(m => myStories.animalCombo.items[i].Value, new { @class = "animalCombo" })
+
+                                                            @Html.HiddenFor(m => myStories.animalCombo.items[i].Text, new { @class = "animalCombo" })
+
+
+
                                                         </td>
-
-                                                    </tr>
-                                                    <tr>
-
                                                         <td>
-                                                            @Html.DropDownList("moralType1", (IEnumerable<SelectListItem>)ViewData["moralTypeData"])
                                                         </td>
-
                                                     </tr>
-                                                </table>
-                                                <table style="width: 55%">
-                                                    <tr>
-                                                        <td>
-                                                            @Html.Label("Story Source")
-                                                        </td>
 
-                                                    </tr>
-                                                    <tr>
-
-                                                        <td>
-                                                            @Html.DropDownList("storySource", (IEnumerable<SelectListItem>)ViewData["storySourceData"])
-                                                        </td>
-
-                                                    </tr>
-                                                </table>
-
-
-                                            </div>
-
-                                            <p>
-                                                @{
-                                                    int pageNum = (int)ViewData["total"];
-                                                    var current = ViewData["currentPage"];
-                                                    int currentPage = Convert.ToInt16(current);
-                                                    var searchResults = Convert.ToString(ViewData["searchResults"]);
-
-                                                    //int currentPage = (int)ViewData["currentPage"];
-
-                                                    if (pageNum <= 0)
-                                                    {
-                                                        <input type="button" id="Previous" onclick="previous()" disabled="true" value="Previous" />
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="button" id="Previous" onclick="previous()" disabled="false" value="Previous" />
-                                                    }
-
-                                                    if (pageNum > 1)
-                                                    {
-                                                        <input type="button" id="Next" onclick="next()" value="Next" />
-
-                                                    }
-
-                                                    //@ViewData["totalRecipesFound"]
-
-                                                    <input type="hidden" id="numberOfPages" name="numberOfPages" value="@pageNum" />
-                                                    <input type="hidden" id="currentPage" name="currentPage" value="@currentPage" />
-                                                    <input type="hidden" id="searchResults" name="searchResults" value="@searchResults" />
 
                                                 }
 
 
-                                            </p>
+                                                    </table>
 
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div>
-                                                Copy and Paste story below
-                                                <textarea id="elmeStory" name="elmeStory" rows="30" cols="90" style="width: 100%">
+
+
+
+                                                    <table style="width: 55%">
+                                                        <tr>
+                                                            <td>
+                                                                @Html.Label("Moral Type")
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+
+                                                            <td>
+                                                                @Html.DropDownList("moralType1", (IEnumerable<SelectListItem>)ViewData["moralTypeData"], new { @disabled = "" })
+                                                            </td>
+
+                                                        </tr>
+                                                    </table>
+
+
+
+                                                </div>
+
+                                                <p>
+                                                    @{
+                                                        int pageNum = (int)ViewData["total"];
+                                                        var current = ViewData["currentPage"];
+                                                        int currentPage = Convert.ToInt16(current);
+                                                        var searchResults = Convert.ToString(ViewData["searchResults"]);
+                                                        string present = current + " of " + pageNum;
+                                                        var userIdPost = ViewData["userIdPost"];
+
+
+
+
+                                                        //int currentPage = (int)ViewData["currentPage"];
+
+                                                        if (currentPage <= 1)
+                                                        {
+                                                            <input type="button" hidden="true" id="Previous" onclick="previous()" value="Previous" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="button" id="Previous" onclick="previous()" value="Previous" />
+                                                        }
+
+                                                        if (currentPage >= 0)
+                                                        {
+
+                                                            <input type="button" id="Next" onclick="next()" value="Next" />
+
+
+
+                                                        }
+
+
+
+
+                                                        <input type="hidden" id="numberOfPages" name="numberOfPages" value="@pageNum" />
+                                                        <input type="hidden" id="currentPage" name="currentPage" value="@currentPage" />
+                                                        <input type="hidden" id="searchResults" name="searchResults" value="@searchResults" />
+                                                        <input type="hidden" id="userIdPost" name="userIdPost" value="@userIdPost" />
+
+
+
+                                                    }
+
+                                                    @present
+
+                                                </p>
+
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div>
+                                                    Copy and Paste story below
+                                                    <textarea id="elmeStory" readonly="true" name="elmeStory" rows="30" cols="90" style="width: 100%">
 
 @{
 
@@ -171,17 +240,19 @@
 
     menu = System.Web.HttpUtility.HtmlDecode(menu);
       @menu
+
+    
 }
 
 
  </textarea>
 
 
-                                            </div>
+                                                </div>
 
-                                            <div>
-                                                Comments
-                                                <textarea id="comments" name="elmeStory" rows="15" cols="90" style="width: 100%">
+                                                <div>
+                                                    Comments
+                                                    <textarea id="comments" readonly="true" name="elmeStory" rows="15" cols="90" style="width: 100%">
 
 
                      @{
@@ -192,59 +263,61 @@
                          }
 
  </textarea>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
                         </div>
 
+
+
+
                     </div>
 
 
+                    <div id="menu1" class="tab-pane fade">
 
-
-                </div>
-                <div id="menu1" class="tab-pane fade">
-
-                    <div>
+                        <div>
 
 
 
 
-                        <p>
+                            <p>
 
-                            @for (int i = 0; i < myStories.youTubeCombo.items.Count; i++)
-                            {
-                                <iframe width="420" height="345"
-                                        src=@myStories.youTubeCombo.items[i].Text></iframe>
+                                @for (int i = 0; i < myStories.youTubeCombo.items.Count; i++)
+                                {
+                                    <iframe width="420" height="345"
+                                            src=@myStories.youTubeCombo.items[i].Text></iframe>
 
-                            }
+                                }
 
 
 
 
 
-                        </p>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div id="menu2" class="tab-pane fade">
-                    <h3>Create Customm PDF</h3>
+                    <div id="menu2" class="tab-pane fade">
+                        <h3>Create Customm PDF</h3>
 
-                </div>
-                <div id="menu3" class="tab-pane fade">
+                    </div>
+                    <div id="menu3" class="tab-pane fade">
 
-                    <input type="button" onclick="PDF()" name="PDF" id="PDF" value="Create custom receipe book" />
+                        <input type="button" onclick="PDF()" name="PDF" id="PDF" value="Create custom receipe book" />
 
 
-                </div>
+                    </div>
 
-                <div id="menu4" class="tab-pane fade">
+                    <div id="menu4" class="tab-pane fade">
 
-                    <div>
+                        <div>
 
-                        <textarea id="elmeStory" name="elmeStory" rows="30" cols="90" style="width: 100%">
+                            <textarea id="elmeStory" readonly="true" name="elmeStory" rows="30" cols="90" style="width: 100%">
 
 @{
 
@@ -258,7 +331,12 @@
  </textarea>
 
 
-                    </div>
+                        </div>
 
+                    </div>
                 </div>
+
+            </div>
+        </div>
+
 

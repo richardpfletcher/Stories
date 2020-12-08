@@ -627,7 +627,13 @@ namespace Stories.Controllers
 
             GetStories myGetStories = new GetStories();
             var email = myGetStories.GetMothersEmail(Convert.ToInt16(userID));
-            ViewData["email"] = email;
+
+            //if (email =="")
+            //{
+            //    email = "Enter the email address";
+            //}
+            
+            ViewData["email"] = email.ToString();
             string userName = base.Request.Form["userName"];
             //ViewData["userName"] = userName;
 
