@@ -328,6 +328,7 @@
     <Content Include="Views\Home\NewMorals.cshtml" />
     <Content Include="Views\Home\JatakaMaster.cshtml" />
     <Content Include="Views\Home\NewJatakaMaster.cshtml" />
+    <Content Include="Views\Shared\ProjectResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -33,7 +33,12 @@
 
 <script src="~/Scripts/jquery.redirect.js"></script>
 
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=499578783419700&autoLogAppEvents=1" nonce="Q799m1XR"></script>
+
 <div id="centerdivResults">
+
+
     <div class="container">
 
 
@@ -180,59 +185,78 @@
 
                                                 </div>
 
-                                                <p>
-                                                    @{
-                                                        int pageNum = (int)ViewData["total"];
-                                                        var current = ViewData["currentPage"];
-                                                        int currentPage = Convert.ToInt16(current);
-                                                        var searchResults = Convert.ToString(ViewData["searchResults"]);
-                                                        string present = current + " of " + pageNum;
-                                                        var userIdPost = ViewData["userIdPost"];
+
+
+
+                                        <p>
+                                            @{
+                                                int pageNum = (int)ViewData["total"];
+                                                var current = ViewData["currentPage"];
+                                                int currentPage = Convert.ToInt16(current);
+                                                var searchResults = Convert.ToString(ViewData["searchResults"]);
+                                                string present = current + " of " + pageNum;
+                                                var userIdPost = ViewData["userIdPost"];
+
+                                                var res = searchResults.Split('|');
+                                                var story = res[currentPage - 1];
+
+
+                                                @*<iframe src="https://www.facebook.com/plugins/like.php?href=http://jataka.fun/Home/SearchResults?searchResults=+@story|&page=1&userIdPost=0"
+                                                        scrolling="no" frameborder="0" style="border: none; width: 450px; height: 80px"></iframe>*@
+
+
+                                                <iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fjataka.fun%2FHome%2FSearchResults%3FsearchResults%3D+@story%7C%26page%3D1%26userIdPost%3D0&width=450&layout=standard&action=like&size=small&share=true&height=35&appId=499578783419700" width="450" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                             
+
+
+                                                if (currentPage <= 1)
+                                                {
+                                                    <input type="button" hidden="true" id="Previous" onclick="previous()" value="Previous" />
+                                                }
+                                                else
+                                                {
+                                                    <input type="button" id="Previous" onclick="previous()" value="Previous" />
+                                                }
+
+                                                if (currentPage >= 0)
+                                                {
+
+                                                    <input type="button" id="Next" onclick="next()" value="Next" />
+
+
+
+                                                }
 
 
 
 
-                                                        //int currentPage = (int)ViewData["currentPage"];
-
-                                                        if (currentPage <= 1)
-                                                        {
-                                                            <input type="button" hidden="true" id="Previous" onclick="previous()" value="Previous" />
-                                                        }
-                                                        else
-                                                        {
-                                                            <input type="button" id="Previous" onclick="previous()" value="Previous" />
-                                                        }
-
-                                                        if (currentPage >= 0)
-                                                        {
-
-                                                            <input type="button" id="Next" onclick="next()" value="Next" />
-
-
-
-                                                        }
+                                                <input type="hidden" id="numberOfPages" name="numberOfPages" value="@pageNum" />
+                                                <input type="hidden" id="currentPage" name="currentPage" value="@currentPage" />
+                                                <input type="hidden" id="searchResults" name="searchResults" value="@searchResults" />
+                                                <input type="hidden" id="userIdPost" name="userIdPost" value="@userIdPost" />
 
 
 
 
-                                                        <input type="hidden" id="numberOfPages" name="numberOfPages" value="@pageNum" />
-                                                        <input type="hidden" id="currentPage" name="currentPage" value="@currentPage" />
-                                                        <input type="hidden" id="searchResults" name="searchResults" value="@searchResults" />
-                                                        <input type="hidden" id="userIdPost" name="userIdPost" value="@userIdPost" />
+
+
+                                            }
+
+                                            @present
+
+                                        </p>
 
 
 
-                                                    }
 
-                                                    @present
-
-                                                </p>
 
                                             </div>
-                                            <div class="col-sm-8">
-                                                <div>
-                                                    Copy and Paste story below
-                                                    <textarea id="elmeStory" readonly="true" name="elmeStory" rows="30" cols="90" style="width: 100%">
+
+
+                                    <div class="col-sm-8">
+                                        <div>
+                                            Copy and Paste story below
+                                            <textarea id="elmeStory" readonly="true" name="elmeStory" rows="30" cols="90" style="width: 100%">
 
 @{
 
@@ -248,11 +272,11 @@
  </textarea>
 
 
-                                                </div>
+                                        </div>
 
-                                                <div>
-                                                    Comments
-                                                    <textarea id="comments" readonly="true" name="elmeStory" rows="15" cols="90" style="width: 100%">
+                                        <div>
+                                            Comments
+                                            <textarea id="comments" readonly="true" name="elmeStory" rows="15" cols="90" style="width: 100%">
 
 
                      @{
@@ -263,8 +287,12 @@
                          }
 
  </textarea>
-                                                </div>
-                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
                                         </div>
                                     </div>
                                 </div>
@@ -336,7 +364,17 @@
                     </div>
                 </div>
 
+
+
             </div>
+
+
+
+
         </div>
+
+       
+
+
 
 

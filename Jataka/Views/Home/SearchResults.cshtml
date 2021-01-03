@@ -70,6 +70,8 @@
 
                             $('#Next').attr("disabled", false);
                             $('#Previous').attr("disabled", false);
+                            
+
                             var x = parseInt(document.getElementById('currentPage').value) + 1
                             document.getElementById('currentPage').value = x;
 
@@ -98,6 +100,10 @@
 
                             var searchResults = document.getElementById('searchResults').value;
                             var userIdPost = document.getElementById('userIdPost').value;
+
+                            //var res = searchResults.split("|");
+                            //var currentPostion = parseInt(document.getElementById('currentPage').value) - 1;
+                            //var story = res[currentPostion];
 
 
                             var resultJSON = {
