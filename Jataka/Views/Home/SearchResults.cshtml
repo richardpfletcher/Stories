@@ -83,15 +83,17 @@
                             var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
 
 
-                            if (env == "Dev") {
+                            //if (env == "Dev") {
 
-                                url = "http://localhost:27242//Home/SearchResults";
-                            }
-                            else {
+                            //    url = "http://localhost:27242//Home/SearchResults";
+                            //}
+                            //else {
 
-                                url = "http://jataka.fun//Home/SearchResults";
+                            //    url = "http://jataka.fun//Home/SearchResults";
 
-                            }
+                            //}
+
+                            url = "/Home/SearchResults";
 
 
                             //
@@ -122,7 +124,7 @@
                                 //dataType: "json",
                                 success: function (data, status, xhr) {
 
-                                    alertify.success("Story next");
+                                    //alertify.success("Story next");
                                     if (data == "") {
                                         alertify.success("No records found");
                                         return;
@@ -176,15 +178,17 @@
                             var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
 
 
-                            if (env == "Dev") {
+                            //if (env == "Dev") {
 
-                                url = "http://localhost:27242//Home/SearchResults";
-                            }
-                            else {
+                            //    url = "http://localhost:27242//Home/SearchResults";
+                            //}
+                            //else {
 
-                                url = "http://jataka.fun//Home/SearchResults";
+                            //    url = "http://jataka.fun//Home/SearchResults";
 
-                            }
+                            //}
+
+                            url = "/Home/SearchResults";
 
                             var resultJSON = {
                                 searchResults: searchResults, page: x, userIdPost: userIdPost,
@@ -202,7 +206,7 @@
                                 //dataType: "json",
                                 success: function (data, status, xhr) {
 
-                                    alertify.success("Story previous");
+                                    //alertify.success("Story previous");
                                     if (data == "") {
                                         alertify.success("No records found");
                                         return;
