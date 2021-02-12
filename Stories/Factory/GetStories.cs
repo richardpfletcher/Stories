@@ -54,7 +54,7 @@ namespace Stories.Factory
 
 
             p.Add("@JakataID", myStory.JakataID);
-            p.Add("@StoryCategorytName", 1);
+            p.Add("@StoryCategorytName", myStory.StoryCategorytName);
             p.Add("@Title", myStory.Title);
             p.Add("@AnimalType", myStory.AnimalType);
             p.Add("@MoralType", myStory.MoralType);
@@ -79,6 +79,46 @@ namespace Stories.Factory
             }
 
             return total;
+
+        }
+
+        /// <summary>
+        /// Inserts a new account
+        /// </summary>
+        /// <param name="myStory"></param>
+        /// <returns></returns>
+
+        public int InsertCategoryName(string category)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("@StoryCategorytName", category);
+
+
+
+
+            var conString = ConfigurationManager.ConnectionStrings["LocalStory"];
+            string strConnString = conString.ConnectionString;
+
+            int total = 0;
+
+            using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(strConnString))
+            {
+                sqlConnection.Open();
+                const string storedProcedure = "dbo.InsertStoryCategorytName";
+                var values = sqlConnection.Query<ReceipeTotalModel>(storedProcedure, p, commandType: CommandType.StoredProcedure);
+                foreach (var el in values)
+                {
+                    total = el.totalReceipesInt;
+                }
+            }
+
+            return total;
+
+
+
+
+
 
         }
 
@@ -1691,6 +1731,54 @@ namespace Stories.Factory
             using (System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(connString))
             {
                 using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("GetJakataMaster", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    var dataReader = cmd.ExecuteReader();
+                    dataTable.Load(dataReader);
+                    dataTable.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+                    returnString = writer.ToString();
+                    int numberOfRecords = dataTable.Rows.Count;
+                    response.result = numberOfRecords;
+
+
+
+                    JakataMasterList list = new JakataMasterList();
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        jakataMaster myprod = new jakataMaster();
+                        myprod.ID = row["ID"].ToString();
+                        myprod.Title = row["Title"].ToString();
+
+
+                        list.jakataMasterLists.Add(myprod);
+                    }
+                    response.AddJakataMasterList(list);
+
+                    response.log.Add(numberOfRecords + " Records found");
+
+                }
+            }
+            return response;
+        }
+
+        public response GetJakataMasterFilter()
+        {
+
+            var dataTable = new DataTable();
+            dataTable = new DataTable { TableName = "JakataMaster" };
+            //var conString1 = ConfigurationManager.ConnectionStrings["LocalEvolution"];
+            //string connString = conString1.ConnectionString;
+            string connString = URLInfo.GetDataBaseConnectionString();
+
+
+            System.IO.StringWriter writer = new System.IO.StringWriter();
+            string returnString = "";
+            response response = new response();
+            response.result = 0;
+            using (System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(connString))
+            {
+                using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("GetJakataMasterFilter", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();

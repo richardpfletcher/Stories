@@ -329,6 +329,7 @@
     <Content Include="Views\Home\JatakaMaster.cshtml" />
     <Content Include="Views\Home\NewJatakaMaster.cshtml" />
     <Content Include="Views\Shared\ProjectResults.cshtml" />
+    <Content Include="Views\Home\NewCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

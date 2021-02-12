@@ -39,5 +39,17 @@ namespace Stories.Controllers
 
         }
 
+        [Route("api/JakataMasterype/JakataMasterFilter")]
+
+        public response GetJakataMasterFilter()
+        {
+
+            GetStories myStories = new GetStories();
+            return myStories.GetJakataMasterFilter();
+
+
+
+        }
+
     }
 }

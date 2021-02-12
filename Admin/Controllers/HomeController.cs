@@ -64,7 +64,8 @@ namespace Stories.Controllers
             model = myGetLookups.GeLookupStorySource();
             ViewData["storySourceData"] = model.items;
 
-            model = myGetLookups.GeLookupJakataMaster();
+            //model = myGetLookups.GeLookupJakataMaster();
+            model = myGetLookups.GeLookupJakataMasterFilter();
             ViewData["jakataMasterData"] = model.items;
 
             model = myGetLookups.GetStoryCategorytName();
@@ -75,6 +76,24 @@ namespace Stories.Controllers
 
             return View(myStory);
             
+        }
+
+        public ActionResult NewCategory()
+        {
+            //ViewBag.Message = "Your app description page.";
+            //DropdownModel model = new DropdownModel();
+            //GetLookups myGetLookups = new GetLookups();
+            //GetStories myGetStories = new GetStories();
+            //MothersHelpersSpecificList myMothersHelpersSpecificList = new MothersHelpersSpecificList();
+            //myMothersHelpersSpecificList = myGetStories.GetMothersHelpersTypeSpecific(0);
+            //Story myStory = new Story();
+
+            //model = myGetLookups.GetMothersHelpersType();
+            //myStory.MothersHelpersTypeCombo = model;
+
+            return View();
+
+
         }
 
         /// <summary>

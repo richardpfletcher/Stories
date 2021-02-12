@@ -1,0 +1,141 @@
+﻿@model Stories.Models.Story
+
+@{
+    ViewBag.Title = "New Category";
+}
+
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+
+
+<h2> Insert New Category</h2>
+<div class="col-md-4">
+
+    <table style="width: 55%">
+
+
+
+        <tr>
+            <td>
+                @Html.Label("New Category")
+            </td>
+
+        </tr>
+        <tr>
+
+            <td>
+
+
+
+                @{
+
+                    <input id="category" name="category" />
+
+                }
+
+
+            </td>
+        </tr>
+
+    </table>
+    <p>
+        <input type="hidden" id="id" name="id" value="0" />
+        <input type="button" id="Update" value="Save" />
+
+    </p>
+
+</div>
+
+<script type="text/javascript">
+
+                    $(function () {
+
+                        $("#Update").click(function () {
+
+
+                            var category = $("#category").val();
+
+                            if (category == "") {
+                                alert('Category name is required');
+                                document.getElementById('category').focus();
+                                return;
+                            }
+
+
+
+
+                            var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
+
+                            var apiUrl = "";
+
+                            if (env == "Dev") {
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+                                apiUrl = "http://localhost:5187/api/StoryCategorytName/insert?StoryCategorytName=" + category;
+                            }
+                            else {
+
+                                //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
+                                //apiUrl = "http://api.storyteller.today/api/StoryCategorytName/insert";
+
+                                apiUrl = "http://api.jataka.fun/api/StoryCategorytName/insert?StoryCategorytName=" + category;
+
+                                
+
+                            }
+
+                            //var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["LocalWebApi"]';
+
+
+                            var resultJSON = {
+                                StoryCategorytName: category};
+
+                            $.ajax({
+                                type: 'POST',
+
+                                //url: apiUrl + "api/MothersHelpers/updateRoles",
+                                url: apiUrl,
+
+
+
+                                //data: resultJSON,
+                                dataType: "json",
+
+
+                                success: function (data, status, xhr) {
+                                   alertify.success("Category Saved");
+
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    alert(xhr.status);
+                                    //alert(thrownError);
+                                }
+
+
+
+                            });
+
+                            return;
+
+                        });
+
+                        //
+
+                    });
+</script>
+
+
+
+
+
+
+
+
