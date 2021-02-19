@@ -178,10 +178,11 @@
                         counter++;
                     });
 
-                    //if (counter1 == 0)
-                    //{
-                    //    alert('You must choose an animal type');
-                    //}
+                    if (animalChoosen  == "")
+                    {
+                        alert('You must choose an animal type');
+                        return;
+                    }
 
 
                     var jakataMaster = $("#jakataMaster").val();
@@ -242,7 +243,7 @@
                             else {
 
                                 //apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["ProductionWebApi"]';
-                                 apiUrl = "http://api.jataka.fun/api/Storiesapi/insert";
+                                 apiUrl = "https://api.jataka.fun/api/Storiesapi/insert";
 
                             }
 

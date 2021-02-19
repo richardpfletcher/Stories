@@ -274,11 +274,16 @@ namespace Stories.Controllers
         {
             ViewBag.Message = "Your app description page.";
             DropdownModel model = new DropdownModel();
+            DropdownModel model1 = new DropdownModel();
             GetLookups myGetLookups = new GetLookups();
             
-            model = myGetLookups.GeLookupSpecificStoryDropdown();
-            ViewData["jakataMasterData"] = model.items;
+            //model = myGetLookups.GeLookupSpecificStoryDropdown();
+            //ViewData["jakataMasterData"] = model.items;
+            ViewData["jakataMasterData"] = model1.items;
 
+            model = myGetLookups.GetStoryCategorytName();
+
+            ViewData["StoryCategorytNameData"] = model.items;
 
 
             return View();

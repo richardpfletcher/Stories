@@ -23,6 +23,18 @@ namespace Stories.Controllers
 
 
         }
-        
+
+        [Route("api/specificStoryDropdown/getjatakabyyspecific")]
+
+        public response getjatakabyyspecific(int id)
+        {
+
+            GetStories myStories = new GetStories();
+            return myStories.GetSpecificStoryDropdownByCategory(id);
+
+
+
+        }
+
     }
 }
