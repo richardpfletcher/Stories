@@ -19,6 +19,23 @@
         <table style="width: 55%">
             <tr>
                 <td>
+                    @Html.Label("Story Category", new { @visible = false })
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+                    @Html.DropDownList("StoryCategorytName", (IEnumerable<SelectListItem>)ViewData["StoryCategorytNameData"])
+                </td>
+
+            </tr>
+
+        </table>
+
+        <table style="width: 55%">
+            <tr>
+                <td>
                     @Html.Label("Title")
                 </td>
 
@@ -242,7 +259,7 @@
                 return;
             }
 
-            
+
             var env = '@System.Configuration.ConfigurationManager.AppSettings["Enviroment"]';
 
             var apiUrl = "";
@@ -279,6 +296,80 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#StoryCategorytName").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            //var StoryCategorytName = $(this).find("option:selected").value();
+            var StoryCategorytName = $("#StoryCategorytName").val();
+            StoryCategorytName = parseInt(StoryCategorytName);
+
+
+            var env = 'Prod';
+
+            var apiUrl = "";
+
+            if (env == "Dev") {
+                //apiUrl = 'http://localhost:5199/';
+                apiUrl = "http://localhost:5199/api/specificStoryDropdown/getjatakabyyspecific";
+
+            }
+            else {
+
+
+                //apiUrl = "https://api.storyteller.today/api/StoryCategorytName/GetStoryCategoryNameByID?id=" + StoryCategorytName;
+                apiUrl = "https://api.storyteller.today/api/specificStoryDropdown/getjatakabyyspecific";
+
+            }
+
+            //var apiUrl = 'http://localhost:5199/';
+
+            var resultJSON = {
+                id: StoryCategorytName
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: apiUrl,
+                //url: apiUrl+"api/Project/getReadersSpecificStory",
+                //url: "http://localhost:5199/api/Project/getReadersSpecificStory",
+
+
+                data: resultJSON,
+                dataType: "json",
+
+
+                success: function (data, status, xhr) {
+                    //alert("Success: " + xhr.status + " : " + xhr.statusText);
+
+                    var jakataMasterLists = data.data[0].jakataMasterLists;
+
+                    var s = '<option value="-0">Please Select ';
+                    for (var i = 0; i < jakataMasterLists.length; i++) {
+                        s += '<option value="' + jakataMasterLists[i].ID + '">' + jakataMasterLists[i].Title + '</option>';
+                    }
+                    $("#jakataMaster").html(s);
+
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+
+
+
+
+            });
+
+
+        });
+    });
+</script>
+
+
+
 
 
 

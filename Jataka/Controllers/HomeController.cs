@@ -52,6 +52,7 @@ namespace Jataka.Controllers
             ViewBag.Message = "Your app description page.";
 
             DropdownModel model = new DropdownModel();
+            DropdownModel model1 = new DropdownModel();
             DropdownModel modelAnimal = new DropdownModel();
             GetLookups myGetLookups = new GetLookups();
             model = myGetLookups.GeLookupAnimal();
@@ -70,7 +71,8 @@ namespace Jataka.Controllers
             ViewData["storySourceData"] = model.items;
 
             model = myGetLookups.GeLookupJakataMaster();
-            ViewData["jakataMasterData"] = model.items;
+            //ViewData["jakataMasterData"] = model.items;
+            ViewData["jakataMasterData"] = model1.items;
 
             DropdownModel modelUserID = new DropdownModel();
            
