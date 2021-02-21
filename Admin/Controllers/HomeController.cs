@@ -562,6 +562,18 @@ namespace Stories.Controllers
 
             //myStory.Posted = "0";
 
+            if (mode == "edit")
+            {
+                ViewData["saved"] = "save";
+
+            }
+            else
+            {
+                ViewData["saved"] = "no";
+
+            }
+
+
 
 
             return View(myStory);

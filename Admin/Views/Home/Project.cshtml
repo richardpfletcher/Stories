@@ -315,7 +315,8 @@
                                     <table style="width: 55%">
                                         <tr>
                                             <td>
-                                                @Html.Label("Posted to You Tube")
+                                                @Html.Label("Posted to You Tube. Make sure you save project first")
+                                                @Html.Label("Posted to You Tube ")
 
                                             </td>
 
@@ -358,8 +359,11 @@
                                                 <input type="button" id="DeleteURL" value="DeleteURL" />
                                                 @{
                                                     string JakataID = (string)ViewData["JakataID"];
+                                                    string saved = (string)ViewData["saved"];
                                                 }
                                                 <input type="hidden" id="JakataID" name="JakataID" value="@JakataID" />
+                                                <input type="hidden" id="saved" value="@saved" />
+
 
 
 
@@ -580,6 +584,7 @@
 
                                         success: function (data, status, xhr) {
                                             //alert("Success: " + xhr.status + " : " + xhr.statusText);
+                                            document.getElementById('saved').value = "saved";
                                             alertify.success("Project Saved");
 
 
@@ -608,6 +613,10 @@
 
                                 $("#UpdateURL").click(function () {
 
+                                    if (document.getElementById('saved').value = "no") {
+                                        alert("You must first save your changes");
+                                        return;
+                                    }
 
                                     var jakataMaster = document.getElementById('JakataID').value
                                     var title = jakataMaster;
