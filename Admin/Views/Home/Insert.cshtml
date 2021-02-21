@@ -36,24 +36,6 @@
 
             <div>
 
-
-
-                <table style="width: 55%">
-                    <tr>
-                        <td>
-                            @Html.Label("Title")
-                        </td>
-
-                    </tr>
-                    <tr>
-
-                        <td>
-                            @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"])
-                        </td>
-
-                    </tr>
-                </table>
-
                 <table style="width: 55%">
                     <tr>
                         <td>
@@ -71,6 +53,24 @@
 
 
                 </table>
+
+                <table style="width: 55%">
+                    <tr>
+                        <td>
+                            @Html.Label("Title")
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>
+                            @Html.DropDownList("jakataMaster", (IEnumerable<SelectListItem>)ViewData["jakataMasterData"])
+                        </td>
+
+                    </tr>
+                </table>
+
+
 
 
                 <table style="width: 55%">
